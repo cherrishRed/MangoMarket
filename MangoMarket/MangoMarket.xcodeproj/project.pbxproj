@@ -12,6 +12,7 @@
 		DA466EBE28E6FCA50076AEE4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA466EBD28E6FCA50076AEE4 /* Assets.xcassets */; };
 		DA466EC128E6FCA50076AEE4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA466EC028E6FCA50076AEE4 /* Preview Assets.xcassets */; };
 		DA466EC828E700ED0076AEE4 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA466EC728E700EC0076AEE4 /* MainView.swift */; };
+		DA466ECD28E701F70076AEE4 /* ProductDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA466ECC28E701F70076AEE4 /* ProductDetail.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +22,7 @@
 		DA466EBD28E6FCA50076AEE4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DA466EC028E6FCA50076AEE4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		DA466EC728E700EC0076AEE4 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		DA466ECC28E701F70076AEE4 /* ProductDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetail.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 				DA466EB928E6FCA20076AEE4 /* MangoMarketApp.swift */,
 				DA466EBB28E6FCA20076AEE4 /* ContentView.swift */,
 				DA466EC728E700EC0076AEE4 /* MainView.swift */,
+				DA466EC928E701B00076AEE4 /* Model */,
 				DA466EBD28E6FCA50076AEE4 /* Assets.xcassets */,
 				DA466EBF28E6FCA50076AEE4 /* Preview Content */,
 			);
@@ -68,6 +71,14 @@
 				DA466EC028E6FCA50076AEE4 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		DA466EC928E701B00076AEE4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				DA466ECC28E701F70076AEE4 /* ProductDetail.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -141,6 +152,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA466EBC28E6FCA20076AEE4 /* ContentView.swift in Sources */,
+				DA466ECD28E701F70076AEE4 /* ProductDetail.swift in Sources */,
 				DA466EC828E700ED0076AEE4 /* MainView.swift in Sources */,
 				DA466EBA28E6FCA20076AEE4 /* MangoMarketApp.swift in Sources */,
 			);

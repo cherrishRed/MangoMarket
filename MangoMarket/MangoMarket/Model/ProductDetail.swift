@@ -12,7 +12,7 @@ struct ProductDetail: Codable, Hashable {
     let vendorID: Int?
     let name: String?
     let thumbnail: URL?
-    let currency: String?
+    let currency: Currency?
     let price: Double?
     let description: String?
     let bargainPrice: Double?

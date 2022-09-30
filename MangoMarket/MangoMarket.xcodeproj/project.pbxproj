@@ -16,6 +16,7 @@
 		DA466ECF28E702830076AEE4 /* ProductList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA466ECE28E702830076AEE4 /* ProductList.swift */; };
 		DA466ED128E702E30076AEE4 /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA466ED028E702E30076AEE4 /* Currency.swift */; };
 		DA466ED328E710360076AEE4 /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA466ED228E710360076AEE4 /* BannerView.swift */; };
+		DA466ED528E71AE60076AEE4 /* ProductListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA466ED428E71AE40076AEE4 /* ProductListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,7 @@
 		DA466ECE28E702830076AEE4 /* ProductList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductList.swift; sourceTree = "<group>"; };
 		DA466ED028E702E30076AEE4 /* Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
 		DA466ED228E710360076AEE4 /* BannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
+		DA466ED428E71AE40076AEE4 /* ProductListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 				DA466EB928E6FCA20076AEE4 /* MangoMarketApp.swift */,
 				DA466EBB28E6FCA20076AEE4 /* ContentView.swift */,
 				DA466EC728E700EC0076AEE4 /* MainView.swift */,
+				DA466ED428E71AE40076AEE4 /* ProductListView.swift */,
 				DA466ED228E710360076AEE4 /* BannerView.swift */,
 				DA466EC928E701B00076AEE4 /* Model */,
 				DA466EBD28E6FCA50076AEE4 /* Assets.xcassets */,
@@ -160,6 +163,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA466ED528E71AE60076AEE4 /* ProductListView.swift in Sources */,
 				DA466ED328E710360076AEE4 /* BannerView.swift in Sources */,
 				DA466ED128E702E30076AEE4 /* Currency.swift in Sources */,
 				DA466EBC28E6FCA20076AEE4 /* ContentView.swift in Sources */,

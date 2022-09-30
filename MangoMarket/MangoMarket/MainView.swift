@@ -13,6 +13,7 @@ struct MainView: View {
       VStack {
         HeaderView()
         BannerView()
+        ProductListView()
       }
     }
 }

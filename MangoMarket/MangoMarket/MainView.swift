@@ -9,7 +9,10 @@ import SwiftUI
 
 struct MainView: View {
     var body: some View {
-      HeaderView()
+      VStack {
+        HeaderView()
+        BannerView()
+      }
     }
 }
 
@@ -35,5 +38,20 @@ struct HeaderView: View {
       }
     }
     .padding()
+  }
+}
+
+struct BannerView: View {
+  @State var banners: [Color] = [.red, .yellow, .purple]
+  
+  var body: some View {
+    TabView{
+      ForEach(banners, id:\.self) { color in
+        Rectangle()
+          .fill(color)
+      }
+    }
+    .frame(maxWidth: .infinity, maxHeight: 200)
+    .tabViewStyle(.page)
   }
 }

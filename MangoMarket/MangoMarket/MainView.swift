@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MainView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+      HeaderView()
     }
 }
 
@@ -17,4 +17,23 @@ struct MainView_Previews: PreviewProvider {
     static var previews: some View {
         MainView()
     }
+}
+
+struct HeaderView: View {
+  var body: some View {
+    HStack(spacing: 0) {
+      Text("Mango Market")
+        .fontWeight(.heavy)
+        .padding(.leading,40)
+        .frame(maxWidth: .infinity)
+      Button {
+        
+      } label: {
+        Image(systemName: "magnifyingglass")
+          .frame(width: 30, height:30, alignment: .center)
+          .foregroundColor(.black)
+      }
+    }
+    .padding()
+  }
 }

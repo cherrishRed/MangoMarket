@@ -22,7 +22,11 @@ struct ProductListView: View {
             ProductListHeaderView(onlyImage: $onlyImage)
             ) {
           ForEach(products, id:\.self) { product in
-            ProductCellView(onlyImage: $onlyImage, product: product)
+            NavigationLink {
+                DetailProductView(product: product)
+            } label: {
+              ProductCellView(onlyImage: $onlyImage, product: product)
+            }
             }
           }
         }

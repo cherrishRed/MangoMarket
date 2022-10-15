@@ -10,10 +10,12 @@ import Combine
 
 struct MainView: View {
     var body: some View {
-      VStack {
-        HeaderView()
-        BannerView()
-        ProductListView()
+      NavigationView {
+        VStack {
+          HeaderView()
+          BannerView()
+          ProductListView()
+        }
       }
     }
 }

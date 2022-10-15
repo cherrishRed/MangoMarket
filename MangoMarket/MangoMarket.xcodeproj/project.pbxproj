@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DA2C799028F9B5E300922C47 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2C798F28F9B5E300922C47 /* APIService.swift */; };
+		DA2C799228FA8FF400922C47 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2C799128FA8FF400922C47 /* NetworkError.swift */; };
 		DA466EBA28E6FCA20076AEE4 /* MangoMarketApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA466EB928E6FCA20076AEE4 /* MangoMarketApp.swift */; };
 		DA466EBC28E6FCA20076AEE4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA466EBB28E6FCA20076AEE4 /* ContentView.swift */; };
 		DA466EBE28E6FCA50076AEE4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA466EBD28E6FCA50076AEE4 /* Assets.xcassets */; };
@@ -21,6 +23,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DA2C798F28F9B5E300922C47 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		DA2C799128FA8FF400922C47 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		DA466EB628E6FCA20076AEE4 /* MangoMarket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MangoMarket.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA466EB928E6FCA20076AEE4 /* MangoMarketApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MangoMarketApp.swift; sourceTree = "<group>"; };
 		DA466EBB28E6FCA20076AEE4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -46,6 +50,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DA2C798E28F9B42E00922C47 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				DA2C798F28F9B5E300922C47 /* APIService.swift */,
+				DA2C799128FA8FF400922C47 /* NetworkError.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 		DA466EAD28E6FCA20076AEE4 = {
 			isa = PBXGroup;
 			children = (
@@ -71,6 +84,7 @@
 				DA466ED428E71AE40076AEE4 /* ProductListView.swift */,
 				DA91E7D328E998950091B6A3 /* DetailProductView.swift */,
 				DA466ED228E710360076AEE4 /* BannerView.swift */,
+				DA2C798E28F9B42E00922C47 /* Network */,
 				DA466EC928E701B00076AEE4 /* Model */,
 				DA466EBD28E6FCA50076AEE4 /* Assets.xcassets */,
 				DA466EBF28E6FCA50076AEE4 /* Preview Content */,
@@ -172,8 +186,10 @@
 				DA466ED128E702E30076AEE4 /* Currency.swift in Sources */,
 				DA466EBC28E6FCA20076AEE4 /* ContentView.swift in Sources */,
 				DA466ECF28E702830076AEE4 /* ProductList.swift in Sources */,
+				DA2C799028F9B5E300922C47 /* APIService.swift in Sources */,
 				DA466ECD28E701F70076AEE4 /* ProductDetail.swift in Sources */,
 				DA466EC828E700ED0076AEE4 /* MainView.swift in Sources */,
+				DA2C799228FA8FF400922C47 /* NetworkError.swift in Sources */,
 				DA466EBA28E6FCA20076AEE4 /* MangoMarketApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

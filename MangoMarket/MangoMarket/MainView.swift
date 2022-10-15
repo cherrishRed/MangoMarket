@@ -15,6 +15,10 @@ struct MainView: View {
         BannerView()
         ProductListView()
       }
+      .onAppear {
+        let apiService = APIService()
+        apiService.fetchItem()
+      }
     }
 }
 

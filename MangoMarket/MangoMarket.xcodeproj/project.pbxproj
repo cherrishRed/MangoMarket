@@ -10,6 +10,7 @@
 		DA2C799028F9B5E300922C47 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2C798F28F9B5E300922C47 /* APIService.swift */; };
 		DA2C799228FA8FF400922C47 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2C799128FA8FF400922C47 /* NetworkError.swift */; };
 		DA2C799428FABC9000922C47 /* ProductCreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2C799328FABC9000922C47 /* ProductCreateView.swift */; };
+		DA2C799728FAC50C00922C47 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2C799628FAC50C00922C47 /* ImagePicker.swift */; };
 		DA466EBA28E6FCA20076AEE4 /* MangoMarketApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA466EB928E6FCA20076AEE4 /* MangoMarketApp.swift */; };
 		DA466EBC28E6FCA20076AEE4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA466EBB28E6FCA20076AEE4 /* ContentView.swift */; };
 		DA466EBE28E6FCA50076AEE4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA466EBD28E6FCA50076AEE4 /* Assets.xcassets */; };
@@ -27,6 +28,8 @@
 		DA2C798F28F9B5E300922C47 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		DA2C799128FA8FF400922C47 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		DA2C799328FABC9000922C47 /* ProductCreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCreateView.swift; sourceTree = "<group>"; };
+		DA2C799528FAC4C500922C47 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		DA2C799628FAC50C00922C47 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		DA466EB628E6FCA20076AEE4 /* MangoMarket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MangoMarket.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA466EB928E6FCA20076AEE4 /* MangoMarketApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MangoMarketApp.swift; sourceTree = "<group>"; };
 		DA466EBB28E6FCA20076AEE4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -80,6 +83,7 @@
 		DA466EB828E6FCA20076AEE4 /* MangoMarket */ = {
 			isa = PBXGroup;
 			children = (
+				DA2C799528FAC4C500922C47 /* Info.plist */,
 				DA466EB928E6FCA20076AEE4 /* MangoMarketApp.swift */,
 				DA466EBB28E6FCA20076AEE4 /* ContentView.swift */,
 				DA466EC728E700EC0076AEE4 /* MainView.swift */,
@@ -87,6 +91,7 @@
 				DA91E7D328E998950091B6A3 /* DetailProductView.swift */,
 				DA466ED228E710360076AEE4 /* BannerView.swift */,
 				DA2C799328FABC9000922C47 /* ProductCreateView.swift */,
+				DA2C799628FAC50C00922C47 /* ImagePicker.swift */,
 				DA2C798E28F9B42E00922C47 /* Network */,
 				DA466EC928E701B00076AEE4 /* Model */,
 				DA466EBD28E6FCA50076AEE4 /* Assets.xcassets */,
@@ -183,6 +188,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA2C799728FAC50C00922C47 /* ImagePicker.swift in Sources */,
 				DA466ED528E71AE60076AEE4 /* ProductListView.swift in Sources */,
 				DA91E7D428E998950091B6A3 /* DetailProductView.swift in Sources */,
 				DA466ED328E710360076AEE4 /* BannerView.swift in Sources */,
@@ -325,6 +331,8 @@
 				DEVELOPMENT_ASSET_PATHS = "\"MangoMarket/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MangoMarket/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "\"카메라에 접근하고 싶어요!\"";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -353,6 +361,8 @@
 				DEVELOPMENT_ASSET_PATHS = "\"MangoMarket/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MangoMarket/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "\"카메라에 접근하고 싶어요!\"";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

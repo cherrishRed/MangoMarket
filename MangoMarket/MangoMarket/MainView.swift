@@ -15,16 +15,6 @@ struct MainView: View {
         BannerView()
         ProductListView()
       }
-      .onAppear {
-        let apiService = APIService()
-        apiService.fetchItem()
-      }
-    }
-}
-
-struct MainView_Previews: PreviewProvider {
-    static var previews: some View {
-        MainView()
     }
 }
 

@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ProductListView: View {
   @State var onlyImage: Bool = false
+  @State var products: [ProductDetail] = []
+  
   var columns: [GridItem] = [GridItem(.flexible(), spacing: 10, alignment: nil),
                                     GridItem(.flexible(), spacing: 10, alignment: nil)]
   
@@ -19,13 +21,30 @@ struct ProductListView: View {
         Section(header:
             ProductListHeaderView(onlyImage: $onlyImage)
             ) {
-          ForEach(1..<100) { number in
-            ProductCellView(onlyImage: $onlyImage, product: number)
+          ForEach(products, id:\.self) { product in
+            ProductCellView(onlyImage: $onlyImage, product: product)
             }
           }
         }
       .padding()
       }
+      .onAppear {
+      let apiService = APIService()
+        apiService.retrieveProduct { result in
+          switch result {
+            case .success(let success):
+              do {
+                let productList = try JSONDecoder().decode(ProductList.self, from: success)
+                products = productList.items ?? []
+              } catch {
+                print("디코드 에러")
+              }
+            case .failure(let failure):
+              print("오류!!!")
+              print(failure)
+          }
+        }
+    }
     }
   }
 
@@ -58,17 +77,22 @@ struct ProductListHeaderView: View {
 
 struct ProductCellView: View {
   @Binding var onlyImage: Bool
-  var product: Int
+  var product: ProductDetail
   
   var body: some View {
     VStack(alignment: .leading) {
       ZStack(alignment: .bottomTrailing) {
-        Rectangle()
-          .scale(x: 1, y: 1, anchor: .center)
-          .fill(.gray)
-          .frame(maxWidth: .infinity)
-          .aspectRatio(1, contentMode: .fill)
-        .cornerRadius(10)
+        AsyncImage(url: product.thumbnail, content: { image in
+          image
+            .resizable()
+            .frame(maxWidth: .infinity)
+            .aspectRatio(1, contentMode: .fit)
+            .cornerRadius(10)
+        }, placeholder: {
+          ProgressView()
+            .frame(maxWidth: .infinity)
+            .aspectRatio(1, contentMode: .fit)
+        })
         Image(systemName: "heart")
           .foregroundColor(.red)
           .padding(.bottom, 10)
@@ -77,18 +101,18 @@ struct ProductCellView: View {
       
       if onlyImage == false {
         VStack(alignment: .leading) {
-          Text("\(product) 번 제품")
+          Text(product.name ?? "이름없음")
             .font(.title3)
             .fontWeight(.medium)
-          Text("12000")
+          Text("\(product.price ?? 0)")
             .strikethrough()
             .foregroundColor(.gray)
           HStack {
             Text("20%")
               .foregroundColor(.red)
-            Text("9600")
+            Text("\(product.discountedPrice ?? 0)")
           }
-          Text("잔여수량 : 38 개")
+          Text("잔여수량 : \(product.stock ?? 0) 개")
         }
         .padding(.leading, 8)
       }

@@ -9,8 +9,8 @@ import Foundation
 
 final class APIService {
   
-  func fetchItem() {
-    let urlComponents = URLComponents(string: "https://{{host}}/api/products?page_no=1&items_per_page=100")!
+  func retrieveProduct(completion: @escaping (Result<Data, Error>) -> ()) {
+    let urlComponents = URLComponents(string: "https://openmarket.yagom-academy.kr/api/products?page_no=1&items_per_page=100")!
 
     var request = URLRequest(url: urlComponents.url!)
     request.httpMethod = "GET"
@@ -22,9 +22,11 @@ final class APIService {
           case .success(let success):
             print("성공!")
             print(success)
+            completion(Result.success(success))
           case .failure(let failure):
             print("실패ㅠㅠ")
             print(failure)
+            completion(Result.failure(failure))
         }
       }
       

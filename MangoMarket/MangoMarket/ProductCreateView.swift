@@ -14,8 +14,27 @@ struct ProductCreateView: View {
   @State var discountedPrice: String = ""
   @State var currency: Currency = .KRW
   
+  @State private var images = [UIImage()]
+  @State private var showSheet = false
+  
   var body: some View {
     Form {
+      ScrollView(.horizontal) {
+        HStack {
+          ForEach(images, id: \.self) { image in
+            Image(uiImage: image)
+              .resizable()
+              .frame(width: 100, height: 100)
+          }
+          Button {
+            showSheet = true
+          } label: {
+            Text("add image")
+          }
+        }
+  
+      }
+      
       TextField("제품 이름", text: $title)
       HStack {
         TextField("가격", text: $price)
@@ -28,8 +47,13 @@ struct ProductCreateView: View {
       TextField("할인된 가격", text: $discountedPrice)
       TextField("제품 설명", text: $description)
     }
+    .sheet(isPresented: $showSheet) {
+        ImagePicker(sourceType: .photoLibrary, selectedImage: self.$images)
+    }
     
   }
+  
+  
 }
 
 struct ProductCreateView_Previews: PreviewProvider {

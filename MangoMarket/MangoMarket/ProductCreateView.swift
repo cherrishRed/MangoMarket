@@ -19,41 +19,49 @@ struct ProductCreateView: View {
   
   var body: some View {
     Form {
-      ScrollView(.horizontal) {
-        HStack {
-          ForEach(images, id: \.self) { image in
-            Image(uiImage: image)
-              .resizable()
-              .frame(width: 100, height: 100)
-          }
-          Button {
-            showSheet = true
-          } label: {
-            Text("add image")
+      Section {
+        ScrollView(.horizontal) {
+          HStack {
+            ForEach(images, id: \.self) { image in
+              Image(uiImage: image)
+                .resizable()
+                .frame(width: 100, height: 100)
+            }
+            Button {
+              showSheet = true
+            } label: {
+              Text("add image")
+            }
           }
         }
-  
       }
       
-      TextField("제품 이름", text: $title)
-      HStack {
-        TextField("가격", text: $price)
-        Picker("", selection: $currency) {
-          ForEach(Currency.allCases, id:\.self) { curreny in
-            Text(curreny.rawValue)
-          }
-        }.pickerStyle(.segmented)
+      Section {
+        TextField("제품 이름", text: $title)
+        HStack {
+          TextField("가격", text: $price)
+          Picker("", selection: $currency) {
+            ForEach(Currency.allCases, id:\.self) { curreny in
+              Text(curreny.rawValue)
+            }
+          }.pickerStyle(.segmented)
+        }
+        TextField("할인된 가격", text: $discountedPrice)
+        TextField("제품 설명", text: $description)
       }
-      TextField("할인된 가격", text: $discountedPrice)
-      TextField("제품 설명", text: $description)
+      
+      Section {
+        Button {
+          // 제출
+        } label: {
+          Text("post 하기")
+        }
+      }
     }
     .sheet(isPresented: $showSheet) {
         ImagePicker(sourceType: .photoLibrary, selectedImage: self.$images)
     }
-    
   }
-  
-  
 }
 
 struct ProductCreateView_Previews: PreviewProvider {

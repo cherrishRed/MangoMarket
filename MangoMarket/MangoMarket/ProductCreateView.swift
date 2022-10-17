@@ -16,6 +16,7 @@ struct ProductCreateView: View {
   
   @State private var images = [UIImage()]
   @State private var showSheet = false
+  let apiService: APIService = APIService()
   
   var body: some View {
     Form {
@@ -52,7 +53,26 @@ struct ProductCreateView: View {
       
       Section {
         Button {
-          // 제출
+          guard let priceDouble = Double(price) else {
+            return
+          }
+          
+          guard let disCountedPriceDouble = Double(discountedPrice) else {
+            return
+          }
+          
+          let imageInfos = images.map { (image) -> ImageInfo in
+            guard let data = image.jpegData(compressionQuality: 0) else {
+              return ImageInfo(fileName: "", data: Data(), type: "")
+            }
+            return ImageInfo(fileName: "", data: data, type: "")
+          }
+          
+          let newProduct = ProductRequest(name: title, descriptions: description, price: priceDouble, currency: .KRW, discountedPrice: disCountedPriceDouble, stock: 10, secret: "bjv33pu73cbajp1", imageInfos: imageInfos)
+          
+          apiService.postProducts(newProduct: newProduct)
+          
+//           제출
         } label: {
           Text("post 하기")
         }

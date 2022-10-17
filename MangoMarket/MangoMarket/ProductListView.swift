@@ -23,7 +23,7 @@ struct ProductListView: View {
             ) {
           ForEach(products, id:\.self) { product in
             NavigationLink {
-                DetailProductView(product: product)
+              DetailProductView(productId: product.id ?? 1)
             } label: {
               ProductCellView(onlyImage: $onlyImage, product: product)
             }
@@ -34,7 +34,7 @@ struct ProductListView: View {
       }
       .onAppear {
       let apiService = APIService()
-        apiService.retrieveProduct { result in
+        apiService.retrieveProducts { result in
           switch result {
             case .success(let success):
               do {

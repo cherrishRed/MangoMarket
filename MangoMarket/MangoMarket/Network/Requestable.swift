@@ -15,3 +15,13 @@ protocol Requestable {
   var bodyParameters: Encodable? { get }
   var headers: [String: String] { get }
 }
+
+extension Requestable {
+  func makeURLComponents() -> URLComponents? {
+    var urlComponents = URLComponents(string: baseURL + path)
+    let queries = queryParameters?.map { URLQueryItem(name: $0, value: $1) } ?? []
+    urlComponents?.queryItems = queries
+    
+    return urlComponents
+  }
+}

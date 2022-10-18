@@ -70,14 +70,12 @@ final class APIService {
   
   func postProducts(newProduct: ProductRequest) {
     let body = createBody(params: newProduct)
+    let boundary = "\(newProduct.boundary!)"
     
-//    let boundary = "Boundary-\(UUID().uuidString)"
-    let boundary = "Boundary-\(newProduct.boundary!)"
-
     var request = URLRequest(url: URL(string: "https://openmarket.yagom-academy.kr/api/products")!,timeoutInterval: Double.infinity)
     request.addValue("81da9d11-4b9d-11ed-a200-81a344d1e7cb", forHTTPHeaderField: "identifier")
     request.addValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
-
+    
     request.httpMethod = "POST"
     request.httpBody = body
     
@@ -98,11 +96,6 @@ final class APIService {
     
     task.resume()
   }
-  // 일단 멀티 파트 폼 데이터에 문제가 있어서 포스트가 안됨 이 부분을...
-  // 다른 사람들 코드를 보면서 좀 수정하고
-  // 완전 이제 구조를 개선해야 겠음
-  // 이제 API 통신이 뭔지 조금 알 것 같음 ...
-  
   
   private func createBody(params: ProductRequest) -> Data? {
        var body = Data()
@@ -143,6 +136,7 @@ final class APIService {
        body.appendString(boundarySuffix)
        print("========================================")
        print("\(body)")
+       
        return body
    }
   

@@ -26,6 +26,8 @@
 		DAB7B94D28FEB7BA00632AC1 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB7B94C28FEB7BA00632AC1 /* HTTPMethod.swift */; };
 		DAB7B94F28FEBF7E00632AC1 /* Requestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB7B94E28FEBF7E00632AC1 /* Requestable.swift */; };
 		DAB7B95228FEC6C500632AC1 /* ProductsListRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB7B95128FEC6C500632AC1 /* ProductsListRequest.swift */; };
+		DAB7B95428FED38D00632AC1 /* URLError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB7B95328FED38D00632AC1 /* URLError.swift */; };
+		DAB7B95628FED59F00632AC1 /* FormDataGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB7B95528FED59F00632AC1 /* FormDataGenerator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +52,8 @@
 		DAB7B94C28FEB7BA00632AC1 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		DAB7B94E28FEBF7E00632AC1 /* Requestable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Requestable.swift; sourceTree = "<group>"; };
 		DAB7B95128FEC6C500632AC1 /* ProductsListRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsListRequest.swift; sourceTree = "<group>"; };
+		DAB7B95328FED38D00632AC1 /* URLError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLError.swift; sourceTree = "<group>"; };
+		DAB7B95528FED59F00632AC1 /* FormDataGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormDataGenerator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,7 +72,9 @@
 			children = (
 				DA2C798F28F9B5E300922C47 /* APIService.swift */,
 				DA2C799128FA8FF400922C47 /* NetworkError.swift */,
+				DAB7B95328FED38D00632AC1 /* URLError.swift */,
 				DAB7B94C28FEB7BA00632AC1 /* HTTPMethod.swift */,
+				DAB7B95528FED59F00632AC1 /* FormDataGenerator.swift */,
 				DAB7B95028FEC6A200632AC1 /* Request */,
 			);
 			path = Network;
@@ -226,6 +232,7 @@
 			files = (
 				DA2C799728FAC50C00922C47 /* ImagePicker.swift in Sources */,
 				DA466ED528E71AE60076AEE4 /* ProductListView.swift in Sources */,
+				DAB7B95428FED38D00632AC1 /* URLError.swift in Sources */,
 				DA91E7D428E998950091B6A3 /* DetailProductView.swift in Sources */,
 				DA466ED328E710360076AEE4 /* BannerView.swift in Sources */,
 				DA466ED128E702E30076AEE4 /* Currency.swift in Sources */,
@@ -241,6 +248,7 @@
 				DA466EC828E700ED0076AEE4 /* MainView.swift in Sources */,
 				DA2C799228FA8FF400922C47 /* NetworkError.swift in Sources */,
 				DA466EBA28E6FCA20076AEE4 /* MangoMarketApp.swift in Sources */,
+				DAB7B95628FED59F00632AC1 /* FormDataGenerator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -28,6 +28,7 @@
 		DAB7B95228FEC6C500632AC1 /* ProductsListRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB7B95128FEC6C500632AC1 /* ProductsListRequest.swift */; };
 		DAB7B95428FED38D00632AC1 /* URLError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB7B95328FED38D00632AC1 /* URLError.swift */; };
 		DAB7B95628FED59F00632AC1 /* FormDataGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB7B95528FED59F00632AC1 /* FormDataGenerator.swift */; };
+		DAB7B95828FF27A100632AC1 /* ProductDetailRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB7B95728FF27A100632AC1 /* ProductDetailRequest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,7 @@
 		DAB7B95128FEC6C500632AC1 /* ProductsListRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsListRequest.swift; sourceTree = "<group>"; };
 		DAB7B95328FED38D00632AC1 /* URLError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLError.swift; sourceTree = "<group>"; };
 		DAB7B95528FED59F00632AC1 /* FormDataGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormDataGenerator.swift; sourceTree = "<group>"; };
+		DAB7B95728FF27A100632AC1 /* ProductDetailRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailRequest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +158,7 @@
 			children = (
 				DAB7B94E28FEBF7E00632AC1 /* Requestable.swift */,
 				DAB7B95128FEC6C500632AC1 /* ProductsListRequest.swift */,
+				DAB7B95728FF27A100632AC1 /* ProductDetailRequest.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -247,6 +250,7 @@
 				DAB7B94B28FE9BD900632AC1 /* ProductListViewModel.swift in Sources */,
 				DA466EC828E700ED0076AEE4 /* MainView.swift in Sources */,
 				DA2C799228FA8FF400922C47 /* NetworkError.swift in Sources */,
+				DAB7B95828FF27A100632AC1 /* ProductDetailRequest.swift in Sources */,
 				DA466EBA28E6FCA20076AEE4 /* MangoMarketApp.swift in Sources */,
 				DAB7B95628FED59F00632AC1 /* FormDataGenerator.swift in Sources */,
 			);

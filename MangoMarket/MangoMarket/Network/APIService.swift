@@ -54,76 +54,43 @@ final class APIService {
   }
   
   func postProducts(newProduct: ProductRequest) {
-    let body = createBody(params: newProduct)
-    let boundary = "\(newProduct.boundary!)"
+    guard let data = try? JSONEncoder().encode(newProduct) else {
+      return
+    }
     
-    var request = URLRequest(url: URL(string: "https://openmarket.yagom-academy.kr/api/products")!,timeoutInterval: Double.infinity)
-    request.addValue("81da9d11-4b9d-11ed-a200-81a344d1e7cb", forHTTPHeaderField: "identifier")
-    request.addValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+    let jsonForm = FormData(type: .json, name: "params", data: data)
     
-    request.httpMethod = "POST"
-    request.httpBody = body
+    guard let imageInfos = newProduct.imageInfos else {
+      return
+    }
+    
+    let imageForms = imageInfos.map { (image) -> FormData in
+      return FormData(type: .jpeg, name: "images", filename: image.fileName, data: image.data)
+    }
+    
+    var forms: [FormData] = []
+    forms.append(jsonForm)
+    forms.append(contentsOf: imageForms)
+    
+    guard let request = PostProductRequest(forms: forms,
+                                           boundary: newProduct.boundary!).makeURLRequest() else {
+      return
+    }
     
     let task = URLSession.shared.dataTask(with: request) { data, response, error in
       self.checkError(with: data, response, error) { result in
         switch result {
           case .success(let success):
             print("포스트 성공!")
-            print(success)
 //            completion(Result.success(success))
           case .failure(let failure):
             print("포스트 실패ㅠㅠ")
-            print(failure)
 //            completion(Result.failure(failure))
         }
       }
     }
-    
     task.resume()
   }
-  
-  private func createBody(params: ProductRequest) -> Data? {
-       var body = Data()
-       let newline = "\r\n"
-       let boundaryPrefix = "--\(params.boundary!)\r\n"
-       let boundarySuffix = "\r\n--\(params.boundary!)--\r\n"
-       guard let jsonData = try? JSONEncoder().encode(params) else {
-           return nil
-       }
-    
-        print("========================================")
-       
-       body.appendString(boundaryPrefix)
-        print(boundaryPrefix)
-       body.appendString("Content-Disposition: form-data; name=\"params\"")
-       body.appendString(newline)
-       body.appendString("Content-Type: application/json")
-       body.appendString(newline)
-       body.appendString(newline)
-       body.append(jsonData)
-       body.appendString(newline)
-       
-       guard let images = params.imageInfos else {
-           return nil
-       }
-
-       for image in images {
-           body.appendString(boundaryPrefix)
-           body.appendString("Content-Disposition: form-data; name=\"images\"; filename=\"\(image.fileName).jpeg\"")
-           body.appendString(newline)
-           body.appendString("Content-Type: image/jpeg")
-           body.appendString(newline)
-           body.appendString(newline)
-           body.append(image.data)
-           body.appendString(newline)
-       }
-
-       body.appendString(boundarySuffix)
-       print("========================================")
-       print("\(body)")
-       
-       return body
-   }
   
   private func checkError(
       with data: Data?,

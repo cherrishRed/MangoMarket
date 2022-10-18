@@ -30,7 +30,17 @@ extension Requestable {
       return nil
     }
     
-    let urlRequest = URLRequest(url: url)
+    var urlRequest = URLRequest(url: url)
+    urlRequest.httpMethod = method.rawValue
+    
+    headers.forEach { (key: String, value: String) in
+      urlRequest.addValue(value, forHTTPHeaderField: key)
+    }
+    
+    if bodyParameters != nil {
+      let body = bodyParameters as? Data
+      urlRequest.httpBody = body
+    }
     
     return urlRequest
   }

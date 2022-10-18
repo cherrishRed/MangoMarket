@@ -29,6 +29,7 @@
 		DAB7B95428FED38D00632AC1 /* URLError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB7B95328FED38D00632AC1 /* URLError.swift */; };
 		DAB7B95628FED59F00632AC1 /* FormDataGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB7B95528FED59F00632AC1 /* FormDataGenerator.swift */; };
 		DAB7B95828FF27A100632AC1 /* ProductDetailRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB7B95728FF27A100632AC1 /* ProductDetailRequest.swift */; };
+		DAB7B95A28FF2B9300632AC1 /* PostProductRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB7B95928FF2B9300632AC1 /* PostProductRequest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +57,7 @@
 		DAB7B95328FED38D00632AC1 /* URLError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLError.swift; sourceTree = "<group>"; };
 		DAB7B95528FED59F00632AC1 /* FormDataGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormDataGenerator.swift; sourceTree = "<group>"; };
 		DAB7B95728FF27A100632AC1 /* ProductDetailRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailRequest.swift; sourceTree = "<group>"; };
+		DAB7B95928FF2B9300632AC1 /* PostProductRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostProductRequest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,6 +161,7 @@
 				DAB7B94E28FEBF7E00632AC1 /* Requestable.swift */,
 				DAB7B95128FEC6C500632AC1 /* ProductsListRequest.swift */,
 				DAB7B95728FF27A100632AC1 /* ProductDetailRequest.swift */,
+				DAB7B95928FF2B9300632AC1 /* PostProductRequest.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -251,6 +254,7 @@
 				DA466EC828E700ED0076AEE4 /* MainView.swift in Sources */,
 				DA2C799228FA8FF400922C47 /* NetworkError.swift in Sources */,
 				DAB7B95828FF27A100632AC1 /* ProductDetailRequest.swift in Sources */,
+				DAB7B95A28FF2B9300632AC1 /* PostProductRequest.swift in Sources */,
 				DA466EBA28E6FCA20076AEE4 /* MangoMarketApp.swift in Sources */,
 				DAB7B95628FED59F00632AC1 /* FormDataGenerator.swift in Sources */,
 			);

@@ -71,7 +71,8 @@ final class APIService {
   func postProducts(newProduct: ProductRequest) {
     let body = createBody(params: newProduct)
     
-    let boundary = "Boundary-\(String(describing: newProduct.boundary))"
+//    let boundary = "Boundary-\(UUID().uuidString)"
+    let boundary = "Boundary-\(newProduct.boundary!)"
 
     var request = URLRequest(url: URL(string: "https://openmarket.yagom-academy.kr/api/products")!,timeoutInterval: Double.infinity)
     request.addValue("81da9d11-4b9d-11ed-a200-81a344d1e7cb", forHTTPHeaderField: "identifier")
@@ -84,11 +85,11 @@ final class APIService {
       self.checkError(with: data, response, error) { result in
         switch result {
           case .success(let success):
-            print("성공!")
+            print("포스트 성공!")
             print(success)
 //            completion(Result.success(success))
           case .failure(let failure):
-            print("실패ㅠㅠ")
+            print("포스트 실패ㅠㅠ")
             print(failure)
 //            completion(Result.failure(failure))
         }
@@ -97,21 +98,31 @@ final class APIService {
     
     task.resume()
   }
+  // 일단 멀티 파트 폼 데이터에 문제가 있어서 포스트가 안됨 이 부분을...
+  // 다른 사람들 코드를 보면서 좀 수정하고
+  // 완전 이제 구조를 개선해야 겠음
+  // 이제 API 통신이 뭔지 조금 알 것 같음 ...
+  
   
   private func createBody(params: ProductRequest) -> Data? {
        var body = Data()
        let newline = "\r\n"
-       let boundaryPrefix = "--\(String(describing: params.boundary))\r\n"
-       let boundarySuffix = "\r\n--\(String(describing: params.boundary))--\r\n"
-       guard let product = try? JSONEncoder().encode(params) else {
+       let boundaryPrefix = "--\(params.boundary!)\r\n"
+       let boundarySuffix = "\r\n--\(params.boundary!)--\r\n"
+       guard let jsonData = try? JSONEncoder().encode(params) else {
            return nil
        }
+    
+        print("========================================")
        
        body.appendString(boundaryPrefix)
+        print(boundaryPrefix)
        body.appendString("Content-Disposition: form-data; name=\"params\"")
        body.appendString(newline)
+       body.appendString("Content-Type: application/json")
        body.appendString(newline)
-       body.append(product)
+       body.appendString(newline)
+       body.append(jsonData)
        body.appendString(newline)
        
        guard let images = params.imageInfos else {
@@ -122,7 +133,7 @@ final class APIService {
            body.appendString(boundaryPrefix)
            body.appendString("Content-Disposition: form-data; name=\"images\"; filename=\"\(image.fileName).jpeg\"")
            body.appendString(newline)
-           body.appendString("Content-Type: image/\(image.type)")
+           body.appendString("Content-Type: image/jpeg")
            body.appendString(newline)
            body.appendString(newline)
            body.append(image.data)
@@ -130,6 +141,8 @@ final class APIService {
        }
 
        body.appendString(boundarySuffix)
+       print("========================================")
+       print("\(body)")
        return body
    }
   

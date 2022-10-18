@@ -14,7 +14,7 @@ struct ProductCreateView: View {
   @State var discountedPrice: String = ""
   @State var currency: Currency = .KRW
   
-  @State private var images = [UIImage()]
+  @State private var images: [UIImage] = []
   @State private var showSheet = false
   let apiService: APIService = APIService()
   
@@ -62,13 +62,15 @@ struct ProductCreateView: View {
           }
           
           let imageInfos = images.map { (image) -> ImageInfo in
-            guard let data = image.jpegData(compressionQuality: 0) else {
+            guard let data = image.jpegData(compressionQuality: 0.1) else {
               return ImageInfo(fileName: "", data: Data(), type: "")
             }
             return ImageInfo(fileName: "", data: data, type: "")
           }
           
           let newProduct = ProductRequest(name: title, descriptions: description, price: priceDouble, currency: .KRW, discountedPrice: disCountedPriceDouble, stock: 10, secret: "bjv33pu73cbajp1", imageInfos: imageInfos)
+          
+          print(newProduct)
           
           apiService.postProducts(newProduct: newProduct)
           

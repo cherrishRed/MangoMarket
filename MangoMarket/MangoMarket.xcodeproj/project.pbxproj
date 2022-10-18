@@ -22,6 +22,7 @@
 		DA466ED328E710360076AEE4 /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA466ED228E710360076AEE4 /* BannerView.swift */; };
 		DA466ED528E71AE60076AEE4 /* ProductListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA466ED428E71AE40076AEE4 /* ProductListView.swift */; };
 		DA91E7D428E998950091B6A3 /* DetailProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA91E7D328E998950091B6A3 /* DetailProductView.swift */; };
+		DAB7B94B28FE9BD900632AC1 /* ProductListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB7B94A28FE9BD900632AC1 /* ProductListViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		DA466ED228E710360076AEE4 /* BannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
 		DA466ED428E71AE40076AEE4 /* ProductListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListView.swift; sourceTree = "<group>"; };
 		DA91E7D328E998950091B6A3 /* DetailProductView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailProductView.swift; sourceTree = "<group>"; };
+		DAB7B94A28FE9BD900632AC1 /* ProductListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,10 +86,10 @@
 			isa = PBXGroup;
 			children = (
 				DA2C799528FAC4C500922C47 /* Info.plist */,
+				DAB7B94828FE9BA800632AC1 /* View */,
 				DA466EB928E6FCA20076AEE4 /* MangoMarketApp.swift */,
 				DA466EBB28E6FCA20076AEE4 /* ContentView.swift */,
 				DA466EC728E700EC0076AEE4 /* MainView.swift */,
-				DA466ED428E71AE40076AEE4 /* ProductListView.swift */,
 				DA91E7D328E998950091B6A3 /* DetailProductView.swift */,
 				DA466ED228E710360076AEE4 /* BannerView.swift */,
 				DA2C799328FABC9000922C47 /* ProductCreateView.swift */,
@@ -116,6 +118,23 @@
 				DA466ED028E702E30076AEE4 /* Currency.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		DAB7B94828FE9BA800632AC1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DAB7B94928FE9BBD00632AC1 /* ProductListView */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		DAB7B94928FE9BBD00632AC1 /* ProductListView */ = {
+			isa = PBXGroup;
+			children = (
+				DA466ED428E71AE40076AEE4 /* ProductListView.swift */,
+				DAB7B94A28FE9BD900632AC1 /* ProductListViewModel.swift */,
+			);
+			path = ProductListView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -198,6 +217,7 @@
 				DA2C799428FABC9000922C47 /* ProductCreateView.swift in Sources */,
 				DA2C799028F9B5E300922C47 /* APIService.swift in Sources */,
 				DA466ECD28E701F70076AEE4 /* ProductDetail.swift in Sources */,
+				DAB7B94B28FE9BD900632AC1 /* ProductListViewModel.swift in Sources */,
 				DA466EC828E700ED0076AEE4 /* MainView.swift in Sources */,
 				DA2C799228FA8FF400922C47 /* NetworkError.swift in Sources */,
 				DA466EBA28E6FCA20076AEE4 /* MangoMarketApp.swift in Sources */,

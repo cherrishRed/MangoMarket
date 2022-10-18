@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct ProductListView: View {
-  @State var onlyImage: Bool = false
-  @State var products: [ProductDetail] = []
+//  @State var onlyImage: Bool = false
+//  @State var products: [ProductDetail] = []
+  @ObservedObject var viewModel = ProductListViewModel()
   
   var columns: [GridItem] = [GridItem(.flexible(), spacing: 10, alignment: nil),
                                     GridItem(.flexible(), spacing: 10, alignment: nil)]
@@ -19,13 +20,13 @@ struct ProductListView: View {
       LazyVGrid(columns: columns, alignment: .center, spacing: 10, pinnedViews: [.sectionHeaders]) {
         
         Section(header:
-            ProductListHeaderView(onlyImage: $onlyImage)
+                  ProductListHeaderView(onlyImage: $viewModel.onlyImage)
             ) {
-          ForEach(products, id:\.self) { product in
+          ForEach(viewModel.products, id:\.self) { product in
             NavigationLink {
               DetailProductView(productId: product.id ?? 1)
             } label: {
-              ProductCellView(onlyImage: $onlyImage, product: product)
+              ProductCellView(onlyImage: $viewModel.onlyImage, product: product)
             }
             }
           }
@@ -33,24 +34,11 @@ struct ProductListView: View {
       .padding()
       }
       .onAppear {
-      let apiService = APIService()
-        apiService.retrieveProducts { result in
-          switch result {
-            case .success(let success):
-              do {
-                let productList = try JSONDecoder().decode(ProductList.self, from: success)
-                products = productList.items ?? []
-              } catch {
-                print("디코드 에러")
-              }
-            case .failure(let failure):
-              print("오류!!!")
-              print(failure)
-          }
-        }
-    }
-    }
+        viewModel.retrieveProducts()
+        
+      }
   }
+}
 
 struct ProductListHeaderView: View {
   @Binding var onlyImage: Bool

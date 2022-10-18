@@ -65,15 +65,15 @@ struct ProductCreateView: View {
             guard let data = image.jpegData(compressionQuality: 0.1) else {
               return ImageInfo(fileName: "", data: Data(), type: "")
             }
-            return ImageInfo(fileName: "", data: data, type: "")
+            return ImageInfo(fileName: "\(Date())", data: data, type: "")
           }
           
           let newProduct = ProductRequest(name: title, descriptions: description, price: priceDouble, currency: .KRW, discountedPrice: disCountedPriceDouble, stock: 10, secret: "bjv33pu73cbajp1", imageInfos: imageInfos)
           
+          print("newProduct")
           print(newProduct)
           
           apiService.postProducts(newProduct: newProduct)
-          
 //           제출
         } label: {
           Text("post 하기")

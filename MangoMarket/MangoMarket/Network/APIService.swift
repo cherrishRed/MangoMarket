@@ -10,31 +10,22 @@ import Foundation
 final class APIService {
   
   func retrieveProducts(completion: @escaping (Result<Data, Error>) -> ()) {
-    let urlComponents = URLComponents(string: "https://openmarket.yagom-academy.kr/api/products?page_no=1&items_per_page=100")!
-
-    var request = URLRequest(url: urlComponents.url!)
-    request.httpMethod = "GET"
+    guard let request = ProductsListRequest().makeURLRequest() else {
+      return completion(.failure(URLError.urlRequestError))
+    }
     
     let task = URLSession.shared.dataTask(with: request) { data, response, error in
       
       self.checkError(with: data, response, error) { result in
         switch result {
           case .success(let success):
-            print("성공!")
-//            print(success)
+            print("product List 가져오기 성공!")
             completion(Result.success(success))
           case .failure(let failure):
-            print("실패ㅠㅠ")
-            print(failure)
+            print("product List 가져오기 실패ㅠㅠ")
             completion(Result.failure(failure))
         }
       }
-      
-      guard let data = data else {
-        print(String(describing: error))
-        return
-      }
-      print(String(data: data, encoding: .utf8)!)
     }
     task.resume()
   }

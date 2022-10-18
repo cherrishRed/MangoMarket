@@ -24,7 +24,8 @@ struct ProductListView: View {
             ) {
           ForEach(viewModel.products, id:\.self) { product in
             NavigationLink {
-              DetailProductView(productId: product.id ?? 1)
+              DetailProductView(viewModel: DetailProductViewModel(productId: product.id ?? 1))
+              
             } label: {
               ProductCellView(onlyImage: $viewModel.onlyImage, product: product)
             }

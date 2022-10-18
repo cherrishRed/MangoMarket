@@ -24,4 +24,14 @@ extension Requestable {
     
     return urlComponents
   }
+  
+  func makeURLRequest() -> URLRequest? {
+    guard let url = makeURLComponents()?.url else {
+      return nil
+    }
+    
+    let urlRequest = URLRequest(url: url)
+    
+    return urlRequest
+  }
 }

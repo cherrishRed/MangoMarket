@@ -8,7 +8,6 @@
 import Foundation
 
 final class APIService {
-  
   func retrieveProducts(completion: @escaping (Result<Data, Error>) -> ()) {
     guard let request = ProductsListRequest().makeURLRequest() else {
       return completion(.failure(URLError.urlRequestError))
@@ -54,23 +53,9 @@ final class APIService {
   }
   
   func postProducts(newProduct: ProductRequest) {
-    guard let data = try? JSONEncoder().encode(newProduct) else {
-      return
-    }
-    
-    let jsonForm = FormData(type: .json, name: "params", data: data)
-    
-    guard let imageInfos = newProduct.imageInfos else {
-      return
-    }
-    
-    let imageForms = imageInfos.map { (image) -> FormData in
-      return FormData(type: .jpeg, name: "images", filename: image.fileName, data: image.data)
-    }
-    
     var forms: [FormData] = []
-    forms.append(jsonForm)
-    forms.append(contentsOf: imageForms)
+    forms.append(makeFormData(productRequest: newProduct))
+    forms.append(contentsOf: makeImageFormData(productRequest: newProduct))
     
     guard let request = PostProductRequest(forms: forms,
                                            boundary: newProduct.boundary!).makeURLRequest() else {
@@ -90,6 +75,16 @@ final class APIService {
       }
     }
     task.resume()
+  }
+  
+  func makeFormData(productRequest: ProductRequest) -> FormData {
+    let data = try? JSONEncoder().encode(productRequest)
+    return FormData(type: .json, name: "params", data: data)
+  }
+  
+  func makeImageFormData(productRequest: ProductRequest) -> [FormData] {
+    guard let imageInfos = productRequest.imageInfos else { return [] }
+    return imageInfos.map { FormData(type: .jpeg, name: "images", filename: $0.fileName, data: $0.data) }
   }
   
   private func checkError(

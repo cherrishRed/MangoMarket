@@ -31,9 +31,9 @@ final class APIService {
   }
   
   func retrieveProduct(id: Int, completion: @escaping (Result<Data, Error>) -> ()){
-    let urlComponents = URLComponents(string: "https://openmarket.yagom-academy.kr/api/products/\(id)")!
-    var request = URLRequest(url: urlComponents.url!)
-    request.httpMethod = "GET"
+    guard let request = ProductDetailRequest(productsId: id).makeURLRequest() else {
+      return completion(.failure(URLError.urlRequestError))
+    }
     
     let task = URLSession.shared.dataTask(with: request) { data, response, error in
       
@@ -49,12 +49,6 @@ final class APIService {
             completion(Result.failure(failure))
         }
       }
-      
-      guard let data = data else {
-        print(String(describing: error))
-        return
-      }
-      print(String(data: data, encoding: .utf8)!)
     }
     task.resume()
   }

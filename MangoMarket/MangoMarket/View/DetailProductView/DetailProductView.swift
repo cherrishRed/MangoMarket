@@ -28,7 +28,7 @@ struct DetailProductView: View {
           Divider()
           HStack {
             Image(systemName: "person.crop.circle")
-              .foregroundColor(.yellow)
+              .foregroundColor(Color("logoYellow"))
             Text(viewModel.vendorName)
               .font(.caption)
           }

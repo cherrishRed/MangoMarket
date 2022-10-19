@@ -16,6 +16,10 @@ class DetailProductViewModel: ObservableObject {
     return product?.name ?? "이름 없음"
   }
   
+  var vendorName: String {
+    return product?.vendor?.name ?? "미상"
+  }
+  
   var currency: String {
     return product?.currency?.rawValue ?? "??"
   }
@@ -53,6 +57,14 @@ class DetailProductViewModel: ObservableObject {
   
   var description: String {
     return product?.description ?? ""
+  }
+  
+  var imageCount: Int {
+    return product?.imageInfos?.count ?? 0
+  }
+  
+  var images: [ProductImage] {
+    return product?.imageInfos ?? []
   }
   
   init(productId: Int) {

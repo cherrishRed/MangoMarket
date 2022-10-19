@@ -17,9 +17,22 @@ class ProductCreateViewModel: ObservableObject {
   @Published var images: [UIImage] = []
   @Published var showSheet = false
   let apiService: APIService = APIService()
+  var maxImageCount: Int = 5
+  
+  var imageCount: Int {
+    return images.count
+  }
+  
+  var inactiveImagePicker: Bool {
+    return images.count < maxImageCount 
+  }
   
   func tappedImagePickerButton() {
     showSheet = true
+  }
+  
+  func tappedCancelImageButton(index: Int) {
+    images.remove(at: index)
   }
   
   func tappedPostButton() {

@@ -15,27 +15,32 @@ struct ProductCreateView: View {
         Section {
           ScrollView(.horizontal) {
             HStack {
-              ForEach(viewModel.images, id: \.self) { image in
-                Image(uiImage: image)
-                  .resizable()
-                  .frame(width: 100, height: 100)
-              }
-              Button {
-                viewModel.tappedImagePickerButton()
-              } label: {
-                ZStack{
-                  Rectangle()
-                    .fill(.gray.opacity(0.3))
-                    .frame(width: 100, height: 100, alignment: .center)
+              ForEach(Array(viewModel.images.enumerated()), id: \.offset) { (index, image) in
+                ZStack(alignment: .topTrailing) {
+                  Image(uiImage: image)
+                    .resizable()
+                    .frame(width: 100, height: 100)
                     .cornerRadius(10)
-                  Image(systemName: "photo.on.rectangle")
-                    .frame(width: 100, height: 100, alignment: .center)
-                    .foregroundColor(.white)
+                  Button {
+                    viewModel.tappedCancelImageButton(index: index)
+                  } label: {
+                    Image(systemName: "xmark.circle.fill")
+                      .foregroundColor(.red)
+                  }
                 }
               }
+              if viewModel.inactiveImagePicker == true {
+                Button {
+                  viewModel.tappedImagePickerButton()
+                } label: {
+                  imagePickerView
+                }
+              }
+              
             }
           }
         }
+        .animation(.easeInOut, value: viewModel.images)
         
         Section {
           TextField("제품 이름", text: $viewModel.title)
@@ -63,10 +68,20 @@ struct ProductCreateView: View {
         ImagePicker(sourceType: .photoLibrary, selectedImage: $viewModel.images)
     }
   }
-}
-
-struct ProductCreateView_Previews: PreviewProvider {
-    static var previews: some View {
-        ProductCreateView()
+  
+  var imagePickerView: some View {
+    ZStack{
+      Rectangle()
+        .fill(Color(uiColor: UIColor.systemGray6))
+        .frame(width: 100, height: 100, alignment: .center)
+        .cornerRadius(10)
+      VStack {
+        Image(systemName: "photo.on.rectangle")
+          .padding(6)
+          .foregroundColor(Color(uiColor: UIColor.gray))
+        Text("\(viewModel.imageCount)/\(viewModel.maxImageCount)")
+          .foregroundColor(Color(uiColor: UIColor.gray))
+      }
     }
+  }
 }

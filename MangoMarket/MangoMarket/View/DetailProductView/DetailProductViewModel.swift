@@ -67,6 +67,11 @@ class DetailProductViewModel: ObservableObject {
     return product?.imageInfos ?? []
   }
   
+  var isMyProduct: Bool {
+    let myUserName = UserDefaults.standard.string(forKey: "userName") ?? ""
+    return vendorName == myUserName
+  }
+  
   init(productId: Int) {
     self.selection = 0
     self.productId = productId

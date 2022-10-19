@@ -28,6 +28,9 @@ struct MainView: View {
           }
         }
       }
+      .onAppear {
+        UserDefaults.standard.set("red123", forKey: "userName")
+      }
     }
 }
 

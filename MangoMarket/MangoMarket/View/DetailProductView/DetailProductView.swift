@@ -26,11 +26,10 @@ struct DetailProductView: View {
         
         VStack(alignment: .leading) {
           Divider()
-          HStack {
-            Image(systemName: "person.crop.circle")
-              .foregroundColor(Color("logoYellow"))
-            Text(viewModel.vendorName)
-              .font(.caption)
+          if viewModel.isMyProduct {
+            myProductView
+          } else {
+            vendorView
           }
           Divider()
           Text(viewModel.productName)
@@ -102,6 +101,44 @@ struct DetailProductView: View {
           viewModel.selection = index
         }
       }
+    }
+  }
+  
+  var vendorView: some View {
+    HStack {
+      Image(systemName: "person.crop.circle")
+        .foregroundColor(Color("logoYellow"))
+      Text(viewModel.vendorName)
+        .font(.caption)
+    }
+  }
+  
+  var myProductView: some View {
+    HStack {
+      Text("나의 상품")
+        .font(.caption)
+      Spacer()
+      Button {
+        // edit
+      } label: {
+        Text("수정하기")
+          .font(.caption)
+          .padding(4)
+          .background(Color("logoYellow"))
+          .foregroundColor(.white)
+          .cornerRadius(4)
+      }
+      Button {
+        // delete
+      } label: {
+        Text("삭제하기")
+          .font(.caption)
+          .padding(4)
+          .background(Color(uiColor: UIColor.systemRed))
+          .foregroundColor(.white)
+          .cornerRadius(4)
+      }
+
     }
   }
 }

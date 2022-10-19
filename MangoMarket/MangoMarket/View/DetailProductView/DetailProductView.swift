@@ -119,7 +119,7 @@ struct DetailProductView: View {
         .font(.caption)
       Spacer()
       NavigationLink {
-        ProductCreateView(viewModel: ProductCreateViewModel(product: viewModel.product))
+        ProductCreateView(viewModel: ProductCreateViewModel(product: viewModel.product, images: viewModel.fetchImage()))
       } label: {
         Text("수정하기")
           .font(.caption)
@@ -128,17 +128,7 @@ struct DetailProductView: View {
           .foregroundColor(.white)
           .cornerRadius(4)
       }
-
-//      Button {
-//
-//      } label: {
-//        Text("수정하기")
-//          .font(.caption)
-//          .padding(4)
-//          .background(Color("logoYellow"))
-//          .foregroundColor(.white)
-//          .cornerRadius(4)
-//      }
+      
       Button {
         // delete
       } label: {

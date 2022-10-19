@@ -77,6 +77,20 @@ final class APIService {
     task.resume()
   }
   
+  func fetchImage(_ urlString: String, completion: @escaping (Result<Data, Error>) -> ()) {
+    guard let url = URL(string: urlString) else {
+      completion(.failure(URLError.imageURLError))
+      return
+    }
+    
+    guard let data = try? Data(contentsOf: url) else {
+      completion(.failure(NetworkError.emptyDataError))
+      return
+    }
+    
+    completion(.success(data))
+  }
+  
   func makeFormData(productRequest: ProductRequest) -> FormData {
     let data = try? JSONEncoder().encode(productRequest)
     return FormData(type: .json, name: "params", data: data)

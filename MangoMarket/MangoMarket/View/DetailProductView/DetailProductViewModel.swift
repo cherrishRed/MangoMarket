@@ -5,12 +5,13 @@
 //  Created by RED on 2022/10/19.
 //
 
-import Foundation
+import SwiftUI
 
 class DetailProductViewModel: ObservableObject {
   @Published var selection: Int = 0
   @Published var productId: Int
   @Published var product: ProductDetail? = nil
+  let apiService: APIService = APIService()
   
   var productName: String {
     return product?.name ?? "이름 없음"
@@ -96,6 +97,21 @@ class DetailProductViewModel: ObservableObject {
           print(failure)
       }
     }
+  }
+  
+  func fetchImage() -> [UIImage]{
+    var images: [UIImage] = []
+    product?.imageInfos?.forEach({ image in
+      apiService.fetchImage(image.url ?? "") { result in
+        switch result {
+          case .success(let data):
+            images.append(UIImage(data: data) ?? UIImage(systemName: "exclamationmark.icloud.fill")!)
+          case .failure(_):
+            images.append(UIImage(systemName: "exclamationmark.icloud")!)
+        }
+      }
+    })
+    return images
   }
   
   private func formatPrice(_ price: Double) -> String {

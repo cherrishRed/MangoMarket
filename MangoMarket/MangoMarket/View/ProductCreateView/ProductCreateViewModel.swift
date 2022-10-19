@@ -46,13 +46,13 @@ class ProductCreateViewModel: ObservableObject {
     self.mode = .create
   }
   
-  init(product: ProductDetail?) {
+  init(product: ProductDetail?, images: [UIImage]) {
     self.title = product?.name ?? ""
     self.description = product?.description ?? ""
     self.price = "\(product?.price ?? 0)"
     self.discountedPrice = "\(product?.discountedPrice ?? 0)"
     self.currency = product?.currency ?? .KRW
-    self.images = []
+    self.images = images
     self.showSheet = false
     self.showAlert = false
     self.alertmessage = .editProductSuccess
@@ -65,6 +65,9 @@ class ProductCreateViewModel: ObservableObject {
   }
   
   var inactiveImagePicker: Bool {
+    guard mode == .create else {
+      return false
+    }
     return images.count < maxImageCount 
   }
   
@@ -111,9 +114,13 @@ class ProductCreateViewModel: ObservableObject {
   }
   
   func tappedPostButton() {
-    postProduct()
-    DispatchQueue.main.async { [weak self] in
-      self?.showAlert = true
+    if mode == .create {
+      postProduct()
+      DispatchQueue.main.async { [weak self] in
+        self?.showAlert = true
+      }
+    } else {
+      // edit
     }
   }
   
@@ -139,7 +146,6 @@ class ProductCreateViewModel: ObservableObject {
     print(newProduct)
     apiService.postProducts(newProduct: newProduct)
   }
-  
   enum Mode {
     case edit
     case create

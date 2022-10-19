@@ -32,7 +32,12 @@ struct ProductCreateView: View {
           Button {
             viewModel.tappedPostButton()
           } label: {
-            Text("post 하기")
+            switch viewModel.mode {
+              case.create:
+                Text("상품 등록 하기")
+              case.edit:
+                Text("상품 수정 하기")
+            }
           }
         }
       }
@@ -74,11 +79,13 @@ struct ProductCreateView: View {
               .resizable()
               .frame(width: 100, height: 100)
               .cornerRadius(10)
-            Button {
-              viewModel.tappedCancelImageButton(index: index)
-            } label: {
-              Image(systemName: "xmark.circle.fill")
-                .foregroundColor(.red)
+            if viewModel.mode == .create {
+              Button {
+                viewModel.tappedCancelImageButton(index: index)
+              } label: {
+                Image(systemName: "xmark.circle.fill")
+                  .foregroundColor(.red)
+              }
             }
           }
         }

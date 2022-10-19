@@ -12,6 +12,7 @@
 		DA2C799428FABC9000922C47 /* ProductCreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2C799328FABC9000922C47 /* ProductCreateView.swift */; };
 		DA2C799728FAC50C00922C47 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2C799628FAC50C00922C47 /* ImagePicker.swift */; };
 		DA3E9D5728FF42E700E72E21 /* DetailProductViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3E9D5628FF42E700E72E21 /* DetailProductViewModel.swift */; };
+		DA3E9D5A290043B200E72E21 /* ProductCreateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3E9D59290043B200E72E21 /* ProductCreateViewModel.swift */; };
 		DA466EBA28E6FCA20076AEE4 /* MangoMarketApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA466EB928E6FCA20076AEE4 /* MangoMarketApp.swift */; };
 		DA466EBC28E6FCA20076AEE4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA466EBB28E6FCA20076AEE4 /* ContentView.swift */; };
 		DA466EBE28E6FCA50076AEE4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA466EBD28E6FCA50076AEE4 /* Assets.xcassets */; };
@@ -40,6 +41,7 @@
 		DA2C799528FAC4C500922C47 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		DA2C799628FAC50C00922C47 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		DA3E9D5628FF42E700E72E21 /* DetailProductViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailProductViewModel.swift; sourceTree = "<group>"; };
+		DA3E9D59290043B200E72E21 /* ProductCreateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCreateViewModel.swift; sourceTree = "<group>"; };
 		DA466EB628E6FCA20076AEE4 /* MangoMarket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MangoMarket.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA466EB928E6FCA20076AEE4 /* MangoMarketApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MangoMarketApp.swift; sourceTree = "<group>"; };
 		DA466EBB28E6FCA20076AEE4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -86,6 +88,15 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
+		DA3E9D582900438F00E72E21 /* ProductCreateView */ = {
+			isa = PBXGroup;
+			children = (
+				DA2C799328FABC9000922C47 /* ProductCreateView.swift */,
+				DA3E9D59290043B200E72E21 /* ProductCreateViewModel.swift */,
+			);
+			path = ProductCreateView;
+			sourceTree = "<group>";
+		};
 		DA466EAD28E6FCA20076AEE4 = {
 			isa = PBXGroup;
 			children = (
@@ -110,7 +121,6 @@
 				DA466EBB28E6FCA20076AEE4 /* ContentView.swift */,
 				DAB7B94828FE9BA800632AC1 /* View */,
 				DA466ED228E710360076AEE4 /* BannerView.swift */,
-				DA2C799328FABC9000922C47 /* ProductCreateView.swift */,
 				DA2C799628FAC50C00922C47 /* ImagePicker.swift */,
 				DA2C798E28F9B42E00922C47 /* Network */,
 				DA466EC928E701B00076AEE4 /* Model */,
@@ -142,6 +152,7 @@
 			isa = PBXGroup;
 			children = (
 				DA466EC728E700EC0076AEE4 /* MainView.swift */,
+				DA3E9D582900438F00E72E21 /* ProductCreateView */,
 				DAB7B94928FE9BBD00632AC1 /* ProductListView */,
 				DAB7B95B28FF420C00632AC1 /* DetailProductView */,
 			);
@@ -258,6 +269,7 @@
 				DA2C799428FABC9000922C47 /* ProductCreateView.swift in Sources */,
 				DA3E9D5728FF42E700E72E21 /* DetailProductViewModel.swift in Sources */,
 				DAB7B94D28FEB7BA00632AC1 /* HTTPMethod.swift in Sources */,
+				DA3E9D5A290043B200E72E21 /* ProductCreateViewModel.swift in Sources */,
 				DAB7B95228FEC6C500632AC1 /* ProductsListRequest.swift in Sources */,
 				DAB7B94F28FEBF7E00632AC1 /* Requestable.swift in Sources */,
 				DA2C799028F9B5E300922C47 /* APIService.swift in Sources */,

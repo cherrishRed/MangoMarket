@@ -17,8 +17,7 @@ class ProductCreateViewModel: ObservableObject {
   @Published var images: [UIImage] = []
   @Published var showSheet = false
   @Published var showAlert = false
-  @Published var clickedPostButton = false
-  @Published var alertmessage: ProductAlert = .invaildCondition
+  @Published var alertmessage: ProductAlert = .postProductSuccess
   
   let apiService: APIService = APIService()
   var maxImageCount: Int = 5
@@ -32,7 +31,7 @@ class ProductCreateViewModel: ObservableObject {
   }
   
   var vaildTitle: Bool {
-    return title.isEmpty == false && title.count < 101
+    return title.count > 2 && title.count < 101
   }
   
   var vaildDescription: Bool {
@@ -74,17 +73,8 @@ class ProductCreateViewModel: ObservableObject {
   }
   
   func tappedPostButton() {
-    if vaildAll == false {
-      ShowinvaildConditionAlert()
-    } else {
-      postProduct()
-    }
-  }
-  
-  private func ShowinvaildConditionAlert() {
+    postProduct()
     DispatchQueue.main.async { [weak self] in
-      self?.clickedPostButton = true
-      self?.alertmessage = .invaildCondition
       self?.showAlert = true
     }
   }
@@ -113,7 +103,6 @@ class ProductCreateViewModel: ObservableObject {
   }
   
   enum ProductAlert: Equatable {
-    case invaildCondition
     case postProductFail
     case postProductSuccess
     case editProductFail
@@ -121,8 +110,6 @@ class ProductCreateViewModel: ObservableObject {
     
     var message: String {
       switch self {
-        case .invaildCondition:
-          return "조건에 맞지 않아요! \n 다시 한번 조건을 확인해 보세요 😚"
         case .postProductFail:
           return "상품 등록에 실패했습니다 🥲"
         case .postProductSuccess:

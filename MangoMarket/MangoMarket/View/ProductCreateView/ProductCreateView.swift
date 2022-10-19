@@ -55,7 +55,11 @@ struct ProductCreateView: View {
           TextField("할인된 가격", text: $viewModel.discountedPrice)
           TextField("제품 설명", text: $viewModel.description)
         }
-        
+      
+      if viewModel.clickedPostButton {
+        validCheckView
+      }
+      
         Section {
           Button {
             viewModel.tappedPostButton()
@@ -66,6 +70,13 @@ struct ProductCreateView: View {
       })
     .sheet(isPresented: $viewModel.showSheet) {
         ImagePicker(sourceType: .photoLibrary, selectedImage: $viewModel.images)
+    }
+    .alert("\(viewModel.alertmessage.message)", isPresented: $viewModel.showAlert) {
+      Button(role: .none) {
+        //
+      } label: {
+        Text("확인")
+      }
     }
   }
   
@@ -81,6 +92,41 @@ struct ProductCreateView: View {
           .foregroundColor(Color(uiColor: UIColor.gray))
         Text("\(viewModel.imageCount)/\(viewModel.maxImageCount)")
           .foregroundColor(Color(uiColor: UIColor.gray))
+      }
+    }
+  }
+  
+  var validCheckView: some View {
+    VStack(alignment: .leading) {
+      HStack {
+        Text("상품 이름 3 ~ 100 글자")
+        Spacer()
+        Image(systemName: viewModel.vaildTitle ? "checkmark" : "xmark")
+          .foregroundColor(viewModel.vaildTitle ? .green : .red)
+      }
+      HStack {
+        Text("이미지는 최소 1장 최대 \(viewModel.maxImageCount) 첨부")
+        Spacer()
+        Image(systemName: viewModel.vaildImageCount ? "checkmark" : "xmark")
+          .foregroundColor(viewModel.vaildImageCount ? .green : .red)
+      }
+      HStack {
+        Text("상품 가격 입력")
+        Spacer()
+        Image(systemName: viewModel.vaildPrice ? "checkmark" : "xmark")
+          .foregroundColor(viewModel.vaildPrice ? .green : .red)
+      }
+      HStack {
+        Text("할인가는 가격을 초과 금지")
+        Spacer()
+        Image(systemName: viewModel.vaildDiscountedPrice ? "checkmark" : "xmark")
+          .foregroundColor(viewModel.vaildDiscountedPrice ? .green : .red)
+      }
+      HStack {
+        Text("상품 정보 10 ~ 1,000 글자")
+        Spacer()
+        Image(systemName: viewModel.vaildDescription ? "checkmark" : "xmark")
+          .foregroundColor(viewModel.vaildDescription ? .green : .red)
       }
     }
   }

@@ -13,14 +13,52 @@ class ProductCreateViewModel: ObservableObject {
   @Published var price: String = ""
   @Published var discountedPrice: String = ""
   @Published var currency: Currency = .KRW
-  
   @Published var images: [UIImage] = []
+  
   @Published var showSheet = false
   @Published var showAlert = false
   @Published var alertmessage: ProductAlert = .postProductSuccess
   
+  let mode: Mode
   let apiService: APIService = APIService()
   var maxImageCount: Int = 5
+  
+  init(title: String = "",
+       description: String = "",
+       price: String = "",
+       discountedPrice: String = "",
+       currency: Currency = .KRW,
+       images: [UIImage] = [],
+       showSheet: Bool = false,
+       showAlert: Bool = false,
+       alertmessage: ProductCreateViewModel.ProductAlert = .postProductSuccess,
+       maxImageCount: Int = 5) {
+    self.title = title
+    self.description = description
+    self.price = price
+    self.discountedPrice = discountedPrice
+    self.currency = currency
+    self.images = images
+    self.showSheet = showSheet
+    self.showAlert = showAlert
+    self.alertmessage = alertmessage
+    self.maxImageCount = maxImageCount
+    self.mode = .create
+  }
+  
+  init(product: ProductDetail?) {
+    self.title = product?.name ?? ""
+    self.description = product?.description ?? ""
+    self.price = "\(product?.price ?? 0)"
+    self.discountedPrice = "\(product?.discountedPrice ?? 0)"
+    self.currency = product?.currency ?? .KRW
+    self.images = []
+    self.showSheet = false
+    self.showAlert = false
+    self.alertmessage = .editProductSuccess
+    self.maxImageCount = 5
+    self.mode = .edit
+  }
   
   var imageCount: Int {
     return images.count
@@ -100,6 +138,11 @@ class ProductCreateViewModel: ObservableObject {
     print("newProduct")
     print(newProduct)
     apiService.postProducts(newProduct: newProduct)
+  }
+  
+  enum Mode {
+    case edit
+    case create
   }
   
   enum ProductAlert: Equatable {

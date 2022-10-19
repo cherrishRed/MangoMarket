@@ -14,13 +14,8 @@ struct ProductCreateView: View {
     Form(content: {
       Section {
         imageView
-        HStack {
-          Text("이미지는 최소 1장 첨부 해주세요 \n이미지는 추후에 수정할 수 없습니다")
-            .font(.caption)
-            .foregroundColor(.gray)
-          Spacer()
-          Image(systemName: viewModel.vaildImageCount ? "checkmark" : "xmark")
-            .foregroundColor(viewModel.vaildImageCount ? .green : .red)
+        if viewModel.mode == .create {
+          validateImageView
         }
       }
       .animation(.easeInOut, value: viewModel.images)
@@ -136,6 +131,17 @@ struct ProductCreateView: View {
       TextField("제품 설명 10 ~ 1,000 글자", text: $viewModel.description)
       Image(systemName: viewModel.vaildDescription ? "checkmark" : "xmark")
         .foregroundColor(viewModel.vaildDescription ? .green : .red)
+    }
+  }
+  
+  var validateImageView: some View {
+    HStack {
+      Text("이미지는 최소 1장 첨부 해주세요 \n이미지는 추후에 수정할 수 없습니다")
+        .font(.caption)
+        .foregroundColor(.gray)
+      Spacer()
+      Image(systemName: viewModel.vaildImageCount ? "checkmark" : "xmark")
+        .foregroundColor(viewModel.vaildImageCount ? .green : .red)
     }
   }
 }

@@ -22,6 +22,7 @@ class ProductCreateViewModel: ObservableObject {
   let mode: Mode
   let apiService: APIService = APIService()
   var maxImageCount: Int = 5
+  var productId: Int?
   
   init(title: String = "",
        description: String = "",
@@ -44,6 +45,7 @@ class ProductCreateViewModel: ObservableObject {
     self.alertmessage = alertmessage
     self.maxImageCount = maxImageCount
     self.mode = .create
+    self.productId = nil
   }
   
   init(product: ProductDetail?, images: [UIImage]) {
@@ -58,6 +60,7 @@ class ProductCreateViewModel: ObservableObject {
     self.alertmessage = .editProductSuccess
     self.maxImageCount = 5
     self.mode = .edit
+    self.productId = product?.id
   }
   
   var imageCount: Int {
@@ -120,17 +123,48 @@ class ProductCreateViewModel: ObservableObject {
         self?.showAlert = true
       }
     } else {
-      // edit
+      editProduct()
     }
   }
   
   private func postProduct() {
-    guard let priceDouble = Double(price) else {
+    guard let newProduct = makeProductRequest() else {
       return
     }
 
-    guard let disCountedPriceDouble = Double(discountedPrice) else {
+    print("newProduct")
+    print(newProduct)
+    apiService.postProducts(newProduct: newProduct)
+  }
+  
+  private func editProduct() {
+    guard let editedProduct = makeProductEditRequest() else {
       return
+    }
+    apiService.editProduct(id: productId ?? 0, product: editedProduct) { resutl in
+      switch resutl {
+        case .success(_):
+          DispatchQueue.main.async { [weak self] in
+            self?.alertmessage = .editProductSuccess
+            self?.showAlert = true
+          }
+        case .failure(_):
+          
+          DispatchQueue.main.async { [weak self] in
+            self?.alertmessage = .editProductFail
+            self?.showAlert = true
+          }
+      }
+    }
+  }
+  
+  private func makeProductRequest() -> ProductRequest? {
+    guard let priceDouble = Double(price) else {
+      return nil
+    }
+
+    guard let disCountedPriceDouble = Double(discountedPrice) else {
+      return nil
     }
 
     let imageInfos = images.map { (image) -> ImageInfo in
@@ -140,12 +174,21 @@ class ProductCreateViewModel: ObservableObject {
       return ImageInfo(fileName: "\(Date())", data: data, type: "")
     }
 
-    let newProduct = ProductRequest(name: title, descriptions: description, price: priceDouble, currency: .KRW, discountedPrice: disCountedPriceDouble, stock: 10, secret: "bjv33pu73cbajp1", imageInfos: imageInfos)
-
-    print("newProduct")
-    print(newProduct)
-    apiService.postProducts(newProduct: newProduct)
+    return ProductRequest(name: title, descriptions: description, price: priceDouble, currency: .KRW, discountedPrice: disCountedPriceDouble, stock: 10, secret: "bjv33pu73cbajp1", imageInfos: imageInfos)
   }
+  
+  private func makeProductEditRequest() -> ProductEditRequestModel? {
+    guard let priceDouble = Double(price) else {
+      return nil
+    }
+
+    guard let disCountedPriceDouble = Double(discountedPrice) else {
+      return nil
+    }
+
+    return ProductEditRequestModel(name: title, descriptions: description, price: priceDouble, currency: .KRW, discountedPrice: disCountedPriceDouble, stock: 10, secret: "bjv33pu73cbajp1")
+  }
+  
   enum Mode {
     case edit
     case create

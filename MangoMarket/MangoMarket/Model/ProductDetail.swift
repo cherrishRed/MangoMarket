@@ -79,6 +79,26 @@ struct ProductRequest: Encodable {
     }
 }
 
+struct ProductEditRequestModel: Encodable {
+    var pageNumber: Int?
+    var perPages: Int?
+    var name: String?
+    var descriptions: String?
+    var price: Double?
+    var currency: Currency?
+    var discountedPrice: Double?
+    var stock: Int?
+    var secret: String?
+    var boundary: String? = UUID().uuidString
+    
+    enum CodingKeys: String, CodingKey {
+        case pageNumber = "page_no"
+        case perPages = "items_per_page"
+        case discountedPrice = "discounted_price"
+        case name, descriptions, price, currency, stock, secret
+    }
+}
+
 struct ImageInfo: Encodable, Hashable {
     let fileName: String
     let data: Data

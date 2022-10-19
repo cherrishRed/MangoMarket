@@ -91,6 +91,27 @@ final class APIService {
     completion(.success(data))
   }
   
+  func editProduct(id: Int, product: ProductEditRequestModel, completion: @escaping (Result<Data, Error>) -> ()) {
+    guard let request = EditProductRequest.init(id: id, product: product).makeURLRequest() else {
+      return
+    }
+    
+    let task = URLSession.shared.dataTask(with: request) { data, response, error in
+      self.checkError(with: data, response, error) { result in
+        switch result {
+          case .success(let success):
+            print("수정 성공!")
+            completion(Result.success(success))
+          case .failure(let failure):
+            print("수정 실패ㅠㅠ")
+            print(failure)
+            completion(Result.failure(failure))
+        }
+      }
+    }
+    task.resume()
+  }
+  
   func makeFormData(productRequest: ProductRequest) -> FormData {
     let data = try? JSONEncoder().encode(productRequest)
     return FormData(type: .json, name: "params", data: data)
@@ -100,6 +121,7 @@ final class APIService {
     guard let imageInfos = productRequest.imageInfos else { return [] }
     return imageInfos.map { FormData(type: .jpeg, name: "images", filename: $0.fileName, data: $0.data) }
   }
+  
   
   private func checkError(
       with data: Data?,

@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct ProductListView: View {
-//  @State var onlyImage: Bool = false
-//  @State var products: [ProductDetail] = []
   @ObservedObject var viewModel = ProductListViewModel()
   
   var columns: [GridItem] = [GridItem(.flexible(), spacing: 10, alignment: nil),
@@ -105,7 +103,12 @@ struct ProductCellView: View {
               .foregroundColor(.red)
             Text("\(product.discountedPrice ?? 0)")
           }
-          Text("잔여수량 : \(product.stock ?? 0) 개")
+          if product.stock == 0 {
+            Text("품절")
+              .foregroundColor(Color(uiColor: UIColor.systemRed))
+          } else {
+            Text("잔여수량 : \(product.stock ?? 0) 개")
+          }
         }
         .padding(.leading, 8)
       }

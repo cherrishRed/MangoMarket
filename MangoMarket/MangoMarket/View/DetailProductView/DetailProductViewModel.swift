@@ -30,6 +30,11 @@ class DetailProductViewModel: ObservableObject {
     return "\(stock)"
   }
   
+  var outOfStock: Bool {
+    let stock = product?.stock ?? 0
+    return stock == 0
+  }
+  
   var productPrice: String {
     guard let price = product?.price else {
       return "가격 정보 없음"

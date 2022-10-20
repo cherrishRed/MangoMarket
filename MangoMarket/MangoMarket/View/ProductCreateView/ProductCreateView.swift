@@ -24,6 +24,7 @@ struct ProductCreateView: View {
         productImageView
         productPriceView
         productDiscountedPriceView
+        productStockView
         productDescriptionView
       }
       
@@ -105,6 +106,14 @@ struct ProductCreateView: View {
       TextField("상품 이름 3 ~ 100 글자", text: $viewModel.title)
       Image(systemName: viewModel.vaildTitle ? "checkmark" : "xmark")
         .foregroundColor(viewModel.vaildTitle ? .green : .red)
+    }
+  }
+  
+  var productStockView: some View {
+    ZStack(alignment: .trailing) {
+      TextField("상품 수량", text: $viewModel.stock)
+      Image(systemName: viewModel.vaildTitle ? "checkmark" : "xmark")
+        .foregroundColor(viewModel.vaildStock ? .green : .red)
     }
   }
   

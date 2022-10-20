@@ -8,12 +8,13 @@
 import SwiftUI
 
 class ProductCreateViewModel: ObservableObject {
-  @Published var title: String = ""
-  @Published var description: String = ""
-  @Published var price: String = ""
-  @Published var discountedPrice: String = ""
-  @Published var currency: Currency = .KRW
-  @Published var images: [UIImage] = []
+  @Published var title: String
+  @Published var description: String
+  @Published var stock: String
+  @Published var price: String
+  @Published var discountedPrice: String
+  @Published var currency: Currency
+  @Published var images: [UIImage]
   
   @Published var showSheet = false
   @Published var showAlert = false
@@ -25,6 +26,7 @@ class ProductCreateViewModel: ObservableObject {
   var productId: Int?
   
   init(title: String = "",
+       stock: String = "",
        description: String = "",
        price: String = "",
        discountedPrice: String = "",
@@ -35,6 +37,7 @@ class ProductCreateViewModel: ObservableObject {
        alertmessage: ProductCreateViewModel.ProductAlert = .postProductSuccess,
        maxImageCount: Int = 5) {
     self.title = title
+    self.stock = stock
     self.description = description
     self.price = price
     self.discountedPrice = discountedPrice
@@ -50,6 +53,7 @@ class ProductCreateViewModel: ObservableObject {
   
   init(product: ProductDetail?, images: [UIImage]) {
     self.title = product?.name ?? ""
+    self.stock = "\(product?.stock ?? 0)"
     self.description = product?.description ?? ""
     self.price = "\(product?.price ?? 0)"
     self.discountedPrice = "\(product?.discountedPrice ?? 0)"
@@ -84,6 +88,11 @@ class ProductCreateViewModel: ObservableObject {
   
   var vaildImageCount: Bool {
     return imageCount != 0 && imageCount < maxImageCount
+  }
+  
+  var vaildStock: Bool {
+    let convertedStock = Int(stock)
+    return convertedStock != nil
   }
   
   var vaildPrice: Bool {
@@ -168,6 +177,8 @@ class ProductCreateViewModel: ObservableObject {
     guard let disCountedPriceDouble = Double(discountedPrice) else {
       return nil
     }
+    
+    let stockInt = Int(stock) ?? 0
 
     let imageInfos = images.map { (image) -> ImageInfo in
       guard let data = image.jpegData(compressionQuality: 0.1) else {
@@ -176,7 +187,7 @@ class ProductCreateViewModel: ObservableObject {
       return ImageInfo(fileName: "\(Date())", data: data, type: "")
     }
 
-    return ProductRequest(name: title, descriptions: description, price: priceDouble, currency: .KRW, discountedPrice: disCountedPriceDouble, stock: 10, secret: "bjv33pu73cbajp1", imageInfos: imageInfos)
+    return ProductRequest(name: title, descriptions: description, price: priceDouble, currency: .KRW, discountedPrice: disCountedPriceDouble, stock: stockInt, secret: "bjv33pu73cbajp1", imageInfos: imageInfos)
   }
   
   private func makeProductEditRequest() -> ProductEditRequestModel? {
@@ -187,8 +198,10 @@ class ProductCreateViewModel: ObservableObject {
     guard let disCountedPriceDouble = Double(discountedPrice) else {
       return nil
     }
+    
+    let stockInt = Int(stock) ?? 0
 
-    return ProductEditRequestModel(name: title, descriptions: description, price: priceDouble, currency: .KRW, discountedPrice: disCountedPriceDouble, stock: 10, secret: "bjv33pu73cbajp1")
+    return ProductEditRequestModel(name: title, descriptions: description, price: priceDouble, currency: .KRW, discountedPrice: disCountedPriceDouble, stock: stockInt, secret: "bjv33pu73cbajp1")
   }
   
   enum Mode {

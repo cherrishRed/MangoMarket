@@ -49,8 +49,12 @@ struct DetailProductView: View {
               .strikethrough()
               .foregroundColor(.gray)
           }
-          
-          Text("남은 수량 : \(viewModel.stock)개")
+          if viewModel.outOfStock {
+            Text("품절")
+              .foregroundColor(Color(uiColor: UIColor.systemRed))
+          } else {
+            Text("남은 수량 : \(viewModel.stock)개")
+          }
           Divider()
           Text(viewModel.description)
         

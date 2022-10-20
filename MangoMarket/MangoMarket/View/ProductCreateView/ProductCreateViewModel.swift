@@ -141,6 +141,8 @@ class ProductCreateViewModel: ObservableObject {
     guard let editedProduct = makeProductEditRequest() else {
       return
     }
+    
+    print(editedProduct)
     apiService.editProduct(id: productId ?? 0, product: editedProduct) { resutl in
       switch resutl {
         case .success(_):

@@ -77,6 +77,47 @@ final class APIService {
     task.resume()
   }
   
+  func fetchDeleteURL(productId: Int, sccret: String?, completion: @escaping (Result<Data, Error>) -> ()) {
+    guard let request = FetchDeleteURLRequest(productsId: productId, secret: sccret).makeURLRequest() else {
+      return
+    }
+    
+    let task = URLSession.shared.dataTask(with: request) { data, response, error in
+      self.checkError(with: data, response, error) { result in
+        switch result {
+          case .success(let success):
+            print("딜리트 url 가져오기 성공")
+            completion(Result.success(success))
+          case .failure(let failure):
+            print("딜리트 url 가져오기 실패ㅠㅠ")
+            completion(Result.failure(failure))
+        }
+      }
+    }
+    task.resume()
+  }
+  
+  func deleteProduct(url: String) {
+    guard let request = DeleteProductRequest(deleteURL: url).makeURLRequest() else {
+      return 
+    }
+    
+    let task = URLSession.shared.dataTask(with: request) { data, response, error in
+      self.checkError(with: data, response, error) { result in
+        switch result {
+          case .success(let success):
+            print("딜리트 성공")
+//            completion(Result.success(success))
+          case .failure(let failure):
+            print("딜리트 실패")
+//            completion(Result.failure(failure))
+        }
+      }
+    }
+    task.resume()
+    
+  }
+  
   func fetchImage(_ urlString: String, completion: @escaping (Result<Data, Error>) -> ()) {
     guard let url = URL(string: urlString) else {
       completion(.failure(URLError.imageURLError))

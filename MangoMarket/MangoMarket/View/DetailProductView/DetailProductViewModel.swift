@@ -84,6 +84,21 @@ class DetailProductViewModel: ObservableObject {
     self.product = nil
   }
   
+  func deleteProduct() {
+    apiService.fetchDeleteURL(productId: productId, sccret: "bjv33pu73cbajp1") { result in
+      switch result {
+        case .success(let success):
+          guard let deleteURL = String(data: success, encoding: .utf8) else {
+            return
+          }
+          print(deleteURL)
+          self.apiService.deleteProduct(url: deleteURL)
+        case .failure(_):
+          print("fail")
+      }
+    }
+  }
+  
   func fetchProduct() {
     let api = APIService()
     api.retrieveProduct(id: productId) { result in

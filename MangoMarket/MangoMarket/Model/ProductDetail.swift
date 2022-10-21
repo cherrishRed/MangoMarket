@@ -93,6 +93,10 @@ struct ProductEditRequestModel: Encodable {
     }
 }
 
+struct DeleteURLRequestModel: Encodable {
+  var secret: String?
+}
+
 struct ImageInfo: Encodable, Hashable {
     let fileName: String
     let data: Data

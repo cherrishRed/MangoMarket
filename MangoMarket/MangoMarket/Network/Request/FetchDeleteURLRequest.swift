@@ -15,13 +15,17 @@ struct FetchDeleteURLRequest: Requestable {
   var bodyParameters: Encodable?
   var headers: [String : String]
   
-  init(productsId: Int) {
+  init(productsId: Int, secret: String?) {
+    let body = DeleteURLRequestModel(secret: secret)
+    let data = try? JSONEncoder().encode(body)
+    
     self.baseURL = "https://openmarket.yagom-academy.kr"
     self.path = "/api/products/\(productsId)/archived"
-    self.method = .get
+    self.method = .post
     self.queryParameters = nil
-    self.bodyParameters = nil
-    self.headers = ["identifier": "81da9d11-4b9d-11ed-a200-81a344d1e7cb"]
+    self.bodyParameters = data
+    self.headers = ["identifier": "81da9d11-4b9d-11ed-a200-81a344d1e7cb",
+                    "Content-Type": "application/json"]
   }
 }
 

@@ -134,7 +134,7 @@ struct DetailProductView: View {
       }
       
       Button {
-        // delete
+        viewModel.deleteProduct()
       } label: {
         Text("삭제하기")
           .font(.caption)

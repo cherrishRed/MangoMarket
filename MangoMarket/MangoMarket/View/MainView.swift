@@ -14,7 +14,7 @@ struct MainView: View {
         ZStack(alignment: .bottomTrailing) {
           VStack {
             HeaderView()
-            BannerView()
+//            BannerView()
             ProductListView()
           }
           NavigationLink {

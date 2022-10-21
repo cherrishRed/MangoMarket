@@ -143,7 +143,23 @@ class ProductCreateViewModel: ObservableObject {
 
     print("newProduct")
     print(newProduct)
-    apiService.postProducts(newProduct: newProduct)
+    
+    var forms: [FormData] = []
+    forms.append(apiService.makeFormData(productRequest: newProduct))
+    forms.append(contentsOf: apiService.makeImageFormData(productRequest: newProduct))
+    
+    guard let request = PostProductRequest(forms: forms, boundary: newProduct.boundary ?? "").makeURLRequest() else {
+      return
+    }
+    
+    apiService.request(request) { [weak self] result in
+      switch result {
+        case .success( _):
+          self?.alertmessage = .postProductSuccess
+        case .failure( _):
+          self?.alertmessage = .postProductFail
+      }
+    }
   }
   
   private func editProduct() {
@@ -151,9 +167,10 @@ class ProductCreateViewModel: ObservableObject {
       return
     }
     
-    print(editedProduct)
-    apiService.editProduct(id: productId ?? 0, product: editedProduct) { resutl in
-      switch resutl {
+    guard let request = EditProductRequest(id: productId ?? 0, product: editedProduct).makeURLRequest() else { return }
+    
+    apiService.request(request) { result in
+      switch result {
         case .success(_):
           DispatchQueue.main.async { [weak self] in
             self?.alertmessage = .editProductSuccess

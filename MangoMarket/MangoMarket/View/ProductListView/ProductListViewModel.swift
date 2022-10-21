@@ -18,7 +18,10 @@ final class ProductListViewModel: ObservableObject {
   }
   
   func retrieveProducts() {
-    apiService.retrieveProducts { result in
+    guard let request = ProductsListRequest().makeURLRequest() else {
+      return
+    }
+    apiService.request(request) { result in
       switch result {
         case .success(let success):
           do {

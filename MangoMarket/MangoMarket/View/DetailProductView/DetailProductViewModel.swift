@@ -85,14 +85,26 @@ class DetailProductViewModel: ObservableObject {
   }
   
   func deleteProduct() {
-    apiService.fetchDeleteURL(productId: productId, sccret: "bjv33pu73cbajp1") { result in
+    guard let request = FetchDeleteURLRequest(productsId: productId, secret: "bjv33pu73cbajp1").makeURLRequest() else {
+      return
+    }
+    
+    apiService.request(request) { result in
       switch result {
         case .success(let success):
           guard let deleteURL = String(data: success, encoding: .utf8) else {
             return
           }
           print(deleteURL)
-          self.apiService.deleteProduct(url: deleteURL)
+          guard let deleteRequest = DeleteProductRequest(deleteURL: deleteURL).makeURLRequest() else { return }
+                  self.apiService.request(deleteRequest) { deleteResult in
+                    switch deleteResult {
+                      case .success(_):
+                        print("삭제 성공")
+                      case .failure(_):
+                        print("삭제 실패")
+                    }
+                  }
         case .failure(_):
           print("fail")
       }
@@ -100,8 +112,10 @@ class DetailProductViewModel: ObservableObject {
   }
   
   func fetchProduct() {
-    let api = APIService()
-    api.retrieveProduct(id: productId) { result in
+    guard let request = ProductDetailRequest(productsId: productId).makeURLRequest() else {
+      return
+    }
+    apiService.request(request) { result in
       switch result {
         case .success(let success):
           do {

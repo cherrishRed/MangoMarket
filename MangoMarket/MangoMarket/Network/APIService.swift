@@ -8,8 +8,14 @@
 import Foundation
 
 final class APIService {
+  private let urlSession: URLSessionProtocol
+  
+  init(urlSession: URLSessionProtocol = URLSession.shared) {
+    self.urlSession = urlSession
+  }
+  
   func request(_ request: URLRequest, completion: @escaping (Result<Data, Error>) -> ()) {
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+    let task = URLSession.shared.dataTask(with: request) { data, response, error in
     
           self.checkError(with: data, response, error) { result in
             switch result {

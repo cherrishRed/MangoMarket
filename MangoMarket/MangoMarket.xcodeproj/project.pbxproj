@@ -20,6 +20,7 @@
 		DA3E9D652903231800E72E21 /* extension+URLSettionDataTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3E9D642903231700E72E21 /* extension+URLSettionDataTask.swift */; };
 		DA3E9D672903233300E72E21 /* URLSessionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3E9D662903233300E72E21 /* URLSessionProtocol.swift */; };
 		DA3E9D692903234E00E72E21 /* URLSessionDataTaskProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3E9D682903234E00E72E21 /* URLSessionDataTaskProtocol.swift */; };
+		DA3E9D8F2903254000E72E21 /* APIServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3E9D8E2903254000E72E21 /* APIServiceTest.swift */; };
 		DA466EBA28E6FCA20076AEE4 /* MangoMarketApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA466EB928E6FCA20076AEE4 /* MangoMarketApp.swift */; };
 		DA466EBC28E6FCA20076AEE4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA466EBB28E6FCA20076AEE4 /* ContentView.swift */; };
 		DA466EBE28E6FCA50076AEE4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA466EBD28E6FCA50076AEE4 /* Assets.xcassets */; };
@@ -41,6 +42,16 @@
 		DAB7B95A28FF2B9300632AC1 /* PostProductRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB7B95928FF2B9300632AC1 /* PostProductRequest.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		DA3E9D902903254000E72E21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DA466EAE28E6FCA20076AEE4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DA466EB528E6FCA20076AEE4;
+			remoteInfo = MangoMarket;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		DA2C798F28F9B5E300922C47 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		DA2C799128FA8FF400922C47 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
@@ -56,6 +67,8 @@
 		DA3E9D642903231700E72E21 /* extension+URLSettionDataTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "extension+URLSettionDataTask.swift"; sourceTree = "<group>"; };
 		DA3E9D662903233300E72E21 /* URLSessionProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionProtocol.swift; sourceTree = "<group>"; };
 		DA3E9D682903234E00E72E21 /* URLSessionDataTaskProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionDataTaskProtocol.swift; sourceTree = "<group>"; };
+		DA3E9D8C2903254000E72E21 /* APIServiceTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = APIServiceTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA3E9D8E2903254000E72E21 /* APIServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIServiceTest.swift; sourceTree = "<group>"; };
 		DA466EB628E6FCA20076AEE4 /* MangoMarket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MangoMarket.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA466EB928E6FCA20076AEE4 /* MangoMarketApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MangoMarketApp.swift; sourceTree = "<group>"; };
 		DA466EBB28E6FCA20076AEE4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -79,6 +92,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		DA3E9D892903254000E72E21 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DA466EB328E6FCA20076AEE4 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -122,10 +142,19 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
+		DA3E9D8D2903254000E72E21 /* APIServiceTest */ = {
+			isa = PBXGroup;
+			children = (
+				DA3E9D8E2903254000E72E21 /* APIServiceTest.swift */,
+			);
+			path = APIServiceTest;
+			sourceTree = "<group>";
+		};
 		DA466EAD28E6FCA20076AEE4 = {
 			isa = PBXGroup;
 			children = (
 				DA466EB828E6FCA20076AEE4 /* MangoMarket */,
+				DA3E9D8D2903254000E72E21 /* APIServiceTest */,
 				DA466EB728E6FCA20076AEE4 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -134,6 +163,7 @@
 			isa = PBXGroup;
 			children = (
 				DA466EB628E6FCA20076AEE4 /* MangoMarket.app */,
+				DA3E9D8C2903254000E72E21 /* APIServiceTest.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -220,6 +250,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		DA3E9D8B2903254000E72E21 /* APIServiceTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DA3E9D942903254000E72E21 /* Build configuration list for PBXNativeTarget "APIServiceTest" */;
+			buildPhases = (
+				DA3E9D882903254000E72E21 /* Sources */,
+				DA3E9D892903254000E72E21 /* Frameworks */,
+				DA3E9D8A2903254000E72E21 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DA3E9D912903254000E72E21 /* PBXTargetDependency */,
+			);
+			name = APIServiceTest;
+			productName = APIServiceTest;
+			productReference = DA3E9D8C2903254000E72E21 /* APIServiceTest.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		DA466EB528E6FCA20076AEE4 /* MangoMarket */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = DA466EC428E6FCA50076AEE4 /* Build configuration list for PBXNativeTarget "MangoMarket" */;
@@ -244,9 +292,13 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1340;
+				LastSwiftUpdateCheck = 1400;
 				LastUpgradeCheck = 1340;
 				TargetAttributes = {
+					DA3E9D8B2903254000E72E21 = {
+						CreatedOnToolsVersion = 14.0.1;
+						TestTargetID = DA466EB528E6FCA20076AEE4;
+					};
 					DA466EB528E6FCA20076AEE4 = {
 						CreatedOnToolsVersion = 13.4.1;
 					};
@@ -266,11 +318,19 @@
 			projectRoot = "";
 			targets = (
 				DA466EB528E6FCA20076AEE4 /* MangoMarket */,
+				DA3E9D8B2903254000E72E21 /* APIServiceTest */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		DA3E9D8A2903254000E72E21 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DA466EB428E6FCA20076AEE4 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -283,6 +343,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		DA3E9D882903254000E72E21 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DA3E9D8F2903254000E72E21 /* APIServiceTest.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DA466EB228E6FCA20076AEE4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -322,7 +390,59 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		DA3E9D912903254000E72E21 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DA466EB528E6FCA20076AEE4 /* MangoMarket */;
+			targetProxy = DA3E9D902903254000E72E21 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		DA3E9D922903254000E72E21 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = net.cherrish.APIServiceTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MangoMarket.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MangoMarket";
+			};
+			name = Debug;
+		};
+		DA3E9D932903254000E72E21 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = net.cherrish.APIServiceTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MangoMarket.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MangoMarket";
+			};
+			name = Release;
+		};
 		DA466EC228E6FCA50076AEE4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -500,6 +620,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		DA3E9D942903254000E72E21 /* Build configuration list for PBXNativeTarget "APIServiceTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DA3E9D922903254000E72E21 /* Debug */,
+				DA3E9D932903254000E72E21 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		DA466EB128E6FCA20076AEE4 /* Build configuration list for PBXProject "MangoMarket" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

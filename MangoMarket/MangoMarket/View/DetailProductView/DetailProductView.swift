@@ -9,6 +9,7 @@ import SwiftUI
 
 struct DetailProductView: View {
   @ObservedObject var viewModel: DetailProductViewModel
+  @Environment(\.presentationMode) var presentation
 
   var body: some View {
     ScrollView(showsIndicators: false) {
@@ -134,7 +135,7 @@ struct DetailProductView: View {
       }
       
       Button {
-        viewModel.deleteProduct()
+        viewModel.tappedDeleteButton()
       } label: {
         Text("삭제하기")
           .font(.caption)
@@ -145,6 +146,22 @@ struct DetailProductView: View {
       }
 
     }
+    .alert("정말로?", isPresented: $viewModel.showAlert, actions: {
+      Button {
+        viewModel.deleteProduct()
+        self.presentation.wrappedValue.dismiss()
+      } label: {
+        Text("확인")
+      }
+      
+      Button(role: .cancel) {
+        // 취소
+      } label: {
+        Text("취소")
+      }
+    }, message: {
+      Text("삭제 할껀가요?")
+    })
   }
 }
 

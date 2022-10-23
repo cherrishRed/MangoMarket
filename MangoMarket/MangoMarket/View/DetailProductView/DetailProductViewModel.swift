@@ -11,6 +11,7 @@ class DetailProductViewModel: ObservableObject {
   @Published var selection: Int = 0
   @Published var productId: Int
   @Published var product: ProductDetail? = nil
+  @Published var showAlert = false
   let apiService: APIService = APIService()
   
   var productName: String {
@@ -82,6 +83,10 @@ class DetailProductViewModel: ObservableObject {
     self.selection = 0
     self.productId = productId
     self.product = nil
+  }
+  
+  func tappedDeleteButton() {
+    showAlert = true
   }
   
   func deleteProduct() {

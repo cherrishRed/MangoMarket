@@ -31,8 +31,8 @@ struct MainView: View {
       Color(uiColor: UIColor.yellow)
         .ignoresSafeArea()
         .tag("like")
-      Color(uiColor: UIColor.orange)
-        .ignoresSafeArea()
+      ProfileView()
+//        .ignoresSafeArea()
         .tag("profile")
     }
   }

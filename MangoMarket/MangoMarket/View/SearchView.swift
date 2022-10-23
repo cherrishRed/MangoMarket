@@ -8,30 +8,37 @@
 import SwiftUI
 
 struct SearchView: View {
-  @State private var searchText = ""
-  var keywords: [String] = ["곰돌이", "코딩", "고양이", "강아지"]
-
+  @ObservedObject var viewModel = SearchViewModel()
+  let productListViewModel = ProductListViewModel()
+  
   let columns = [
     GridItem(.flexible(), spacing: 0, alignment: nil),
     GridItem(.flexible(), spacing: 0, alignment: nil),
     GridItem(.flexible(), spacing: 0, alignment: nil)
   ]
   
-    var body: some View {
-      VStack(alignment: .center,spacing: 20) {
-        SearchBar()
-        ScrollView {
+  var body: some View {
+    VStack(alignment: .center,spacing: 20) {
+      SearchBar(searchText: $viewModel.searchText)
+      ScrollView {
+        if viewModel.searchTextIsEmpty {
           recommendedKeyword
+        } else {
+          ProductListView(viewModel: productListViewModel)
         }
       }
     }
+    .onChange(of: viewModel.searchText) { updatedSearchText in
+      productListViewModel.changeSearchValue(viewModel.searchText)
+    }
+  }
   
   var recommendedKeyword: some View {
     VStack {
       LazyVGrid(columns: columns) {
-        ForEach(keywords, id: \.self) { keyword in
+        ForEach(viewModel.keywords, id: \.self) { keyword in
           Button(keyword) {
-            searchText = keyword
+            viewModel.tappedKeywordButton(keyword)
           }
           .buttonStyle(KeywordButtonStyle())
         }
@@ -42,39 +49,35 @@ struct SearchView: View {
 }
 
 struct SearchView_Previews: PreviewProvider {
-    static var previews: some View {
-        SearchView()
-    }
+  static var previews: some View {
+    SearchView()
+  }
 }
 
 struct SearchBar: View {
-  @State private var searchText = ""
-    var body: some View {
-      HStack {
-        Button {
-          // dismiss
-        } label: {
-          Image(systemName: "chevron.backward")
-            .foregroundColor(.black)
-        }
-        HStack {
-          TextField("검색하기", text: $searchText)
-          Button {
-            searchText = ""
-          } label: {
-            Image(systemName: "xmark.circle.fill")
-              .foregroundColor(.gray)
-              .opacity(searchText == "" ? 0.0 : 1.0)
-          }
-        }
-        .foregroundColor(.primary)
-        .padding(EdgeInsets(top: 4, leading: 8, bottom: 4, trailing: 8))
-        .foregroundColor(.secondary)
-        .background(Color(.secondarySystemBackground))
-        .cornerRadius(10.0)
+  @Binding var searchText: String
+  
+  init(searchText: Binding<String>) {
+    self._searchText = searchText
+  }
+  var body: some View {
+    HStack {
+      TextField("검색하기", text: $searchText)
+      Button {
+        searchText = ""
+      } label: {
+        Image(systemName: "xmark.circle.fill")
+          .foregroundColor(.gray)
+          .opacity(searchText == "" ? 0.0 : 1.0)
       }
-      .padding(.horizontal)
     }
+    .foregroundColor(.primary)
+    .padding(EdgeInsets(top: 4, leading: 8, bottom: 4, trailing: 8))
+    .foregroundColor(.secondary)
+    .background(Color(.secondarySystemBackground))
+    .cornerRadius(10.0)
+    .padding(.horizontal)
+  }
 }
 
 struct KeywordButtonStyle: ButtonStyle {

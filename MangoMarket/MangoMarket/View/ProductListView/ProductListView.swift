@@ -11,31 +11,37 @@ struct ProductListView: View {
   @ObservedObject var viewModel = ProductListViewModel()
   
   var columns: [GridItem] = [GridItem(.flexible(), spacing: 10, alignment: nil),
-                                    GridItem(.flexible(), spacing: 10, alignment: nil)]
+                             GridItem(.flexible(), spacing: 10, alignment: nil)]
   
   var body: some View {
     ScrollView {
-      LazyVGrid(columns: columns, alignment: .center, spacing: 10, pinnedViews: [.sectionHeaders]) {
-        
-        Section(header:
-                  ProductListHeaderView(onlyImage: $viewModel.onlyImage)
-            ) {
-          ForEach(viewModel.products, id:\.self) { product in
-            NavigationLink {
-              DetailProductView(viewModel: DetailProductViewModel(productId: product.id ?? 1))
-              
-            } label: {
-              ProductCellView(onlyImage: $viewModel.onlyImage, product: product)
-            }
+      if viewModel.productIsEmpty {
+        Text("제품이 없습니다")
+      } else {
+        LazyVGrid(columns: columns, alignment: .center, spacing: 10, pinnedViews: [.sectionHeaders]) {
+          
+          Section(header:
+                    ProductListHeaderView(onlyImage: $viewModel.onlyImage)
+          ) {
+            ForEach(viewModel.products, id:\.self) { product in
+              NavigationLink {
+                DetailProductView(viewModel: DetailProductViewModel(productId: product.id ?? 1))
+                
+              } label: {
+                ProductCellView(onlyImage: $viewModel.onlyImage, product: product)
+              }
             }
           }
         }
-      .padding()
+        .padding()
       }
-      .onAppear {
-        viewModel.retrieveProducts()
-        
-      }
+    }
+    .onAppear {
+      viewModel.retrieveProducts()
+    }
+    .onChange(of: viewModel.searchValue) { newValue in
+      viewModel.retrieveProducts(searchValue: newValue)
+    }
   }
 }
 
@@ -112,7 +118,6 @@ struct ProductCellView: View {
         }
         .padding(.leading, 8)
       }
+    }
   }
-}
-
 }

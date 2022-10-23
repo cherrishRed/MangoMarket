@@ -2,53 +2,113 @@
 //  MainView.swift
 //  MangoMarket
 //
-//  Created by RED on 2022/09/30.
+//  Created by RED on 2022/10/23.
 //
 
 import SwiftUI
-import Combine
 
 struct MainView: View {
-    var body: some View {
-      NavigationView {
-        ZStack(alignment: .bottomTrailing) {
-          VStack {
-            HeaderView()
-//            BannerView()
-            ProductListView()
-          }
-          NavigationLink {
-            ProductCreateView()
+  @State var seletedtab: String = TabItem.home.rawValue
+  
+  init() {
+    UITabBar.appearance().isHidden = true
+  }
+  
+  var body: some View {
+    NavigationView {
+      ZStack(alignment: .bottom) {
+        tabView
+        tabItemView
+      }
+    }
+  }
+  
+  var tabView: some View {
+    TabView(selection: $seletedtab) {
+      HomeView()
+        .ignoresSafeArea()
+        .tag("home")
+      Color(uiColor: UIColor.yellow)
+        .ignoresSafeArea()
+        .tag("like")
+      Color(uiColor: UIColor.orange)
+        .ignoresSafeArea()
+        .tag("profile")
+    }
+  }
+  
+  var tabItemView: some View {
+    ZStack(alignment: .bottomTrailing) {
+      Rectangle()
+        .fill(.white)
+        .ignoresSafeArea()
+        .frame(height: 50)
+      
+      Circle()
+        .fill(.white)
+        .frame(width: 60, height: 60)
+        .padding(.trailing, 20)
+      
+      NavigationLink {
+        ProductCreateView()
+      } label: {
+        Image(systemName: "plus.circle.fill")
+          .resizable()
+          .renderingMode(.template)
+          .aspectRatio(contentMode: .fit)
+          .frame(width: 40, height: 40)
+          .padding(.trailing, 28)
+          .padding(.bottom, 10)
+      }
+      
+      HStack {
+        ForEach(TabItem.allCases, id: \.self) { tab in
+          Button {
+            withAnimation(.spring()) {
+              seletedtab = tab.rawValue
+            }
           } label: {
-            Image(systemName: "plus.circle.fill")
+            Image(systemName: seletedtab == tab.rawValue ? tab.seletedIcon : tab.icon)
               .resizable()
-              .frame(width: 30,height: 30)
-              .foregroundColor(Color("logoYellow"))
-              .padding()
+              .renderingMode(.template)
+              .aspectRatio(contentMode: .fit)
+              .frame(width: 25, height: 25)
+              .foregroundColor(seletedtab == tab.rawValue ? Color.blue : Color.gray)
+              .padding(.top, 30)
           }
+          Spacer()
         }
       }
-      .onAppear {
-        UserDefaults.standard.set("red123", forKey: "userName")
-      }
+      .padding(.horizontal, 30)
+    .padding(.top, 10)
     }
+  }
 }
 
-struct HeaderView: View {
-  var body: some View {
-    HStack(spacing: 0) {
-      Text("Mango Market")
-        .fontWeight(.heavy)
-        .padding(.leading,40)
-        .frame(maxWidth: .infinity)
-      Button {
-        
-      } label: {
-        Image(systemName: "magnifyingglass")
-          .frame(width: 30, height:30, alignment: .center)
-          .foregroundColor(.black)
-      }
+enum TabItem: String, CaseIterable, Hashable {
+  case home
+  case like
+  case profile
+  
+  var icon: String {
+    switch self {
+      case .home:
+        return "house"
+      case .like:
+        return "heart"
+      case .profile:
+        return "person"
     }
-    .padding()
+  }
+  
+  var seletedIcon: String {
+    switch self {
+      case .home:
+        return "house.fill"
+      case .like:
+        return "heart.fill"
+      case .profile:
+        return "person.fill"
+    }
   }
 }

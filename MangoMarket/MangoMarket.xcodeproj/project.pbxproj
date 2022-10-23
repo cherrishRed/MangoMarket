@@ -25,12 +25,12 @@
 		DA3E9D9A2903CB8C00E72E21 /* ProductRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3E9D992903CB8C00E72E21 /* ProductRequest.swift */; };
 		DA3E9D9C2903CBBD00E72E21 /* ProductEditRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3E9D9B2903CBBD00E72E21 /* ProductEditRequestModel.swift */; };
 		DA3E9D9E2903CBE400E72E21 /* DeleteURLRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3E9D9D2903CBE400E72E21 /* DeleteURLRequestModel.swift */; };
-		DA3E9DA0290537C500E72E21 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3E9D9F290537C400E72E21 /* Home.swift */; };
+		DA3E9DA0290537C500E72E21 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3E9D9F290537C400E72E21 /* MainView.swift */; };
 		DA466EBA28E6FCA20076AEE4 /* MangoMarketApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA466EB928E6FCA20076AEE4 /* MangoMarketApp.swift */; };
 		DA466EBC28E6FCA20076AEE4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA466EBB28E6FCA20076AEE4 /* ContentView.swift */; };
 		DA466EBE28E6FCA50076AEE4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA466EBD28E6FCA50076AEE4 /* Assets.xcassets */; };
 		DA466EC128E6FCA50076AEE4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA466EC028E6FCA50076AEE4 /* Preview Assets.xcassets */; };
-		DA466EC828E700ED0076AEE4 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA466EC728E700EC0076AEE4 /* MainView.swift */; };
+		DA466EC828E700ED0076AEE4 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA466EC728E700EC0076AEE4 /* HomeView.swift */; };
 		DA466ECD28E701F70076AEE4 /* ProductDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA466ECC28E701F70076AEE4 /* ProductDetail.swift */; };
 		DA466ECF28E702830076AEE4 /* ProductList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA466ECE28E702830076AEE4 /* ProductList.swift */; };
 		DA466ED128E702E30076AEE4 /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA466ED028E702E30076AEE4 /* Currency.swift */; };
@@ -78,13 +78,13 @@
 		DA3E9D992903CB8C00E72E21 /* ProductRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductRequest.swift; sourceTree = "<group>"; };
 		DA3E9D9B2903CBBD00E72E21 /* ProductEditRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductEditRequestModel.swift; sourceTree = "<group>"; };
 		DA3E9D9D2903CBE400E72E21 /* DeleteURLRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteURLRequestModel.swift; sourceTree = "<group>"; };
-		DA3E9D9F290537C400E72E21 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
+		DA3E9D9F290537C400E72E21 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		DA466EB628E6FCA20076AEE4 /* MangoMarket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MangoMarket.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA466EB928E6FCA20076AEE4 /* MangoMarketApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MangoMarketApp.swift; sourceTree = "<group>"; };
 		DA466EBB28E6FCA20076AEE4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		DA466EBD28E6FCA50076AEE4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DA466EC028E6FCA50076AEE4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		DA466EC728E700EC0076AEE4 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		DA466EC728E700EC0076AEE4 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		DA466ECC28E701F70076AEE4 /* ProductDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetail.swift; sourceTree = "<group>"; };
 		DA466ECE28E702830076AEE4 /* ProductList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductList.swift; sourceTree = "<group>"; };
 		DA466ED028E702E30076AEE4 /* Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
@@ -236,8 +236,8 @@
 		DAB7B94828FE9BA800632AC1 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				DA466EC728E700EC0076AEE4 /* MainView.swift */,
-				DA3E9D9F290537C400E72E21 /* Home.swift */,
+				DA466EC728E700EC0076AEE4 /* HomeView.swift */,
+				DA3E9D9F290537C400E72E21 /* MainView.swift */,
 				DA466ED228E710360076AEE4 /* BannerView.swift */,
 				DA3E9D582900438F00E72E21 /* ProductCreateView */,
 				DAB7B94928FE9BBD00632AC1 /* ProductListView */,
@@ -410,10 +410,10 @@
 				DA2C799028F9B5E300922C47 /* APIService.swift in Sources */,
 				DA466ECD28E701F70076AEE4 /* ProductDetail.swift in Sources */,
 				DAB7B94B28FE9BD900632AC1 /* ProductListViewModel.swift in Sources */,
-				DA466EC828E700ED0076AEE4 /* MainView.swift in Sources */,
+				DA466EC828E700ED0076AEE4 /* HomeView.swift in Sources */,
 				DA2C799228FA8FF400922C47 /* NetworkError.swift in Sources */,
 				DA3E9D9A2903CB8C00E72E21 /* ProductRequest.swift in Sources */,
-				DA3E9DA0290537C500E72E21 /* Home.swift in Sources */,
+				DA3E9DA0290537C500E72E21 /* MainView.swift in Sources */,
 				DAB7B95828FF27A100632AC1 /* ProductDetailRequest.swift in Sources */,
 				DA3E9D9E2903CBE400E72E21 /* DeleteURLRequestModel.swift in Sources */,
 				DA3E9D652903231800E72E21 /* extension+URLSettionDataTask.swift in Sources */,

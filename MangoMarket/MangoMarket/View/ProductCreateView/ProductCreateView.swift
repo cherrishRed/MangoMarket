@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ProductCreateView: View {
   @ObservedObject var viewModel = ProductCreateViewModel()
+  @Environment(\.presentationMode) var presentation
   
   var body: some View {
     Form(content: {
@@ -32,6 +33,7 @@ struct ProductCreateView: View {
         Section {
           Button {
             viewModel.tappedPostButton()
+            self.presentation.wrappedValue.dismiss()
           } label: {
             switch viewModel.mode {
               case.create:

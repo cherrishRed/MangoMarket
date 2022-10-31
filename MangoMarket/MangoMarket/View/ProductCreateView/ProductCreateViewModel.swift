@@ -155,9 +155,13 @@ class ProductCreateViewModel: ObservableObject {
     apiService.request(request) { [weak self] result in
       switch result {
         case .success( _):
-          self?.alertmessage = .postProductSuccess
+          DispatchQueue.main.async {
+            self?.alertmessage = .postProductSuccess
+          }
         case .failure( _):
-          self?.alertmessage = .postProductFail
+          DispatchQueue.main.async {
+            self?.alertmessage = .postProductFail
+          }
       }
     }
   }
@@ -204,7 +208,7 @@ class ProductCreateViewModel: ObservableObject {
       return ImageInfo(fileName: "\(Date())", data: data, type: "")
     }
 
-    return ProductRequest(name: title, descriptions: description, price: priceDouble, currency: .KRW, discountedPrice: disCountedPriceDouble, stock: stockInt, secret: "bjv33pu73cbajp1", imageInfos: imageInfos)
+    return ProductRequest(name: title, description: description, price: priceDouble, currency: .KRW, discountedPrice: disCountedPriceDouble, stock: stockInt, secret: "bjv33pu73cbajp1", imageInfos: imageInfos)
   }
   
   private func makeProductEditRequest() -> ProductEditRequestModel? {

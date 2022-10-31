@@ -163,6 +163,18 @@ struct ProductRowCellView: View {
   var product: ProductDetail
   var delete: (Int) -> Void
   
+  var salePercent: String {
+    guard let price = product.price else {
+      return "0%"
+    }
+    guard let discountedPrice = product.discountedPrice else {
+      return "0%"
+    }
+    // NAN 오류가 나는 이유
+    let salePercent = discountedPrice / price
+    return "\(Float(round(salePercent*100)))%"
+  }
+  
   var body: some View {
     HStack {
       AsyncImage(url: product.thumbnail, content: { image in
@@ -185,7 +197,7 @@ struct ProductRowCellView: View {
           .strikethrough()
           .foregroundColor(.gray)
         HStack {
-          Text("20%")
+          Text(salePercent)
             .foregroundColor(.red)
           Text("\(product.discountedPrice ?? 0)")
         }

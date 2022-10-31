@@ -8,10 +8,11 @@
 import Foundation
 
 struct ProductRequest: Encodable {
+  
     var pageNumber: Int?
     var perPages: Int?
     var name: String?
-    var descriptions: String?
+    var description: String?
     var price: Double?
     var currency: Currency?
     var discountedPrice: Double?
@@ -25,6 +26,6 @@ struct ProductRequest: Encodable {
         case perPages = "items_per_page"
         case discountedPrice = "discounted_price"
         case imageInfos = "images"
-        case name, descriptions, price, currency, stock, secret
+        case name, description, price, currency, stock, secret
     }
 }

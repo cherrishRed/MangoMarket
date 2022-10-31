@@ -58,8 +58,12 @@ class DetailProductViewModel: ObservableObject {
       return "0%"
     }
     
-    let salePercent = discountedPrice / price
-    return "\(salePercent)"
+    if discountedPrice == 0 || price == 0 {
+      return "0%"
+    } else {
+      let salePercent = discountedPrice / price
+      return "\(Int(round(salePercent*100)))%"
+    }
   }
   
   var description: String {

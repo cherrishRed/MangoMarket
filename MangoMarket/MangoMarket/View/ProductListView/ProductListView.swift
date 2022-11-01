@@ -116,17 +116,8 @@ struct ProductGridCellView: View {
   var body: some View {
     VStack(alignment: .leading) {
       ZStack(alignment: .bottomTrailing) {
-        AsyncImage(url: product.thumbnail, content: { image in
-          image
-            .resizable()
-            .frame(maxWidth: .infinity)
-            .aspectRatio(1, contentMode: .fit)
-            .cornerRadius(10)
-        }, placeholder: {
-          ProgressView()
-            .frame(maxWidth: .infinity)
-            .aspectRatio(1, contentMode: .fit)
-        })
+        ImageLoadView(url: product.thumbnail?.absoluteString)
+        
         Image(systemName: "heart")
           .foregroundColor(.red)
           .padding(.bottom, 10)

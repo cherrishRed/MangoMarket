@@ -20,10 +20,8 @@ final class APIService {
           self.checkError(with: data, response, error) { result in
             switch result {
               case .success(let success):
-                print("request 성공!")
                 completion(Result.success(success))
               case .failure(let failure):
-                print("request 실패")
                 completion(Result.failure(failure))
             }
           }
@@ -36,13 +34,21 @@ final class APIService {
       completion(.failure(URLError.imageURLError))
       return
     }
-
-    guard let data = try? Data(contentsOf: url) else {
-      completion(.failure(NetworkError.emptyDataError))
-      return
-    }
-
-    completion(.success(data))
+    
+    let request = URLRequest(url: url, cachePolicy: .returnCacheDataElseLoad)
+    
+    let task = URLSession.shared.dataTask(with: request) { data, response, error in
+    
+          self.checkError(with: data, response, error) { result in
+            switch result {
+              case .success(let success):
+                completion(Result.success(success))
+              case .failure(let failure):
+                completion(Result.failure(failure))
+            }
+          }
+        }
+        task.resume()
   }
 
   func makeFormData(productRequest: ProductRequest) -> FormData {

@@ -28,11 +28,6 @@ struct HomeView: View {
           }
         }
       }
-      .onAppear {
-        UserDefaults.standard.set("red123", forKey: "userName")
-        UserDefaults.standard.set("81da9d11-4b9d-11ed-a200-81a344d1e7cb", forKey: "identifier")
-        UserDefaults.standard.set("bjv33pu73cbajp1", forKey: "secret")
-      }
     }
 }
 

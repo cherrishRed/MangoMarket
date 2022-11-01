@@ -21,7 +21,7 @@ struct PostProductRequest: Requestable {
     self.method = .post
     self.queryParameters = [:]
     self.bodyParameters = FormDataGenerator(boundary: boundary).createMutiPartFormData(forms)
-    self.headers = ["identifier": "81da9d11-4b9d-11ed-a200-81a344d1e7cb",
+    self.headers = ["identifier": UserInfomation.shared.identifier,
                     "Content-Type": "multipart/form-data; boundary=\(boundary)"]
   }
 }

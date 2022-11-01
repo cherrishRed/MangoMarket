@@ -21,6 +21,6 @@ struct DeleteProductRequest: Requestable {
     self.method = .delete
     self.queryParameters = nil
     self.bodyParameters = nil
-    self.headers = ["identifier": "81da9d11-4b9d-11ed-a200-81a344d1e7cb"]
+    self.headers = ["identifier": UserInfomation.shared.identifier]
   }
 }

@@ -9,18 +9,12 @@ import SwiftUI
 
 struct ProfileView: View {
   @State var darkMode: Bool = false
-  let productListViewModel = ProductListViewModel(searchValue: UserDefaults.standard.string(forKey: "userName") ?? "", layout: .row)
+  let productListViewModel = ProductListViewModel(searchValue: UserInfomation.shared.userName, layout: .row)
   
     var body: some View {
       VStack(alignment: .leading) {
         userProfileView
-//        Form {
-//          HStack {
-//            Text("다크 모드")
-//            Toggle("", isOn: $darkMode)
-//          }
-//        }
-        Text("나의 제품")
+        Text("내가 등록한 제품")
           .padding(.horizontal, 20)
           .padding(.top, 10)
           .font(.title3)
@@ -28,7 +22,6 @@ struct ProfileView: View {
       }
       .padding(.top, 20)
       .onAppear {
-//        productListViewModel.retrieveProducts(searchValue: UserDefaults.standard.string(forKey: "userName") ?? "")
       }
     }
   
@@ -47,8 +40,8 @@ struct ProfileView: View {
   }
 }
 
-struct ProfileView_Previews: PreviewProvider {
-    static var previews: some View {
-        ProfileView()
-    }
-}
+//struct ProfileView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ProfileView()
+//    }
+//}

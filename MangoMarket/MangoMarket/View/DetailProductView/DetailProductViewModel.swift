@@ -36,6 +36,10 @@ class DetailProductViewModel: ObservableObject {
     return stock == 0
   }
   
+  var noSale: Bool {
+    return salePercent == "0%" ? true : false
+  }
+  
   var productPrice: String {
     guard let price = product?.price, let currency = product?.currency else {
       return "가격 정보 없음"

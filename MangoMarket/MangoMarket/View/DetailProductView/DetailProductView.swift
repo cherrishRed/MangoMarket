@@ -37,19 +37,30 @@ struct DetailProductView: View {
             .font(.title)
             .fontWeight(.medium)
           
-          HStack {
-            Text(viewModel.salePercent)
-              .font(.title3)
-              .foregroundColor(.red)
-            Text(viewModel.currency)
-              .font(.title3)
-            Text(viewModel.bargainPrice)
-              .font(.title3)
-              .fontWeight(.medium)
-            Text(viewModel.productPrice)
-              .strikethrough()
-              .foregroundColor(.gray)
+          if viewModel.noSale {
+            HStack {
+              Text(viewModel.currency)
+                .font(.title3)
+              Text(viewModel.bargainPrice)
+                .font(.title3)
+                .fontWeight(.medium)
+            }
+          } else {
+            HStack {
+              Text(viewModel.salePercent)
+                .font(.title3)
+                .foregroundColor(.red)
+              Text(viewModel.currency)
+                .font(.title3)
+              Text(viewModel.bargainPrice)
+                .font(.title3)
+                .fontWeight(.medium)
+              Text(viewModel.productPrice)
+                .strikethrough()
+                .foregroundColor(.gray)
+            }
           }
+          
           if viewModel.outOfStock {
             Text("품절")
               .foregroundColor(Color(uiColor: UIColor.systemRed))

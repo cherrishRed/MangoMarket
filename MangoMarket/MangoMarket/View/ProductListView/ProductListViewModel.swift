@@ -72,7 +72,7 @@ final class ProductListViewModel: ObservableObject {
     guard let productId = deleteReady else {
       return
     }
-    guard let request = FetchDeleteURLRequest(productsId: productId, secret: "bjv33pu73cbajp1").makeURLRequest() else {
+    guard let request = FetchDeleteURLRequest(productsId: productId, secret: UserInfomation.shared.secret).makeURLRequest() else {
       return
     }
     

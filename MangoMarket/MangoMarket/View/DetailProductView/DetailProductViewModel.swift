@@ -37,17 +37,17 @@ class DetailProductViewModel: ObservableObject {
   }
   
   var productPrice: String {
-    guard let price = product?.price else {
+    guard let price = product?.price, let currency = product?.currency else {
       return "가격 정보 없음"
     }
-    return formatPrice(price)
+    return price.formatPrice(currency: currency)
   }
   
   var bargainPrice: String {
-    guard let price = product?.bargainPrice else {
+    guard let price = product?.bargainPrice, let currency = product?.currency else {
       return "가격 정보 없음"
     }
-    return formatPrice(price)
+    return price.formatPrice(currency: currency)
   }
   
   var salePercent: String {
@@ -155,23 +155,5 @@ class DetailProductViewModel: ObservableObject {
       }
     })
     return images
-  }
-  
-  private func formatPrice(_ price: Double) -> String {
-    let numberFormatter = NumberFormatter()
-    var formattedPrice: String
-    
-    switch product?.currency {
-      case.KRW:
-        numberFormatter.numberStyle = .none
-        formattedPrice = numberFormatter.string(from: price as NSNumber) ?? "가격 정보 없음"
-      case.USD:
-        numberFormatter.maximumFractionDigits = 2
-        formattedPrice = numberFormatter.string(from: price as NSNumber) ?? "가격 정보 없음"
-      case .none:
-        formattedPrice = "가격 정보 없음"
-    }
-    
-    return formattedPrice
   }
 }

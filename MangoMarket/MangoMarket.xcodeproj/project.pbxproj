@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		DA27898B29108EB100E76B53 /* ImageLoadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA27898A29108EB100E76B53 /* ImageLoadView.swift */; };
+		DA27898D29109FCE00E76B53 /* ProductListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA27898C29109FCE00E76B53 /* ProductListCell.swift */; };
+		DA27898F2910A00C00E76B53 /* ProductListCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA27898E2910A00C00E76B53 /* ProductListCellModel.swift */; };
+		DA2789912910A22900E76B53 /* extension+Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2789902910A22900E76B53 /* extension+Double.swift */; };
 		DA2C799028F9B5E300922C47 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2C798F28F9B5E300922C47 /* APIService.swift */; };
 		DA2C799228FA8FF400922C47 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2C799128FA8FF400922C47 /* NetworkError.swift */; };
 		DA2C799428FABC9000922C47 /* ProductCreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2C799328FABC9000922C47 /* ProductCreateView.swift */; };
@@ -63,6 +66,9 @@
 
 /* Begin PBXFileReference section */
 		DA27898A29108EB100E76B53 /* ImageLoadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoadView.swift; sourceTree = "<group>"; };
+		DA27898C29109FCE00E76B53 /* ProductListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListCell.swift; sourceTree = "<group>"; };
+		DA27898E2910A00C00E76B53 /* ProductListCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListCellModel.swift; sourceTree = "<group>"; };
+		DA2789902910A22900E76B53 /* extension+Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "extension+Double.swift"; sourceTree = "<group>"; };
 		DA2C798F28F9B5E300922C47 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		DA2C799128FA8FF400922C47 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		DA2C799328FABC9000922C47 /* ProductCreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCreateView.swift; sourceTree = "<group>"; };
@@ -156,6 +162,7 @@
 				DA3E9D62290322D400E72E21 /* extension+URLSession.swift */,
 				DA3E9D642903231700E72E21 /* extension+URLSettionDataTask.swift */,
 				DA3E9D962903CB2200E72E21 /* extension+Data.swift */,
+				DA2789902910A22900E76B53 /* extension+Double.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -271,6 +278,8 @@
 			children = (
 				DA466ED428E71AE40076AEE4 /* ProductListView.swift */,
 				DAB7B94A28FE9BD900632AC1 /* ProductListViewModel.swift */,
+				DA27898C29109FCE00E76B53 /* ProductListCell.swift */,
+				DA27898E2910A00C00E76B53 /* ProductListCellModel.swift */,
 			);
 			path = ProductListView;
 			sourceTree = "<group>";
@@ -406,6 +415,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA27898F2910A00C00E76B53 /* ProductListCellModel.swift in Sources */,
 				DA2C799728FAC50C00922C47 /* ImagePicker.swift in Sources */,
 				DA466ED528E71AE60076AEE4 /* ProductListView.swift in Sources */,
 				DAB7B95428FED38D00632AC1 /* URLError.swift in Sources */,
@@ -423,6 +433,7 @@
 				DA3E9D5C2900B64F00E72E21 /* EditProductRequest.swift in Sources */,
 				DA3E9D692903234E00E72E21 /* URLSessionDataTaskProtocol.swift in Sources */,
 				DA3E9D5A290043B200E72E21 /* ProductCreateViewModel.swift in Sources */,
+				DA2789912910A22900E76B53 /* extension+Double.swift in Sources */,
 				DA27898B29108EB100E76B53 /* ImageLoadView.swift in Sources */,
 				DAB7B95228FEC6C500632AC1 /* ProductsListRequest.swift in Sources */,
 				DA3E9D5E2902E87B00E72E21 /* FetchDeleteURLRequest.swift in Sources */,
@@ -435,6 +446,7 @@
 				DAB7B94B28FE9BD900632AC1 /* ProductListViewModel.swift in Sources */,
 				DA466EC828E700ED0076AEE4 /* HomeView.swift in Sources */,
 				DA2C799228FA8FF400922C47 /* NetworkError.swift in Sources */,
+				DA27898D29109FCE00E76B53 /* ProductListCell.swift in Sources */,
 				DA3E9D9A2903CB8C00E72E21 /* ProductRequest.swift in Sources */,
 				DA3E9DA0290537C500E72E21 /* MainView.swift in Sources */,
 				DA3E9DA32905AE9C00E72E21 /* ProfileView.swift in Sources */,

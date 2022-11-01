@@ -135,7 +135,7 @@ struct DetailProductView: View {
         .font(.caption)
       Spacer()
       NavigationLink {
-        ProductCreateView(viewModel: ProductCreateViewModel(product: viewModel.product, images: viewModel.fetchImage()))
+        ProductCreateView(viewModel: ProductCreateViewModel(product: viewModel.product, images: viewModel.productImageInfo))
       } label: {
         Text("수정하기")
           .font(.caption)

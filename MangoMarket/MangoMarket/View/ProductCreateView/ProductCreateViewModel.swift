@@ -51,20 +51,22 @@ class ProductCreateViewModel: ObservableObject {
     self.productId = nil
   }
   
-  init(product: ProductDetail?, images: [UIImage]) {
+  init(product: ProductDetail?, images: [ProductImage]) {
     self.title = product?.name ?? ""
     self.stock = "\(product?.stock ?? 0)"
     self.description = product?.description ?? ""
     self.price = "\(product?.price ?? 0)"
     self.discountedPrice = "\(product?.discountedPrice ?? 0)"
     self.currency = product?.currency ?? .KRW
-    self.images = images
     self.showSheet = false
     self.showAlert = false
     self.alertmessage = .editProductSuccess
     self.maxImageCount = 5
     self.mode = .edit
     self.productId = product?.id
+    
+    self.images = []
+    fetchImage(imagesInfo: images)
   }
   
   var imageCount: Int {
@@ -223,6 +225,25 @@ class ProductCreateViewModel: ObservableObject {
     let stockInt = Int(stock) ?? 0
 
     return ProductEditRequestModel(name: title, descriptions: description, price: priceDouble, currency: .KRW, discountedPrice: disCountedPriceDouble, stock: stockInt, secret: "bjv33pu73cbajp1")
+  }
+  
+  private func fetchImage(imagesInfo: [ProductImage]) {
+    imagesInfo.forEach({ image in
+      apiService.fetchImage(image.url ?? "") { result in
+        switch result {
+          case .success(let data):
+            guard let uiImage = UIImage(data: data) else { return }
+            DispatchQueue.main.async {
+              self.images.append(uiImage)
+            }
+          case .failure(_):
+            guard let uiImage = UIImage(systemName: "exclamationmark.icloud") else { return }
+            DispatchQueue.main.async {
+              self.images.append(uiImage)
+            }
+        }
+      }
+    })
   }
   
   enum Mode {

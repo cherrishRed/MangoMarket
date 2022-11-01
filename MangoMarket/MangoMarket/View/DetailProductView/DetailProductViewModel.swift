@@ -87,6 +87,11 @@ class DetailProductViewModel: ObservableObject {
     return vendorName == myUserName
   }
   
+  var productImageInfo: [ProductImage] {
+    guard let imageInfo = product?.imageInfos else { return [] }
+    return imageInfo
+  }
+  
   init(productId: Int) {
     self.selection = 0
     self.productId = productId
@@ -144,20 +149,5 @@ class DetailProductViewModel: ObservableObject {
           print(failure)
       }
     }
-  }
-  
-  func fetchImage() -> [UIImage]{
-    var images: [UIImage] = []
-    product?.imageInfos?.forEach({ image in
-      apiService.fetchImage(image.url ?? "") { result in
-        switch result {
-          case .success(let data):
-            images.append(UIImage(data: data) ?? UIImage(systemName: "exclamationmark.icloud.fill")!)
-          case .failure(_):
-            images.append(UIImage(systemName: "exclamationmark.icloud")!)
-        }
-      }
-    })
-    return images
   }
 }

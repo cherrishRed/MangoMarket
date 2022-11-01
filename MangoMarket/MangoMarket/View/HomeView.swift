@@ -50,14 +50,6 @@ struct HeaderView: View {
           .frame(width: 30, height:30, alignment: .center)
           .foregroundColor(.black)
       }
-
-//      Button {
-//
-//      } label: {
-//        Image(systemName: "magnifyingglass")
-//          .frame(width: 30, height:30, alignment: .center)
-//          .foregroundColor(.black)
-//      }
     }
     .padding()
   }

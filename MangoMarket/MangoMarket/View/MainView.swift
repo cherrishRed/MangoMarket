@@ -28,11 +28,7 @@ struct MainView: View {
       HomeView()
         .ignoresSafeArea()
         .tag("home")
-      Color(uiColor: UIColor.yellow)
-        .ignoresSafeArea()
-        .tag("like")
       ProfileView()
-//        .ignoresSafeArea()
         .tag("profile")
     }
   }
@@ -44,11 +40,6 @@ struct MainView: View {
         .ignoresSafeArea()
         .frame(height: 50)
       
-      Circle()
-        .fill(.white)
-        .frame(width: 60, height: 60)
-        .padding(.trailing, 20)
-      
       NavigationLink {
         ProductCreateView()
       } label: {
@@ -56,46 +47,44 @@ struct MainView: View {
           .resizable()
           .renderingMode(.template)
           .aspectRatio(contentMode: .fit)
-          .frame(width: 40, height: 40)
-          .padding(.trailing, 28)
-          .padding(.bottom, 10)
+          .frame(width: 30, height: 30)
+          .padding(.trailing, 30)
       }
       
-      HStack {
-        ForEach(TabItem.allCases, id: \.self) { tab in
-          Button {
-            withAnimation(.spring()) {
-              seletedtab = tab.rawValue
+      VStack(alignment: .leading) {
+        HStack(spacing: 30) {
+          ForEach(TabItem.allCases, id: \.self) { tab in
+            Button {
+              withAnimation(.spring()) {
+                seletedtab = tab.rawValue
+              }
+            } label: {
+              Image(systemName: seletedtab == tab.rawValue ? tab.seletedIcon : tab.icon)
+                .resizable()
+                .renderingMode(.template)
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 25, height: 25)
+                .foregroundColor(seletedtab == tab.rawValue ? Color.blue : Color.gray)
+                .padding(.top, 30)
             }
-          } label: {
-            Image(systemName: seletedtab == tab.rawValue ? tab.seletedIcon : tab.icon)
-              .resizable()
-              .renderingMode(.template)
-              .aspectRatio(contentMode: .fit)
-              .frame(width: 25, height: 25)
-              .foregroundColor(seletedtab == tab.rawValue ? Color.blue : Color.gray)
-              .padding(.top, 30)
           }
           Spacer()
         }
+        .padding(.horizontal, 30)
+      .padding(.top, 10)
       }
-      .padding(.horizontal, 30)
-    .padding(.top, 10)
     }
   }
 }
 
 enum TabItem: String, CaseIterable, Hashable {
   case home
-  case like
   case profile
   
   var icon: String {
     switch self {
       case .home:
         return "house"
-      case .like:
-        return "heart"
       case .profile:
         return "person"
     }
@@ -105,8 +94,6 @@ enum TabItem: String, CaseIterable, Hashable {
     switch self {
       case .home:
         return "house.fill"
-      case .like:
-        return "heart.fill"
       case .profile:
         return "person.fill"
     }

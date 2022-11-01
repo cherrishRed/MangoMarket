@@ -168,17 +168,8 @@ struct ProductRowCellView: View {
   
   var body: some View {
     HStack {
-      AsyncImage(url: product.thumbnail, content: { image in
-        image
-          .resizable()
-          .frame(width: 100, height: 100)
-          .aspectRatio(1, contentMode: .fit)
-          .cornerRadius(10)
-      }, placeholder: {
-        ProgressView()
-          .frame(maxWidth: .infinity)
-          .aspectRatio(1, contentMode: .fit)
-      })
+      ImageLoadView(url: product.thumbnail?.absoluteString)
+        .frame(width: 100, height: 100)
       
       VStack(alignment: .leading) {
         Text(product.name ?? "이름없음")

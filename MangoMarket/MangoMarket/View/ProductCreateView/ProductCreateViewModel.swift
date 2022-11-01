@@ -224,7 +224,7 @@ class ProductCreateViewModel: ObservableObject {
     
     let stockInt = Int(stock) ?? 0
 
-    return ProductEditRequestModel(name: title, descriptions: description, price: priceDouble, currency: .KRW, discountedPrice: disCountedPriceDouble, stock: stockInt, secret: "bjv33pu73cbajp1")
+    return ProductEditRequestModel(name: title, descriptions: description, price: priceDouble, currency: currency, discountedPrice: disCountedPriceDouble, stock: stockInt, secret: "bjv33pu73cbajp1")
   }
   
   private func fetchImage(imagesInfo: [ProductImage]) {

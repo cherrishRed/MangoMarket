@@ -208,7 +208,7 @@ class ProductCreateViewModel: ObservableObject {
       return ImageInfo(fileName: "\(Date())", data: data, type: "")
     }
 
-    return ProductRequest(name: title, description: description, price: priceDouble, currency: .KRW, discountedPrice: disCountedPriceDouble, stock: stockInt, secret: "bjv33pu73cbajp1", imageInfos: imageInfos)
+    return ProductRequest(name: title, description: description, price: priceDouble, currency: currency, discountedPrice: disCountedPriceDouble, stock: stockInt, secret: "bjv33pu73cbajp1", imageInfos: imageInfos)
   }
   
   private func makeProductEditRequest() -> ProductEditRequestModel? {

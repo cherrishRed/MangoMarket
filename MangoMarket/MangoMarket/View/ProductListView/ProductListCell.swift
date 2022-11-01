@@ -39,11 +39,15 @@ struct ProductGridCellView: View {
           }
           
           if viewModel.noSale == true {
-            Text(viewModel.productPrice)
+            HStack {
+              Text(viewModel.currency)
+              Text(viewModel.productPrice)
+            }
           } else {
             HStack {
               Text(viewModel.salePercent)
                 .foregroundColor(.red)
+              Text(viewModel.currency)
               Text(viewModel.productDiscountedPrice)
             }
           }
@@ -88,10 +92,14 @@ struct ProductRowCellView: View {
           HStack {
             Text(viewModel.salePercent)
               .foregroundColor(.red)
+            Text(viewModel.currency)
             Text(viewModel.productDiscountedPrice)
           }
         } else {
-          Text(viewModel.productPrice)
+          HStack {
+            Text(viewModel.currency)
+            Text(viewModel.productPrice)
+          }
         }
         
         if viewModel.outOfStock {

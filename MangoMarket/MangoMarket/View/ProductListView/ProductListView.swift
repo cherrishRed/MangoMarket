@@ -38,6 +38,7 @@ struct ProductListView: View {
                     DetailProductView(viewModel: DetailProductViewModel(productId: product.id ?? 1))
                   } label: {
                     ProductGridCellView(onlyImage: $viewModel.onlyImage, product: product)
+                      .foregroundColor(.black)
                   }
                 }
               }
@@ -47,6 +48,7 @@ struct ProductListView: View {
                   DetailProductView(viewModel: DetailProductViewModel(productId: product.id ?? 1))
                 } label: {
                   ProductRowCellView(product: product, delete: viewModel.tappedDeleteButton)
+                    .foregroundColor(.black)
                 }
               }
           }

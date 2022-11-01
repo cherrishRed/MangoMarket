@@ -61,4 +61,8 @@ class ProductListCellViewModel: ObservableObject {
   var productStock: String {
     return "\(product.stock ?? 0)" 
   }
+  
+  var currency: String {
+    return product.currency?.symbol ?? ""
+  }
 }

@@ -16,19 +16,19 @@ final class APIService {
   
   func request(_ request: URLRequest, completion: @escaping (Result<Data, Error>) -> ()) {
     let task = URLSession.shared.dataTask(with: request) { data, response, error in
-    
-          self.checkError(with: data, response, error) { result in
-            switch result {
-              case .success(let success):
-                completion(Result.success(success))
-              case .failure(let failure):
-                completion(Result.failure(failure))
-            }
-          }
+      
+      self.checkError(with: data, response, error) { result in
+        switch result {
+          case .success(let success):
+            completion(Result.success(success))
+          case .failure(let failure):
+            completion(Result.failure(failure))
         }
-        task.resume()
+      }
+    }
+    task.resume()
   }
-
+  
   func fetchImage(_ urlString: String, completion: @escaping (Result<Data, Error>) -> ()) {
     guard let url = URL(string: urlString) else {
       completion(.failure(URLError.imageURLError))
@@ -38,19 +38,19 @@ final class APIService {
     let request = URLRequest(url: url, cachePolicy: .returnCacheDataElseLoad)
     
     let task = URLSession.shared.dataTask(with: request) { data, response, error in
-    
-          self.checkError(with: data, response, error) { result in
-            switch result {
-              case .success(let success):
-                completion(Result.success(success))
-              case .failure(let failure):
-                completion(Result.failure(failure))
-            }
-          }
+      
+      self.checkError(with: data, response, error) { result in
+        switch result {
+          case .success(let success):
+            completion(Result.success(success))
+          case .failure(let failure):
+            completion(Result.failure(failure))
         }
-        task.resume()
+      }
+    }
+    task.resume()
   }
-
+  
   func makeFormData(productRequest: ProductRequest) -> FormData {
     let data = try? JSONEncoder().encode(productRequest)
     return FormData(type: .json, name: "params", data: data)
@@ -63,31 +63,31 @@ final class APIService {
   
   
   private func checkError(
-      with data: Data?,
-      _ response: URLResponse?,
-      _ error: Error?,
-      completion: @escaping (Result<Data, Error>) -> ()
+    with data: Data?,
+    _ response: URLResponse?,
+    _ error: Error?,
+    completion: @escaping (Result<Data, Error>) -> ()
   ) {
-      if let error = error {
-          completion(.failure(error))
-          return
-      }
-      
-      guard let response = response as? HTTPURLResponse else {
-          completion(.failure(NetworkError.responseError))
-          return
-      }
-      
-      guard (200..<300).contains(response.statusCode) else {
-          completion(.failure(NetworkError.invalidHttpStatusCodeError(statusCode: response.statusCode)))
-          return
-      }
-      
-      guard let data = data else {
-          completion(.failure(NetworkError.emptyDataError))
-          return
-      }
-      
-      completion(.success((data)))
+    if let error = error {
+      completion(.failure(error))
+      return
+    }
+    
+    guard let response = response as? HTTPURLResponse else {
+      completion(.failure(NetworkError.responseError))
+      return
+    }
+    
+    guard (200..<300).contains(response.statusCode) else {
+      completion(.failure(NetworkError.invalidHttpStatusCodeError(statusCode: response.statusCode)))
+      return
+    }
+    
+    guard let data = data else {
+      completion(.failure(NetworkError.emptyDataError))
+      return
+    }
+    
+    completion(.success((data)))
   }
 }

@@ -8,8 +8,8 @@
 import Foundation
 
 enum Currency: String, Codable, CaseIterable {
-     case KRW = "KRW"
-     case USD = "USD"
+  case KRW = "KRW"
+  case USD = "USD"
   
   var symbol: String {
     switch self {
@@ -19,4 +19,4 @@ enum Currency: String, Codable, CaseIterable {
         return "$"
     }
   }
- }
+}

@@ -9,26 +9,26 @@ import SwiftUI
 import Combine
 
 struct HomeView: View {
-    var body: some View {
-      NavigationView {
-        ZStack(alignment: .bottomTrailing) {
-          VStack {
-            HeaderView()
-//            BannerView()
-            ProductListView()
-          }
-          NavigationLink {
-            ProductCreateView()
-          } label: {
-            Image(systemName: "plus.circle.fill")
-              .resizable()
-              .frame(width: 30,height: 30)
-              .foregroundColor(Color("logoYellow"))
-              .padding()
-          }
+  var body: some View {
+    NavigationView {
+      ZStack(alignment: .bottomTrailing) {
+        VStack {
+          HeaderView()
+          //            BannerView()
+          ProductListView()
+        }
+        NavigationLink {
+          ProductCreateView()
+        } label: {
+          Image(systemName: "plus.circle.fill")
+            .resizable()
+            .frame(width: 30,height: 30)
+            .foregroundColor(Color("logoYellow"))
+            .padding()
         }
       }
     }
+  }
 }
 
 struct HeaderView: View {

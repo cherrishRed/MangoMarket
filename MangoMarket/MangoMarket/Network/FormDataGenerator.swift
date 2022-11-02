@@ -25,7 +25,7 @@ final class FormDataGenerator {
   private let boundary: String
   private var boundaryPrefix: String { "\r\n--\(boundary)\r\n" }
   private var boundarySuffix: String { "\r\n--\(boundary)--\r\n" }
-
+  
   init(boundary: String) {
     self.data = Data()
     self.boundary = boundary

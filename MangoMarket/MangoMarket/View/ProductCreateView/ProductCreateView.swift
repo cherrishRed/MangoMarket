@@ -11,6 +11,41 @@ struct ProductCreateView: View {
   @ObservedObject var viewModel = ProductCreateViewModel()
   @Environment(\.presentationMode) var presentation
   
+  enum Constant: String {
+    case productAdd
+    case productEdit
+    case ok
+    case productNamePlaceHolder
+    case productStockPlaceHolder
+    case productPricePlaceHolder
+    case productDiscountedPricePlaceHolder
+    case productDescriptionPlaceHolder
+    case productImageAlert
+    
+    var message: String {
+      switch self {
+        case .productAdd:
+          return "상품 등록 하기"
+        case .productEdit:
+          return "상품 수정 하기"
+        case .ok:
+          return "확인"
+        case .productNamePlaceHolder:
+          return "상품 이름 3 ~ 100 글자"
+        case .productStockPlaceHolder:
+          return "상품 수량"
+        case .productPricePlaceHolder:
+          return "가격"
+        case .productDiscountedPricePlaceHolder:
+          return "할인할 가격(상품가격 보다 높게 측정 금지)"
+        case .productDescriptionPlaceHolder:
+          return "제품 설명 10 ~ 1,000 글자"
+        case .productImageAlert:
+          return "이미지는 최소 1장 첨부 해주세요 \n이미지는 추후에 수정할 수 없습니다"
+      }
+    }
+  }
+  
   var body: some View {
     Form(content: {
       Section {
@@ -37,9 +72,9 @@ struct ProductCreateView: View {
           } label: {
             switch viewModel.mode {
               case.create:
-                Text("상품 등록 하기")
+                Text(Constant.productAdd.message)
               case.edit:
-                Text("상품 수정 하기")
+                Text(Constant.productEdit.message)
             }
           }
         }
@@ -50,9 +85,8 @@ struct ProductCreateView: View {
     }
     .alert("\(viewModel.alertmessage.message)", isPresented: $viewModel.showAlert) {
       Button(role: .none) {
-        //
       } label: {
-        Text("확인")
+        Text(Constant.ok.message)
       }
     }
   }
@@ -105,7 +139,7 @@ struct ProductCreateView: View {
   
   var productImageView: some View {
     ZStack(alignment: .trailing) {
-      TextField("상품 이름 3 ~ 100 글자", text: $viewModel.title)
+      TextField(Constant.productNamePlaceHolder.message, text: $viewModel.title)
       Image(systemName: viewModel.vaildTitle ? "checkmark" : "xmark")
         .foregroundColor(viewModel.vaildTitle ? .green : .red)
     }
@@ -113,7 +147,7 @@ struct ProductCreateView: View {
   
   var productStockView: some View {
     ZStack(alignment: .trailing) {
-      TextField("상품 수량", text: $viewModel.stock)
+      TextField(Constant.productStockPlaceHolder.message, text: $viewModel.stock)
       Image(systemName: viewModel.vaildTitle ? "checkmark" : "xmark")
         .foregroundColor(viewModel.vaildStock ? .green : .red)
     }
@@ -122,7 +156,7 @@ struct ProductCreateView: View {
   var productPriceView: some View {
     HStack {
       ZStack(alignment: .trailing) {
-        TextField("가격", text: $viewModel.price)
+        TextField(Constant.productPricePlaceHolder.message, text: $viewModel.price)
         Image(systemName: viewModel.vaildPrice ? "checkmark" : "xmark")
           .foregroundColor(viewModel.vaildPrice ? .green : .red)
         
@@ -138,7 +172,7 @@ struct ProductCreateView: View {
   
   var productDiscountedPriceView: some View {
     ZStack(alignment: .trailing) {
-      TextField("할인할 가격(상품가격 보다 높게 측정 금지)", text: $viewModel.discountedPrice)
+      TextField(Constant.productDiscountedPricePlaceHolder.message, text: $viewModel.discountedPrice)
       Image(systemName: viewModel.vaildDiscountedPrice ? "checkmark" : "xmark")
         .foregroundColor(viewModel.vaildDiscountedPrice ? .green : .red)
     }
@@ -146,7 +180,7 @@ struct ProductCreateView: View {
   
   var productDescriptionView: some View {
     ZStack(alignment: .trailing) {
-      TextField("제품 설명 10 ~ 1,000 글자", text: $viewModel.description)
+      TextField(Constant.productDescriptionPlaceHolder.message, text: $viewModel.description)
       Image(systemName: viewModel.vaildDescription ? "checkmark" : "xmark")
         .foregroundColor(viewModel.vaildDescription ? .green : .red)
     }
@@ -154,7 +188,7 @@ struct ProductCreateView: View {
   
   var validateImageView: some View {
     HStack {
-      Text("이미지는 최소 1장 첨부 해주세요 \n이미지는 추후에 수정할 수 없습니다")
+      Text(Constant.productImageAlert.message)
         .font(.caption)
         .foregroundColor(.gray)
       Spacer()

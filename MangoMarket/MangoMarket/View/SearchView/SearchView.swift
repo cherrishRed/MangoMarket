@@ -11,14 +11,10 @@ struct SearchView: View {
   @ObservedObject var viewModel = SearchViewModel()
   let productListViewModel = ProductListViewModel()
   
-  let columns = [
-    GridItem(.flexible(), spacing: 0, alignment: nil),
-    GridItem(.flexible(), spacing: 0, alignment: nil),
-    GridItem(.flexible(), spacing: 0, alignment: nil)
-  ]
+  let columns = Array(repeating: GridItem(.flexible(), spacing: 0, alignment: nil), count: 3)
   
   var body: some View {
-    VStack(alignment: .center,spacing: 20) {
+    VStack(spacing: 20) {
       SearchBar(searchText: $viewModel.searchText)
       ScrollView {
         if viewModel.searchTextIsEmpty {
@@ -71,22 +67,5 @@ struct SearchBar: View {
     .background(Color(.secondarySystemBackground))
     .cornerRadius(10.0)
     .padding(.horizontal)
-  }
-}
-
-struct KeywordButtonStyle: ButtonStyle {
-  func makeBody(configuration: Self.Configuration) -> some View {
-    configuration.label
-      .padding(.horizontal)
-      .padding(.vertical, 4)
-      .foregroundColor(configuration.isPressed ? .white : .gray)
-      .background {
-        if configuration.isPressed == true {
-          RoundedRectangle(cornerRadius: 20)
-            .fill(.gray)
-        }
-        RoundedRectangle(cornerRadius: 20)
-          .strokeBorder(.gray)
-      }
   }
 }

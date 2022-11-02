@@ -19,10 +19,7 @@ extension Double {
       case .USD:
         numberFormatter.maximumFractionDigits = 2
         formattedPrice = numberFormatter.string(from: self as NSNumber) ?? "가격 정보 없음"
-      default:
-        formattedPrice = "가격 정보 없음"
     }
-    
     return formattedPrice
   }
   

@@ -11,19 +11,17 @@ struct ProfileView: View {
   @State var darkMode: Bool = false
   let productListViewModel = ProductListViewModel(searchValue: UserInfomation.shared.userName, layout: .row)
   
-    var body: some View {
-      VStack(alignment: .leading) {
-        userProfileView
-        Text("내가 등록한 제품")
-          .padding(.horizontal, 20)
-          .padding(.top, 10)
-          .font(.title3)
-        ProductListView(viewModel: productListViewModel)
-      }
-      .padding(.top, 20)
-      .onAppear {
-      }
+  var body: some View {
+    VStack(alignment: .leading) {
+      userProfileView
+      Text("내가 등록한 제품")
+        .padding(.horizontal, 20)
+        .padding(.top, 10)
+        .font(.title3)
+      ProductListView(viewModel: productListViewModel)
     }
+    .padding(.top, 20)
+  }
   
   var userProfileView: some View {
     HStack(spacing: 20) {
@@ -39,9 +37,3 @@ struct ProfileView: View {
     .padding(.horizontal, 30)
   }
 }
-
-//struct ProfileView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ProfileView()
-//    }
-//}

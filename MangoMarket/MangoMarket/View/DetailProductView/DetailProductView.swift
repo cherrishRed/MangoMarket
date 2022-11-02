@@ -10,7 +10,7 @@ import SwiftUI
 struct DetailProductView: View {
   @ObservedObject var viewModel: DetailProductViewModel
   @Environment(\.presentationMode) var presentation
-
+  
   var body: some View {
     ScrollView(showsIndicators: false) {
       VStack(alignment: .leading) {
@@ -69,7 +69,7 @@ struct DetailProductView: View {
           }
           Divider()
           Text(viewModel.description)
-        
+          
         }
         .padding(20)
       }
@@ -99,7 +99,7 @@ struct DetailProductView: View {
   var imageIndicatior: some View {
     HStack {
       ForEach(Array(viewModel.images.enumerated()), id: \.offset) { index, image in
-  
+        
         ZStack {
           Rectangle()
             .frame(width: 52, height: 52)
@@ -155,7 +155,7 @@ struct DetailProductView: View {
           .foregroundColor(.white)
           .cornerRadius(4)
       }
-
+      
     }
     .alert("정말로?", isPresented: $viewModel.showAlert, actions: {
       Button {
@@ -166,7 +166,6 @@ struct DetailProductView: View {
       }
       
       Button(role: .cancel) {
-        // 취소
       } label: {
         Text("취소")
       }

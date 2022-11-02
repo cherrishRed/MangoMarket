@@ -62,7 +62,7 @@ final class ProductListViewModel: ObservableObject {
     self.searchValue = searchValue
   }
   
-  func tappedDeleteButton(id: Int) { 
+  func tappedDeleteButton(id: Int) {
     print(id)
     deleteReady = id
     showAlert = true
@@ -83,15 +83,15 @@ final class ProductListViewModel: ObservableObject {
             return
           }
           guard let deleteRequest = DeleteProductRequest(deleteURL: deleteURL).makeURLRequest() else { return }
-                  self.apiService.request(deleteRequest) { deleteResult in
-                    switch deleteResult {
-                      case .success(_):
-                        self.retrieveProducts()
-                        print("삭제 성공")
-                      case .failure(_):
-                        print("삭제 실패")
-                    }
-                  }
+          self.apiService.request(deleteRequest) { deleteResult in
+            switch deleteResult {
+              case .success(_):
+                self.retrieveProducts()
+                print("삭제 성공")
+              case .failure(_):
+                print("삭제 실패")
+            }
+          }
         case .failure(_):
           print("fail")
       }

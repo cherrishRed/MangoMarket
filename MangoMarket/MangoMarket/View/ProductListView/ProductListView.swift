@@ -65,7 +65,6 @@ struct ProductListView: View {
       } label: {
         Text("확인")
       }
-      
       Button(role: .cancel) {
         // 취소
       } label: {
@@ -80,13 +79,11 @@ struct ProductListView: View {
     .onChange(of: viewModel.searchValue) { newValue in
       viewModel.retrieveProducts()
     }
-    
   }
 }
 
 struct ProductListHeaderView: View {
   @Binding var onlyImage: Bool
-  
   
   var body: some View {
     VStack(alignment: .leading) {

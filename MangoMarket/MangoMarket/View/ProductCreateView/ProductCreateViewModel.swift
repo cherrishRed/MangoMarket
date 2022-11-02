@@ -77,7 +77,7 @@ class ProductCreateViewModel: ObservableObject {
     guard mode == .create else {
       return false
     }
-    return images.count < maxImageCount 
+    return images.count < maxImageCount
   }
   
   var vaildTitle: Bool {
@@ -142,7 +142,7 @@ class ProductCreateViewModel: ObservableObject {
     guard let newProduct = makeProductRequest() else {
       return
     }
-
+    
     print("newProduct")
     print(newProduct)
     
@@ -196,20 +196,20 @@ class ProductCreateViewModel: ObservableObject {
     guard let priceDouble = Double(price) else {
       return nil
     }
-
+    
     guard let disCountedPriceDouble = Double(discountedPrice) else {
       return nil
     }
     
     let stockInt = Int(stock) ?? 0
-
+    
     let imageInfos = images.map { (image) -> ImageInfo in
       guard let data = image.jpegData(compressionQuality: 0.1) else {
         return ImageInfo(fileName: "", data: Data(), type: "")
       }
       return ImageInfo(fileName: "\(Date())", data: data, type: "")
     }
-
+    
     return ProductRequest(name: title, description: description, price: priceDouble, currency: currency, discountedPrice: disCountedPriceDouble, stock: stockInt, secret: "bjv33pu73cbajp1", imageInfos: imageInfos)
   }
   
@@ -217,13 +217,13 @@ class ProductCreateViewModel: ObservableObject {
     guard let priceDouble = Double(price) else {
       return nil
     }
-
+    
     guard let disCountedPriceDouble = Double(discountedPrice) else {
       return nil
     }
     
     let stockInt = Int(stock) ?? 0
-
+    
     return ProductEditRequestModel(name: title, descriptions: description, price: priceDouble, currency: currency, discountedPrice: disCountedPriceDouble, stock: stockInt, secret: "bjv33pu73cbajp1")
   }
   

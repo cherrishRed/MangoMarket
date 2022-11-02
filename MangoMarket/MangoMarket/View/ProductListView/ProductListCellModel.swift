@@ -15,19 +15,19 @@ class ProductListCellViewModel: ObservableObject {
   }
   
   var salePercent: String {
-      guard let price = product.price else {
-        return "0%"
-      }
-      guard let discountedPrice = product.discountedPrice else {
-        return "0%"
-      }
-      
-      if discountedPrice == 0 || price == 0 {
-        return "0%"
-      } else {
-        let salePercent = discountedPrice / price
-        return "\(Int(round(salePercent*100)))%"
-      }
+    guard let price = product.price else {
+      return "0%"
+    }
+    guard let discountedPrice = product.discountedPrice else {
+      return "0%"
+    }
+    
+    if discountedPrice == 0 || price == 0 {
+      return "0%"
+    } else {
+      let salePercent = discountedPrice / price
+      return "\(Int(round(salePercent*100)))%"
+    }
   }
   
   var noSale: Bool {
@@ -59,7 +59,7 @@ class ProductListCellViewModel: ObservableObject {
   }
   
   var productStock: String {
-    return "\(product.stock ?? 0)" 
+    return "\(product.stock ?? 0)"
   }
   
   var currency: String {

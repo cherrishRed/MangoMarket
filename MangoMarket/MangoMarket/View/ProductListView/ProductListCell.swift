@@ -18,14 +18,7 @@ struct ProductGridCellView: View {
   
   var body: some View {
     VStack(alignment: .leading) {
-      ZStack(alignment: .bottomTrailing) {
         ImageLoadView(url: viewModel.thumbnailURL)
-        
-        Image(systemName: "heart")
-          .foregroundColor(.red)
-          .padding(.bottom, 10)
-          .padding(.trailing, 10)
-      }
       
       if onlyImage == false {
         VStack(alignment: .leading) {

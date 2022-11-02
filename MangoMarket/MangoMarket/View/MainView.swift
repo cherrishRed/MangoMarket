@@ -49,6 +49,7 @@ struct MainView: View {
           .aspectRatio(contentMode: .fit)
           .frame(width: 30, height: 30)
           .padding(.trailing, 30)
+          .foregroundColor(Color.logoYellow)
       }
       
       VStack(alignment: .leading) {
@@ -64,7 +65,7 @@ struct MainView: View {
                 .renderingMode(.template)
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 25, height: 25)
-                .foregroundColor(seletedtab == tab.rawValue ? Color.blue : Color.gray)
+                .foregroundColor(seletedtab == tab.rawValue ? Color.vividOrange : Color.logoYellow)
                 .padding(.top, 30)
             }
           }

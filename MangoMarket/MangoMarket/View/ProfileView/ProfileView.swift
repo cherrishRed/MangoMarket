@@ -27,6 +27,7 @@ struct ProfileView: View {
     HStack(spacing: 20) {
       Image(systemName: "person.circle.fill")
         .resizable()
+        .foregroundColor(Color.pastelGreen)
         .frame(width: 60, height: 60)
       VStack(alignment: .leading) {
         Text(UserDefaults.standard.string(forKey: "userName") ?? "No Name")

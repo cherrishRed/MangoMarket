@@ -23,7 +23,7 @@ struct HomeView: View {
           Image(systemName: "plus.circle.fill")
             .resizable()
             .frame(width: 30,height: 30)
-            .foregroundColor(Color("logoYellow"))
+            .foregroundColor(Color.logoYellow)
             .padding()
         }
       }

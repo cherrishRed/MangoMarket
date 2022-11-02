@@ -210,7 +210,7 @@ class ProductCreateViewModel: ObservableObject {
       return ImageInfo(fileName: "\(Date())", data: data, type: "")
     }
     
-    return ProductRequest(name: title, description: description, price: priceDouble, currency: currency, discountedPrice: disCountedPriceDouble, stock: stockInt, secret: "bjv33pu73cbajp1", imageInfos: imageInfos)
+    return ProductRequest(name: title, description: description, price: priceDouble, currency: currency, discountedPrice: disCountedPriceDouble, stock: stockInt, secret: UserInfomation.shared.secret, imageInfos: imageInfos)
   }
   
   private func makeProductEditRequest() -> ProductEditRequestModel? {
@@ -224,7 +224,7 @@ class ProductCreateViewModel: ObservableObject {
     
     let stockInt = Int(stock) ?? 0
     
-    return ProductEditRequestModel(name: title, descriptions: description, price: priceDouble, currency: currency, discountedPrice: disCountedPriceDouble, stock: stockInt, secret: "bjv33pu73cbajp1")
+    return ProductEditRequestModel(name: title, descriptions: description, price: priceDouble, currency: currency, discountedPrice: disCountedPriceDouble, stock: stockInt, secret: UserInfomation.shared.secret)
   }
   
   private func fetchImage(imagesInfo: [ProductImage]) {

@@ -103,7 +103,9 @@ struct ProductRowCellView: View {
         }
       }
       .padding(.leading, 8)
+      
       Spacer()
+      
       VStack {
         NavigationLink {
           ProductCreateView(viewModel: ProductCreateViewModel(product: viewModel.product, images: []))

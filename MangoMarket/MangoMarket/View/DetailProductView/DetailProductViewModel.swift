@@ -83,7 +83,7 @@ class DetailProductViewModel: ObservableObject {
   }
   
   var isMyProduct: Bool {
-    let myUserName = UserDefaults.standard.string(forKey: "userName") ?? ""
+    let myUserName = UserInfomation.shared.userName
     return vendorName == myUserName
   }
   

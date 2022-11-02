@@ -12,7 +12,6 @@
 		DA27898F2910A00C00E76B53 /* ProductListCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA27898E2910A00C00E76B53 /* ProductListCellModel.swift */; };
 		DA2789912910A22900E76B53 /* extension+Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2789902910A22900E76B53 /* extension+Double.swift */; };
 		DA2789932910F13300E76B53 /* UserInfomation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2789922910F13300E76B53 /* UserInfomation.swift */; };
-		DA27899829121B6100E76B53 /* NavigationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA27899729121B6100E76B53 /* NavigationRouter.swift */; };
 		DA2C799028F9B5E300922C47 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2C798F28F9B5E300922C47 /* APIService.swift */; };
 		DA2C799228FA8FF400922C47 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2C799128FA8FF400922C47 /* NetworkError.swift */; };
 		DA2C799428FABC9000922C47 /* ProductCreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2C799328FABC9000922C47 /* ProductCreateView.swift */; };
@@ -72,7 +71,6 @@
 		DA27898E2910A00C00E76B53 /* ProductListCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListCellModel.swift; sourceTree = "<group>"; };
 		DA2789902910A22900E76B53 /* extension+Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "extension+Double.swift"; sourceTree = "<group>"; };
 		DA2789922910F13300E76B53 /* UserInfomation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfomation.swift; sourceTree = "<group>"; };
-		DA27899729121B6100E76B53 /* NavigationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationRouter.swift; sourceTree = "<group>"; };
 		DA2C798F28F9B5E300922C47 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		DA2C799128FA8FF400922C47 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		DA2C799328FABC9000922C47 /* ProductCreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCreateView.swift; sourceTree = "<group>"; };
@@ -137,14 +135,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		DA278996291219EB00E76B53 /* Coordinator */ = {
-			isa = PBXGroup;
-			children = (
-				DA27899729121B6100E76B53 /* NavigationRouter.swift */,
-			);
-			path = Coordinator;
-			sourceTree = "<group>";
-		};
 		DA2C798E28F9B42E00922C47 /* Network */ = {
 			isa = PBXGroup;
 			children = (
@@ -237,7 +227,6 @@
 				DA2C799528FAC4C500922C47 /* Info.plist */,
 				DA466EB928E6FCA20076AEE4 /* MangoMarketApp.swift */,
 				DA466EBB28E6FCA20076AEE4 /* ContentView.swift */,
-				DA278996291219EB00E76B53 /* Coordinator */,
 				DAB7B94828FE9BA800632AC1 /* View */,
 				DA3E9D952903CB0300E72E21 /* Utils */,
 				DA3E9D61290322BA00E72E21 /* Extension */,
@@ -467,7 +456,6 @@
 				DA3E9DA32905AE9C00E72E21 /* ProfileView.swift in Sources */,
 				DAB7B95828FF27A100632AC1 /* ProductDetailRequest.swift in Sources */,
 				DA3E9D9E2903CBE400E72E21 /* DeleteURLRequestModel.swift in Sources */,
-				DA27899829121B6100E76B53 /* NavigationRouter.swift in Sources */,
 				DA3E9D652903231800E72E21 /* extension+URLSettionDataTask.swift in Sources */,
 				DAB7B95A28FF2B9300632AC1 /* PostProductRequest.swift in Sources */,
 				DA466EBA28E6FCA20076AEE4 /* MangoMarketApp.swift in Sources */,

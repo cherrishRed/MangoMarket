@@ -67,8 +67,10 @@ struct ProductCreateView: View {
       if viewModel.vaildAll {
         Section {
           Button {
-            viewModel.tappedPostButton()
-            self.presentation.wrappedValue.dismiss()
+            Task {
+              await viewModel.tappedPostButton()
+              self.presentation.wrappedValue.dismiss()
+            }
           } label: {
             switch viewModel.mode {
               case.create:

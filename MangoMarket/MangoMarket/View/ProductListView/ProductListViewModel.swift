@@ -33,61 +33,44 @@ final class ProductListViewModel: ObservableObject {
     self.layout = layout
   }
   
-  func retrieveProducts(pageNumber: Int = 1, itemsPerPage: Int = 10) {
+  func retrieveProducts(pageNumber: Int = 1, itemsPerPage: Int = 10) async {
     guard let request = ProductsListRequest(pageNumber: pageNumber,
                                             itemsPerPage: itemsPerPage,
                                             searchValue: searchValue).makeURLRequest() else {
       return
     }
-    apiService.request(request) { [weak self] result in
-      switch result {
-        case .success(let success):
-          do {
-            let productList = try JSONDecoder().decode(ProductList.self, from: success)
-            DispatchQueue.main.async {
-                self?.products = productList.items ?? []
-            }
-          } catch {
-            DispatchQueue.main.async {
-              self?.products = []
-            }
-            print("디코드 에러")
-            print(error)
-          }
-        case .failure(let failure):
-          print("오류!!!")
-          print(failure)
+    
+    do {
+      let data = try await apiService.request(request)
+      let productList = try JSONDecoder().decode(ProductList.self, from: data)
+      DispatchQueue.main.async {
+        self.products = productList.items ?? []
+      }
+    } catch {
+      print(error)
+      DispatchQueue.main.async {
+        self.products = []
       }
     }
   }
   
-  func retrieveproductsMore(itemsPerPage: Int = 10) {
+  func retrieveproductsMore(itemsPerPage: Int = 10) async {
     pageNumber += 1
     guard let request = ProductsListRequest(pageNumber: pageNumber,
                                             itemsPerPage: itemsPerPage,
                                             searchValue: searchValue).makeURLRequest() else {
       return
     }
-    apiService.request(request) { [weak self] result in
-      switch result {
-        case .success(let success):
-          do {
-            let productList = try JSONDecoder().decode(ProductList.self, from: success)
-            DispatchQueue.main.async {
-              withAnimation {
-                self?.products.append(contentsOf: productList.items ?? [])
-              }
-            }
-          } catch {
-            DispatchQueue.main.async {
-              self?.products = []
-            }
-            print("디코드 에러")
-            print(error)
-          }
-        case .failure(let failure):
-          print("오류!!!")
-          print(failure)
+    do {
+      let data = try await apiService.request(request)
+      let productList = try JSONDecoder().decode(ProductList.self, from: data)
+      DispatchQueue.main.async {
+        self.products.append(contentsOf: productList.items ?? [])
+      }
+    } catch {
+      print(error)
+      DispatchQueue.main.async {
+        self.products = []
       }
     }
   }
@@ -102,33 +85,24 @@ final class ProductListViewModel: ObservableObject {
     showAlert = true
   }
   
-  func deleteProduct() {
+  func deleteProduct() async {
     guard let productId = deleteReady else {
       return
     }
     guard let request = FetchDeleteURLRequest(productsId: productId, secret: UserInfomation.shared.secret).makeURLRequest() else {
       return
     }
-    
-    apiService.request(request) { result in
-      switch result {
-        case .success(let success):
-          guard let deleteURL = String(data: success, encoding: .utf8) else {
-            return
-          }
-          guard let deleteRequest = DeleteProductRequest(deleteURL: deleteURL).makeURLRequest() else { return }
-          self.apiService.request(deleteRequest) { deleteResult in
-            switch deleteResult {
-              case .success(_):
-                self.retrieveProducts()
-                print("삭제 성공")
-              case .failure(_):
-                print("삭제 실패")
-            }
-          }
-        case .failure(_):
-          print("fail")
-      }
+    do {
+      let deleteURLData = try await apiService.request(request)
+      guard let deleteURL = String(data: deleteURLData, encoding: .utf8) else { return }
+      guard let deleteRequest = DeleteProductRequest(deleteURL: deleteURL).makeURLRequest() else { return }
+      
+      let _ = try await apiService.request(deleteRequest)
+      
+    } catch {
+      print("삭제 실패")
+      print(error)
     }
+
   }
 }

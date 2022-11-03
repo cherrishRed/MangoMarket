@@ -102,52 +102,36 @@ class DetailProductViewModel: ObservableObject {
     showAlert = true
   }
   
-  func deleteProduct() {
+  func deleteProduct() async {
     guard let request = FetchDeleteURLRequest(productsId: productId, secret: UserInfomation.shared.secret).makeURLRequest() else {
       return
     }
-    
-    apiService.request(request) { result in
-      switch result {
-        case .success(let success):
-          guard let deleteURL = String(data: success, encoding: .utf8) else {
-            return
-          }
-          print(deleteURL)
-          guard let deleteRequest = DeleteProductRequest(deleteURL: deleteURL).makeURLRequest() else { return }
-                  self.apiService.request(deleteRequest) { deleteResult in
-                    switch deleteResult {
-                      case .success(_):
-                        print("삭제 성공")
-                      case .failure(_):
-                        print("삭제 실패")
-                    }
-                  }
-        case .failure(_):
-          print("fail")
-      }
+    do {
+      let deleteURLData = try await apiService.request(request)
+      guard let deleteURL = String(data: deleteURLData, encoding: .utf8) else { return }
+      guard let deleteRequest = DeleteProductRequest(deleteURL: deleteURL).makeURLRequest() else { return }
+      
+      let _ = try await apiService.request(deleteRequest)
+      
+    } catch {
+      print("삭제 실패")
+      print(error)
     }
   }
   
-  func fetchProduct() {
+  func fetchProduct() async {
     guard let request = ProductDetailRequest(productsId: productId).makeURLRequest() else {
       return
     }
-    apiService.request(request) { result in
-      switch result {
-        case .success(let success):
-          do {
-            let product = try JSONDecoder().decode(ProductDetail.self, from: success)
-            DispatchQueue.main.async {
-              self.product = product
-            }
-          } catch {
-            print("디코드 에러")
-          }
-        case .failure(let failure):
-          print("오류!!!")
-          print(failure)
+    
+    do {
+      let data = try await apiService.request(request)
+      let product = try JSONDecoder().decode(ProductDetail.self, from: data)
+      DispatchQueue.main.async {
+        self.product = product
       }
+    } catch {
+      print(error)
     }
   }
 }

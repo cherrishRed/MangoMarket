@@ -75,7 +75,9 @@ struct DetailProductView: View {
       }
     }
     .onAppear {
-      viewModel.fetchProduct()
+      Task {
+        await viewModel.fetchProduct()
+      }
     }
   }
   
@@ -159,7 +161,9 @@ struct DetailProductView: View {
     }
     .alert("정말로?", isPresented: $viewModel.showAlert, actions: {
       Button {
-        viewModel.deleteProduct()
+        Task {
+          await viewModel.deleteProduct()
+        }
         self.presentation.wrappedValue.dismiss()
       } label: {
         Text("확인")

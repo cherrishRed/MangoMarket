@@ -55,7 +55,9 @@ struct ProductListView: View {
         }
         .padding()
         Button {
-          viewModel.retrieveproductsMore()
+          Task {
+            await viewModel.retrieveproductsMore()
+          }
         } label: {
           VStack(spacing: 10) {
             Text("더보기")
@@ -66,11 +68,15 @@ struct ProductListView: View {
       }
     }
     .refreshable {
-      viewModel.retrieveProducts()
+      Task {
+        await viewModel.retrieveProducts()
+      }
     }
     .alert("정말로?", isPresented: $viewModel.showAlert, actions: {
       Button {
-        viewModel.deleteProduct()
+        Task {
+          await viewModel.deleteProduct()
+        }
       } label: {
         Text("확인")
       }
@@ -83,10 +89,14 @@ struct ProductListView: View {
       Text("삭제 할껀가요?")
     })
     .onAppear {
-      viewModel.retrieveProducts()
+      Task {
+        await viewModel.retrieveProducts()
+      }
     }
     .onChange(of: viewModel.searchValue) { newValue in
-      viewModel.retrieveProducts()
+      Task {
+        await viewModel.retrieveProducts()
+      }
     }
   }
 }

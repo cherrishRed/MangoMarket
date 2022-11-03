@@ -14,41 +14,24 @@ final class APIService {
     self.urlSession = urlSession
   }
   
-  func request(_ request: URLRequest, completion: @escaping (Result<Data, Error>) -> ()) {
-    let task = URLSession.shared.dataTask(with: request) { data, response, error in
-      
-      self.checkError(with: data, response, error) { result in
-        switch result {
-          case .success(let success):
-            completion(Result.success(success))
-          case .failure(let failure):
-            completion(Result.failure(failure))
-        }
-      }
-    }
-    task.resume()
+  func request(_ request: URLRequest) async throws -> Data {
+    let (data, response) = try await URLSession.shared.data(for: request)
+    try await checkError(response)
+    return data
   }
   
-  func fetchImage(_ urlString: String, completion: @escaping (Result<Data, Error>) -> ()) {
+  func fetchImage(_ urlString: String) async throws -> Data {
+    
     guard let url = URL(string: urlString) else {
-      completion(.failure(URLError.imageURLError))
-      return
+      throw URLError.imageURLError
     }
     
     let request = URLRequest(url: url, cachePolicy: .returnCacheDataElseLoad)
     
-    let task = URLSession.shared.dataTask(with: request) { data, response, error in
-      
-      self.checkError(with: data, response, error) { result in
-        switch result {
-          case .success(let success):
-            completion(Result.success(success))
-          case .failure(let failure):
-            completion(Result.failure(failure))
-        }
-      }
-    }
-    task.resume()
+    let (data, response) = try await URLSession.shared.data(for: request)
+    try await checkError(response)
+    
+    return data
   }
   
   func makeFormData(productRequest: ProductRequest) -> FormData {
@@ -62,32 +45,13 @@ final class APIService {
   }
   
   
-  private func checkError(
-    with data: Data?,
-    _ response: URLResponse?,
-    _ error: Error?,
-    completion: @escaping (Result<Data, Error>) -> ()
-  ) {
-    if let error = error {
-      completion(.failure(error))
-      return
-    }
-    
-    guard let response = response as? HTTPURLResponse else {
-      completion(.failure(NetworkError.responseError))
-      return
-    }
-    
-    guard (200..<300).contains(response.statusCode) else {
-      completion(.failure(NetworkError.invalidHttpStatusCodeError(statusCode: response.statusCode)))
-      return
-    }
-    
-    guard let data = data else {
-      completion(.failure(NetworkError.emptyDataError))
-      return
-    }
-    
-    completion(.success((data)))
+  private func checkError(_ response: URLResponse?) async throws {
+      guard let response = response as? HTTPURLResponse else {
+        throw NetworkError.responseError
+      }
+      
+      guard (200..<300).contains(response.statusCode) else {
+        throw NetworkError.invalidHttpStatusCodeError(statusCode: response.statusCode)
+      }
   }
 }

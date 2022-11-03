@@ -66,7 +66,7 @@ class ProductCreateViewModel: ObservableObject {
     self.productId = product?.id
     
     self.images = []
-    fetchImage(imagesInfo: images)
+//    await fetchImage(imagesInfo: images)
   }
   
   var imageCount: Int {
@@ -127,18 +127,18 @@ class ProductCreateViewModel: ObservableObject {
     images.remove(at: index)
   }
   
-  func tappedPostButton() {
+  func tappedPostButton() async {
     if mode == .create {
-      postProduct()
+      await postProduct()
       DispatchQueue.main.async { [weak self] in
         self?.showAlert = true
       }
     } else {
-      editProduct()
+      await editProduct()
     }
   }
   
-  private func postProduct() {
+  private func postProduct() async {
     guard let newProduct = makeProductRequest() else {
       return
     }
@@ -154,40 +154,35 @@ class ProductCreateViewModel: ObservableObject {
       return
     }
     
-    apiService.request(request) { [weak self] result in
-      switch result {
-        case .success( _):
-          DispatchQueue.main.async {
-            self?.alertmessage = .postProductSuccess
-          }
-        case .failure( _):
-          DispatchQueue.main.async {
-            self?.alertmessage = .postProductFail
-          }
+    do {
+      let _ = try await apiService.request(request)
+      DispatchQueue.main.async {
+        self.alertmessage = .postProductSuccess
+      }
+    } catch {
+      DispatchQueue.main.async {
+        self.alertmessage = .postProductFail
       }
     }
   }
   
-  private func editProduct() {
+  private func editProduct() async {
     guard let editedProduct = makeProductEditRequest() else {
       return
     }
     
     guard let request = EditProductRequest(id: productId ?? 0, product: editedProduct).makeURLRequest() else { return }
     
-    apiService.request(request) { result in
-      switch result {
-        case .success(_):
-          DispatchQueue.main.async { [weak self] in
-            self?.alertmessage = .editProductSuccess
-            self?.showAlert = true
-          }
-        case .failure(_):
-          
-          DispatchQueue.main.async { [weak self] in
-            self?.alertmessage = .editProductFail
-            self?.showAlert = true
-          }
+    do {
+      let _ = try await apiService.request(request)
+      DispatchQueue.main.async { [weak self] in
+        self?.alertmessage = .editProductSuccess
+        self?.showAlert = true
+      }
+    } catch {
+      DispatchQueue.main.async { [weak self] in
+        self?.alertmessage = .editProductFail
+        self?.showAlert = true
       }
     }
   }
@@ -227,23 +222,22 @@ class ProductCreateViewModel: ObservableObject {
     return ProductEditRequestModel(name: title, descriptions: description, price: priceDouble, currency: currency, discountedPrice: disCountedPriceDouble, stock: stockInt, secret: UserInfomation.shared.secret)
   }
   
-  private func fetchImage(imagesInfo: [ProductImage]) {
-    imagesInfo.forEach({ image in
-      apiService.fetchImage(image.url ?? "") { result in
-        switch result {
-          case .success(let data):
-            guard let uiImage = UIImage(data: data) else { return }
-            DispatchQueue.main.async {
-              self.images.append(uiImage)
-            }
-          case .failure(_):
-            guard let uiImage = UIImage(systemName: "exclamationmark.icloud") else { return }
-            DispatchQueue.main.async {
-              self.images.append(uiImage)
-            }
+  private func fetchImage(imagesInfo: [ProductImage]) async {
+    
+    for image in imagesInfo {
+      do {
+        let data = try await apiService.fetchImage(image.url ?? "")
+        guard let uiImage = UIImage(data: data) else { return }
+        DispatchQueue.main.async {
+          self.images.append(uiImage)
+        }
+      } catch {
+        guard let uiImage = UIImage(systemName: "exclamationmark.icloud") else { return }
+        DispatchQueue.main.async {
+          self.images.append(uiImage)
         }
       }
-    })
+    }
   }
   
   enum Mode {

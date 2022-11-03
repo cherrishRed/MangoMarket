@@ -36,8 +36,8 @@ struct ImageLoadView: View {
         }
       }
       .onAppear {
-        DispatchQueue.main.async {
-          imageLoader.fetch()
+        Task {
+          await imageLoader.fetch()
         }
       }
     }
@@ -54,24 +54,20 @@ class ImageLoader: ObservableObject {
     self.url = url
   }
   
-  func fetch() {
+  func fetch() async {
     guard let url = url else { return }
     isLoading = false
-    APIService().fetchImage(url) { [weak self] result in
-      switch result {
-        case .success(let success):
-          guard let uiImage = UIImage(data: success) else { return }
-          DispatchQueue.main.async {
-            self?.image = uiImage
-            self?.isLoading = true
-          }
-        case .failure(_):
-          DispatchQueue.main.async {
-            self?.image = nil
-            self?.errorMessage = "데이터 로드 오류"
-            self?.isLoading = true
-          }
+    
+    do {
+      let data = try await APIService().fetchImage(url)
+      guard let uiImage = UIImage(data: data) else { return }
+      DispatchQueue.main.async {
+        self.image = uiImage
+        self.isLoading = true
       }
+    } catch {
+      print("데이터 로드 오류")
+      print(error)
     }
   }
 }

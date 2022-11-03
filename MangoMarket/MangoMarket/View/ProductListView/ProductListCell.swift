@@ -25,6 +25,7 @@ struct ProductGridCellView: View {
           Text(viewModel.productName)
             .font(.title3)
             .fontWeight(.medium)
+            .lineLimit(1)
           if viewModel.noSale == false {
             Text(viewModel.productPrice)
               .strikethrough()

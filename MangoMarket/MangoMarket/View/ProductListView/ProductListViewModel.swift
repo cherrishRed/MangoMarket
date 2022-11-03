@@ -5,7 +5,7 @@
 //  Created by RED on 2022/10/18.
 //
 
-import Foundation
+import SwiftUI
 
 final class ProductListViewModel: ObservableObject {
   @Published var onlyImage: Bool
@@ -45,7 +45,7 @@ final class ProductListViewModel: ObservableObject {
           do {
             let productList = try JSONDecoder().decode(ProductList.self, from: success)
             DispatchQueue.main.async {
-              self?.products = productList.items ?? []
+                self?.products = productList.items ?? []
             }
           } catch {
             DispatchQueue.main.async {
@@ -61,9 +61,35 @@ final class ProductListViewModel: ObservableObject {
     }
   }
   
-  func retrieveproductsMore() {
+  func retrieveproductsMore(itemsPerPage: Int = 10) {
     pageNumber += 1
-    retrieveProducts(pageNumber: pageNumber)
+    guard let request = ProductsListRequest(pageNumber: pageNumber,
+                                            itemsPerPage: itemsPerPage,
+                                            searchValue: searchValue).makeURLRequest() else {
+      return
+    }
+    apiService.request(request) { [weak self] result in
+      switch result {
+        case .success(let success):
+          do {
+            let productList = try JSONDecoder().decode(ProductList.self, from: success)
+            DispatchQueue.main.async {
+              withAnimation {
+                self?.products.append(contentsOf: productList.items ?? [])
+              }
+            }
+          } catch {
+            DispatchQueue.main.async {
+              self?.products = []
+            }
+            print("디코드 에러")
+            print(error)
+          }
+        case .failure(let failure):
+          print("오류!!!")
+          print(failure)
+      }
+    }
   }
   
   func changeSearchValue(_ searchValue: String = "") {

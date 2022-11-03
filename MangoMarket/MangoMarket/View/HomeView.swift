@@ -17,15 +17,6 @@ struct HomeView: View {
           //            BannerView()
           ProductListView()
         }
-        NavigationLink {
-          ProductCreateView()
-        } label: {
-          Image(systemName: "plus.circle.fill")
-            .resizable()
-            .frame(width: 30,height: 30)
-            .foregroundColor(Color.logoYellow)
-            .padding()
-        }
       }
     }
   }

@@ -18,6 +18,7 @@ struct MainView: View {
     NavigationView {
       ZStack(alignment: .bottom) {
         tabView
+          .padding(.bottom, 50)
         tabItemView
       }
     }

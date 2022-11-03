@@ -12,6 +12,7 @@ final class ProductListViewModel: ObservableObject {
   @Published var products: [ProductDetail]
   @Published var searchValue: String
   @Published var showAlert = false
+  @Published var pageNumber: Int = 1
   var deleteReady: Int? = nil
   let layout: Layout
   let apiService = APIService()
@@ -32,8 +33,10 @@ final class ProductListViewModel: ObservableObject {
     self.layout = layout
   }
   
-  func retrieveProducts() {
-    guard let request = ProductsListRequest(searchValue: searchValue).makeURLRequest() else {
+  func retrieveProducts(pageNumber: Int = 1, itemsPerPage: Int = 10) {
+    guard let request = ProductsListRequest(pageNumber: pageNumber,
+                                            itemsPerPage: itemsPerPage,
+                                            searchValue: searchValue).makeURLRequest() else {
       return
     }
     apiService.request(request) { [weak self] result in
@@ -56,6 +59,11 @@ final class ProductListViewModel: ObservableObject {
           print(failure)
       }
     }
+  }
+  
+  func retrieveproductsMore() {
+    pageNumber += 1
+    retrieveProducts(pageNumber: pageNumber)
   }
   
   func changeSearchValue(_ searchValue: String = "") {

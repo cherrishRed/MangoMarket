@@ -14,7 +14,7 @@ struct HomeView: View {
       ZStack(alignment: .bottomTrailing) {
         VStack {
           HeaderView()
-          //            BannerView()
+          BannerView()
           ProductListView()
         }
       }

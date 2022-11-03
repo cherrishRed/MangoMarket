@@ -12,21 +12,24 @@ struct BannerView: View {
   
   var body: some View {
     TabView(selection: $selection) {
-      Rectangle()
-        .fill(.red)
+      Image("timeAttack")
+        .resizable()
+        .aspectRatio(contentMode: .fill)
         .tag(0)
-      Rectangle()
-        .fill(.yellow)
+      Image("fruitSale")
+        .resizable()
+        .aspectRatio(contentMode: .fill)
         .tag(1)
-      Rectangle()
-        .fill(.purple)
+      Image("userSale")
+        .resizable()
+        .aspectRatio(contentMode: .fill)
         .tag(2)
     }
     .animation(.easeInOut, value: selection)
     .frame(maxWidth: .infinity, maxHeight: 200)
     .tabViewStyle(.page)
     .onAppear {
-      Timer.scheduledTimer(withTimeInterval: 3, repeats: true) { _ in
+      Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { _ in
         if selection == 2 {
           selection = 0
         } else {

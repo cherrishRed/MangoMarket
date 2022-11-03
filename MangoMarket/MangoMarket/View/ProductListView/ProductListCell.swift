@@ -36,6 +36,8 @@ struct ProductGridCellView: View {
               Text(viewModel.currency)
               Text(viewModel.productPrice)
             }
+            .padding(.top, 2)
+            .padding(.bottom, 1)
           } else {
             HStack {
               Text(viewModel.salePercent)
@@ -113,7 +115,7 @@ struct ProductRowCellView: View {
           Text("수정하기")
             .font(.caption)
             .padding(4)
-            .background(Color("logoYellow"))
+            .background(Color.logoYellow)
             .foregroundColor(.white)
             .cornerRadius(4)
         }

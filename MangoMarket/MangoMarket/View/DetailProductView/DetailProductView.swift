@@ -137,7 +137,7 @@ struct DetailProductView: View {
         .font(.caption)
       Spacer()
       NavigationLink {
-        ProductCreateView(viewModel: ProductCreateViewModel(product: viewModel.product, images: viewModel.productImageInfo))
+        ProductCreateView(viewModel: ProductCreateViewModel(product: viewModel.product, images: viewModel.uiImages))
       } label: {
         Text("수정하기")
           .font(.caption)
@@ -158,6 +158,12 @@ struct DetailProductView: View {
           .cornerRadius(4)
       }
       
+    }
+    .onAppear {
+      Task {
+        guard let imageInfos = viewModel.product?.imageInfos else { return }
+        await viewModel.fetchImage(imagesInfo: imageInfos)
+      }
     }
     .alert("정말로?", isPresented: $viewModel.showAlert, actions: {
       Button {

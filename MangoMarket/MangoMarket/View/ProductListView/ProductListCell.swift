@@ -111,7 +111,7 @@ struct ProductRowCellView: View {
       
       VStack {
         NavigationLink {
-          ProductCreateView(viewModel: ProductCreateViewModel(product: viewModel.product, images: []))
+          ProductCreateView(viewModel: ProductCreateViewModel(product: viewModel.product, images: viewModel.uiImages))
         } label: {
           Text("수정하기")
             .font(.caption)
@@ -131,6 +131,14 @@ struct ProductRowCellView: View {
             .foregroundColor(.white)
             .cornerRadius(4)
         } 
+      }
+    }
+    .onAppear {
+      Task {
+        guard let imageInfos = viewModel.product.imageInfos else {
+          return
+        }
+        await viewModel.fetchImage(imagesInfo: imageInfos)
       }
     }
   }

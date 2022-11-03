@@ -51,7 +51,7 @@ class ProductCreateViewModel: ObservableObject {
     self.productId = nil
   }
   
-  init(product: ProductDetail?, images: [ProductImage]) {
+  init(product: ProductDetail?, images: [UIImage]) {
     self.title = product?.name ?? ""
     self.stock = "\(product?.stock ?? 0)"
     self.description = product?.description ?? ""
@@ -65,8 +65,7 @@ class ProductCreateViewModel: ObservableObject {
     self.mode = .edit
     self.productId = product?.id
     
-    self.images = []
-//    await fetchImage(imagesInfo: images)
+    self.images = images
   }
   
   var imageCount: Int {
@@ -222,23 +221,23 @@ class ProductCreateViewModel: ObservableObject {
     return ProductEditRequestModel(name: title, descriptions: description, price: priceDouble, currency: currency, discountedPrice: disCountedPriceDouble, stock: stockInt, secret: UserInfomation.shared.secret)
   }
   
-  private func fetchImage(imagesInfo: [ProductImage]) async {
-    
-    for image in imagesInfo {
-      do {
-        let data = try await apiService.fetchImage(image.url ?? "")
-        guard let uiImage = UIImage(data: data) else { return }
-        DispatchQueue.main.async {
-          self.images.append(uiImage)
-        }
-      } catch {
-        guard let uiImage = UIImage(systemName: "exclamationmark.icloud") else { return }
-        DispatchQueue.main.async {
-          self.images.append(uiImage)
-        }
-      }
-    }
-  }
+//  private func fetchImage(imagesInfo: [ProductImage]) async {
+//    
+//    for image in imagesInfo {
+//      do {
+//        let data = try await apiService.fetchImage(image.url ?? "")
+//        guard let uiImage = UIImage(data: data) else { return }
+//        DispatchQueue.main.async {
+//          self.images.append(uiImage)
+//        }
+//      } catch {
+//        guard let uiImage = UIImage(systemName: "exclamationmark.icloud") else { return }
+//        DispatchQueue.main.async {
+//          self.images.append(uiImage)
+//        }
+//      }
+//    }
+//  }
   
   enum Mode {
     case edit

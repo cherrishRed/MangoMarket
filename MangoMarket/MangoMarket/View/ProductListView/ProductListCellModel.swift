@@ -5,10 +5,11 @@
 //  Created by RED on 2022/11/01.
 //
 
-import Foundation
+import SwiftUI
 
 class ProductListCellViewModel: ObservableObject {
   var product: ProductDetail
+  var uiImages: [UIImage] = []
   
   init(product: ProductDetail) {
     self.product = product
@@ -64,5 +65,19 @@ class ProductListCellViewModel: ObservableObject {
   
   var currency: String {
     return product.currency?.symbol ?? ""
+  }
+  
+  func fetchImage(imagesInfo: [ProductImage]) async {
+    
+    for image in imagesInfo {
+      do {
+        let data = try await APIService().fetchImage(image.url ?? "")
+        guard let uiImage = UIImage(data: data) else { return }
+          self.uiImages.append(uiImage)
+      } catch {
+        guard let uiImage = UIImage(systemName: "exclamationmark.icloud") else { return }
+          self.uiImages.append(uiImage)
+      }
+    }
   }
 }

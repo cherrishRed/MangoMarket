@@ -13,6 +13,7 @@ class DetailProductViewModel: ObservableObject {
   @Published var product: ProductDetail? = nil
   @Published var showAlert = false
   let apiService: APIService = APIService()
+  var uiImages: [UIImage] = []
   
   var productName: String {
     return product?.name ?? "이름 없음"
@@ -132,6 +133,20 @@ class DetailProductViewModel: ObservableObject {
       }
     } catch {
       print(error)
+    }
+  }
+  
+  func fetchImage(imagesInfo: [ProductImage]) async {
+    
+    for image in imagesInfo {
+      do {
+        let data = try await apiService.fetchImage(image.url ?? "")
+        guard let uiImage = UIImage(data: data) else { return }
+          self.uiImages.append(uiImage)
+      } catch {
+        guard let uiImage = UIImage(systemName: "exclamationmark.icloud") else { return }
+          self.uiImages.append(uiImage)
+      }
     }
   }
 }

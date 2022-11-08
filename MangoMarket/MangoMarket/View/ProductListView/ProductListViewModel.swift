@@ -12,7 +12,7 @@ final class ProductListViewModel: ObservableObject {
   @Published var products: [ProductDetail]
   @Published var searchValue: String
   @Published var showAlert = false
-  @Published var pageNumber: Int = 1
+  @Published var pageNumber: Int
   var deleteReady: Int? = nil
   let layout: Layout
   let apiService = APIService()
@@ -31,6 +31,7 @@ final class ProductListViewModel: ObservableObject {
     self.products = products
     self.searchValue = searchValue
     self.layout = layout
+    self.pageNumber = 1
   }
   
   func retrieveProducts(pageNumber: Int = 1, itemsPerPage: Int = 10) async {

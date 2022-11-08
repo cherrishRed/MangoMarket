@@ -56,7 +56,9 @@ class ImageLoader: ObservableObject {
   
   func fetch() async {
     guard let url = url else { return }
-    isLoading = false
+    DispatchQueue.main.async { [weak self] in
+      self?.isLoading = false
+    }
     
     do {
       let data = try await APIService().fetchImage(url)

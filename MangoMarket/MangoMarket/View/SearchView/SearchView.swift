@@ -9,7 +9,6 @@ import SwiftUI
 
 struct SearchView: View {
   @ObservedObject var viewModel = SearchViewModel()
-  let productListViewModel = ProductListViewModel()
   
   let columns = Array(repeating: GridItem(.flexible(), spacing: 0, alignment: nil), count: 3)
   
@@ -20,12 +19,9 @@ struct SearchView: View {
         if viewModel.searchTextIsEmpty {
           recommendedKeyword
         } else {
-          ProductListView(viewModel: productListViewModel)
+          ProductListView(viewModel: viewModel.productListViewModel)
         }
       }
-    }
-    .onChange(of: viewModel.searchText) { updatedSearchText in
-      productListViewModel.changeSearchValue(viewModel.searchText)
     }
   }
   

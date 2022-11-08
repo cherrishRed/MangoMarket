@@ -221,24 +221,6 @@ class ProductCreateViewModel: ObservableObject {
     return ProductEditRequestModel(name: title, descriptions: description, price: priceDouble, currency: currency, discountedPrice: disCountedPriceDouble, stock: stockInt, secret: UserInfomation.shared.secret)
   }
   
-//  private func fetchImage(imagesInfo: [ProductImage]) async {
-//    
-//    for image in imagesInfo {
-//      do {
-//        let data = try await apiService.fetchImage(image.url ?? "")
-//        guard let uiImage = UIImage(data: data) else { return }
-//        DispatchQueue.main.async {
-//          self.images.append(uiImage)
-//        }
-//      } catch {
-//        guard let uiImage = UIImage(systemName: "exclamationmark.icloud") else { return }
-//        DispatchQueue.main.async {
-//          self.images.append(uiImage)
-//        }
-//      }
-//    }
-//  }
-  
   enum Mode {
     case edit
     case create

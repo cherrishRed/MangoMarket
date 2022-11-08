@@ -43,9 +43,15 @@ final class ProductListViewModel: ObservableObject {
     
     do {
       let data = try await apiService.request(request)
-      let productList = try JSONDecoder().decode(ProductList.self, from: data)
-      DispatchQueue.main.async {
-        self.products = productList.items ?? []
+      if data.count == 0 {
+        DispatchQueue.main.async {
+          self.products = []
+        }
+      } else {
+        let productList = try JSONDecoder().decode(ProductList.self, from: data)
+        DispatchQueue.main.async {
+          self.products = productList.items ?? []
+        }
       }
     } catch {
       print(error)

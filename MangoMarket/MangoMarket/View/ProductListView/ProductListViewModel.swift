@@ -13,6 +13,7 @@ final class ProductListViewModel: ObservableObject {
   @Published var searchValue: String
   @Published var showAlert = false
   @Published var pageNumber: Int
+  
   var deleteReady: Int? = nil
   let layout: Layout
   let apiService = APIService()
@@ -34,6 +35,7 @@ final class ProductListViewModel: ObservableObject {
     self.pageNumber = 1
   }
   
+  @MainActor
   func retrieveProducts(pageNumber: Int = 1, itemsPerPage: Int = 10) async {
     guard let request = ProductsListRequest(pageNumber: pageNumber,
                                             itemsPerPage: itemsPerPage,
@@ -44,20 +46,14 @@ final class ProductListViewModel: ObservableObject {
     do {
       let data = try await apiService.request(request)
       if data.count == 0 {
-        DispatchQueue.main.async {
-          self.products = []
-        }
+        self.products = []
       } else {
         let productList = try JSONDecoder().decode(ProductList.self, from: data)
-        DispatchQueue.main.async {
-          self.products = productList.items ?? []
-        }
+        self.products = productList.items ?? []
       }
     } catch {
       print(error)
-      DispatchQueue.main.async {
-        self.products = []
-      }
+      self.products = []
     }
   }
   
@@ -71,14 +67,10 @@ final class ProductListViewModel: ObservableObject {
     do {
       let data = try await apiService.request(request)
       let productList = try JSONDecoder().decode(ProductList.self, from: data)
-      DispatchQueue.main.async {
-        self.products.append(contentsOf: productList.items ?? [])
-      }
+      self.products.append(contentsOf: productList.items ?? [])
     } catch {
       print(error)
-      DispatchQueue.main.async {
-        self.products = []
-      }
+      self.products = []
     }
   }
   

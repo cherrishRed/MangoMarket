@@ -54,19 +54,16 @@ class ImageLoader: ObservableObject {
     self.url = url
   }
   
+  @MainActor
   func fetch() async {
     guard let url = url else { return }
-    DispatchQueue.main.async { [weak self] in
-      self?.isLoading = false
-    }
+    isLoading = false
     
     do {
       let data = try await APIService().fetchImage(url)
       guard let uiImage = UIImage(data: data) else { return }
-      DispatchQueue.main.async {
-        self.image = uiImage
-        self.isLoading = true
-      }
+      image = uiImage
+      isLoading = true
     } catch {
       print("데이터 로드 오류")
       print(error)

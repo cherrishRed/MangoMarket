@@ -126,17 +126,17 @@ class ProductCreateViewModel: ObservableObject {
     images.remove(at: index)
   }
   
+  @MainActor
   func tappedPostButton() async {
     if mode == .create {
       await postProduct()
-      DispatchQueue.main.async { [weak self] in
-        self?.showAlert = true
-      }
+      showAlert = true
     } else {
       await editProduct()
     }
   }
   
+  @MainActor
   private func postProduct() async {
     guard let newProduct = makeProductRequest() else {
       return
@@ -155,16 +155,13 @@ class ProductCreateViewModel: ObservableObject {
     
     do {
       let _ = try await apiService.request(request)
-      DispatchQueue.main.async {
-        self.alertmessage = .postProductSuccess
-      }
+      self.alertmessage = .postProductSuccess
     } catch {
-      DispatchQueue.main.async {
-        self.alertmessage = .postProductFail
-      }
+      self.alertmessage = .postProductFail
     }
   }
   
+  @MainActor
   private func editProduct() async {
     guard let editedProduct = makeProductEditRequest() else {
       return
@@ -174,15 +171,11 @@ class ProductCreateViewModel: ObservableObject {
     
     do {
       let _ = try await apiService.request(request)
-      DispatchQueue.main.async { [weak self] in
-        self?.alertmessage = .editProductSuccess
-        self?.showAlert = true
-      }
+      alertmessage = .editProductSuccess
+      showAlert = true
     } catch {
-      DispatchQueue.main.async { [weak self] in
-        self?.alertmessage = .editProductFail
-        self?.showAlert = true
-      }
+      alertmessage = .editProductFail
+      showAlert = true
     }
   }
   

@@ -128,9 +128,7 @@ class DetailProductViewModel: ObservableObject {
     do {
       let data = try await apiService.request(request)
       let product = try JSONDecoder().decode(ProductDetail.self, from: data)
-      DispatchQueue.main.async {
-        self.product = product
-      }
+      self.product = product
     } catch {
       print(error)
     }
